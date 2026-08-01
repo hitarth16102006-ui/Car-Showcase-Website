@@ -1,0 +1,525 @@
+/* ================================================
+   home.css
+   Styles for the home page of AUTOVERSE
+   ================================================ */
+
+/* ============ NAVIGATION BAR ============ */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background-color: #0d0d0d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    border-bottom: 1px solid #222222;
+    z-index: 1000;
+}
+
+/* text logo with a small red underline */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    border-bottom: 3px solid #e63946;
+    padding-bottom: 5px;
+}
+
+.logo-auto {
+    font-size: 24px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 3px;
+}
+
+.logo-verse {
+    font-size: 24px;
+    font-weight: 300;
+    color: #ffffff;
+    letter-spacing: 3px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: 28px;
+}
+
+.nav-links li a {
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+    color: #e63946;
+}
+
+/* login and signup appear as small buttons */
+.login-btn {
+    border: 1px solid #e63946;
+    padding: 8px 18px;
+    border-radius: 4px;
+}
+
+.signup-btn {
+    background-color: #e63946;
+    padding: 8px 18px;
+    border-radius: 4px;
+}
+
+.signup-btn:hover {
+    background-color: #c9303c;
+    color: #ffffff;
+}
+
+/* hamburger icon - hidden on desktop, shown on mobile */
+.menu-toggle {
+    display: none;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #ffffff;
+    margin-bottom: 5px;
+    border-radius: 2px;
+}
+
+/* ============ HERO SECTION ============ */
+.hero {
+    width: 100%;
+    height: 100vh;
+    background-image: url('../Images/backgroundImage.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero-content {
+    width: 80%;
+    max-width: 800px;
+}
+
+.hero-small {
+    font-size: 16px;
+    font-weight: 600;
+    color: #e63946;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.hero-heading {
+    font-size: 58px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.hero-text {
+    font-size: 18px;
+    color: #cccccc;
+    margin-bottom: 35px;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.hero-buttons .btn {
+    margin: 0 10px;
+}
+
+/* ============ FEATURED CARS ============ */
+.featured-cars {
+    padding: 80px 50px;
+    background-color: #0a0a0a;
+}
+
+.cars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 25px;
+    grid-row-gap: 25px;
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+.car-card {
+    background-color: #141414;
+    border: 1px solid #242424;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.car-img img {
+    height: 230px;
+}
+
+.car-details {
+    padding: 20px;
+}
+
+.car-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+
+.car-brand {
+    font-size: 14px;
+    color: #999999;
+    margin-bottom: 6px;
+}
+
+.car-price {
+    font-size: 17px;
+    font-weight: 600;
+    color: #e63946;
+    margin-bottom: 15px;
+}
+
+.car-btn {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #e63946;
+    color: #ffffff;
+    padding: 10px 24px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.car-btn:hover {
+    background-color: #c9303c;
+}
+
+/* ============ WHY CHOOSE US ============ */
+.why-choose-us {
+    padding: 80px 50px;
+    background-color: #000000;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 25px;
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    text-align: center;
+    background-color: #111111;
+    border: 1px solid #242424;
+    border-radius: 8px;
+    padding: 45px 25px;
+}
+
+/* small circular icon with the first letter of the feature */
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    background-color: #e63946;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 18px auto;
+}
+
+.feature-card h3 {
+    font-size: 19px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    font-size: 14px;
+    color: #aaaaaa;
+    line-height: 1.7;
+}
+
+/* ============ POPULAR BRANDS ============ */
+.popular-brands {
+    padding: 80px 50px;
+    background-color: #0a0a0a;
+}
+
+.brands-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.brand-card {
+    background-color: #141414;
+    border: 1px solid #242424;
+    border-radius: 8px;
+    text-align: center;
+    padding: 40px 15px;
+}
+
+.brand-card h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/* ============ STATISTICS ============ */
+.statistics {
+    padding: 80px 50px;
+    background-color: #111111;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.stat-box {
+    text-align: center;
+    border: 1px solid #242424;
+    border-radius: 8px;
+    padding: 40px 15px;
+}
+
+.stat-number {
+    font-size: 42px;
+    font-weight: 700;
+    color: #e63946;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* ============ TESTIMONIALS ============ */
+.testimonials {
+    padding: 80px 50px;
+    background-color: #000000;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 25px;
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    text-align: center;
+    background-color: #111111;
+    border: 1px solid #242424;
+    border-radius: 8px;
+    padding: 40px 25px;
+}
+
+/* circular placeholder for the customer photo */
+.testimonial-img {
+    width: 80px;
+    height: 80px;
+    background-color: #2a2a2a;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px auto;
+}
+
+.testimonial-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.stars {
+    font-size: 18px;
+    color: #f4a523;
+    margin-bottom: 12px;
+}
+
+.testimonial-text {
+    font-size: 14px;
+    color: #bbbbbb;
+    line-height: 1.7;
+}
+
+/* ============ NEWSLETTER ============ */
+.newsletter {
+    padding: 80px 50px;
+    background-color: #e63946;
+    text-align: center;
+}
+
+.newsletter-box {
+    width: 80%;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.newsletter-title {
+    font-size: 34px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+.newsletter-text {
+    font-size: 16px;
+    color: #ffd9db;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.newsletter-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.newsletter-input {
+    width: 360px;
+    height: 52px;
+    padding: 0 18px;
+    font-size: 15px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+.newsletter-btn {
+    height: 52px;
+    padding: 0 30px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #111111;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.newsletter-btn:hover {
+    background-color: #000000;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+    background-color: #0a0a0a;
+    color: #cccccc;
+    border-top: 1px solid #222222;
+    padding: 60px 50px 0 50px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 30px;
+    max-width: 1150px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.footer-logo .logo-auto,
+.footer-logo .logo-verse {
+    font-size: 22px;
+    letter-spacing: 3px;
+}
+
+.footer-text {
+    font-size: 14px;
+    color: #999999;
+    line-height: 1.7;
+}
+
+.footer h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 18px;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    font-size: 14px;
+    color: #aaaaaa;
+    transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: #e63946;
+}
+
+.footer-contact p {
+    font-size: 14px;
+    color: #aaaaaa;
+    margin-bottom: 8px;
+}
+
+.footer-social a {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #aaaaaa;
+    margin-right: 14px;
+    margin-bottom: 6px;
+    transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: #e63946;
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #222222;
+    padding: 25px 0;
+    font-size: 14px;
+    color: #777777;
+}

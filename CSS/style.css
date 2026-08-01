@@ -1,0 +1,83 @@
+/* ================================================
+   style.css
+   Common styles shared by all pages of AUTOVERSE
+   ================================================ */
+
+/* ---------- Reset ---------- */
+/* removes the default margin and padding that
+   the browser applies on its own */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ---------- Body ---------- */
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* ---------- Links ---------- */
+a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+/* ---------- Lists ---------- */
+ul {
+    list-style: none;
+}
+
+/* ---------- Images ---------- */
+img {
+    width: 100%;
+    display: block;
+}
+
+/* ---------- Section heading (reused in many sections) ---------- */
+.section-heading {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-size: 34px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.section-subtitle {
+    font-size: 15px;
+    color: #999999;
+    margin-top: 10px;
+}
+
+/* ---------- Generic buttons ---------- */
+.btn {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 34px;
+    border-radius: 4px;
+}
+
+.btn-red {
+    background-color: #e63946;
+    color: #ffffff;
+}
+
+.btn-red:hover {
+    background-color: #c9303c;
+}
+
+.btn-outline {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+}
+
+.btn-outline:hover {
+    background-color: #ffffff;
+    color: #000000;
+}

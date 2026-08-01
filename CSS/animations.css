@@ -1,0 +1,123 @@
+/* ================================================
+   animations.css
+   All the simple animations and hover effects
+   used on the home page
+   ================================================ */
+
+/* ============ SIMPLE FADE IN ANIMATION ============ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+/* the hero text fades in one part after another
+   when the page loads */
+.hero-small {
+    animation-name: fadeInUp;
+    animation-duration: 0.8s;
+}
+
+.hero-heading {
+    animation-name: fadeInUp;
+    animation-duration: 0.8s;
+    animation-delay: 0.2s;
+    animation-fill-mode: both;
+}
+
+.hero-text {
+    animation-name: fadeInUp;
+    animation-duration: 0.8s;
+    animation-delay: 0.4s;
+    animation-fill-mode: both;
+}
+
+.hero-buttons {
+    animation-name: fadeInUp;
+    animation-duration: 0.8s;
+    animation-delay: 0.6s;
+    animation-fill-mode: both;
+}
+
+/* ============ SIMPLE BUTTON HOVER ============ */
+.btn {
+    transition: transform 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+/* ============ SIMPLE IMAGE HOVER ============ */
+.car-img {
+    overflow: hidden;
+}
+
+.car-img img {
+    transition: transform 0.4s ease;
+}
+
+/* the car image zooms in slowly when the card is hovered */
+.car-card:hover .car-img img {
+    transform: scale(1.08);
+}
+
+/* ============ SIMPLE CARD HOVER ============ */
+.car-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.car-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 30px rgba(230, 57, 70, 0.2);
+}
+
+.feature-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgba(230, 57, 70, 0.15);
+}
+
+.brand-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.brand-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgba(230, 57, 70, 0.15);
+}
+
+.stat-box {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgba(230, 57, 70, 0.15);
+}
+
+.testimonial-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgba(230, 57, 70, 0.15);
+}
+
+/* ============ NAVBAR SHADOW ON SCROLL ============ */
+.navbar {
+    transition: box-shadow 0.3s ease;
+}
+
+.navbar.scrolled {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}

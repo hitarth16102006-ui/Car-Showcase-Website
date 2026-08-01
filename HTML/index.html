@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUTOVERSE | Car Showcase Website</title>
+
+    <!-- Google Fonts for a clean premium look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- All stylesheets used on the home page -->
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/home.css">
+    <link rel="stylesheet" href="../CSS/animations.css">
+    <link rel="stylesheet" href="../CSS/responsive.css">
+</head>
+<body>
+
+<!-- ========== NAVIGATION BAR ========== -->
+<header class="header">
+    <nav class="navbar" id="navbar">
+        <!-- Text logo - AUTO bold + VERSE thin + red underline -->
+        <div class="nav-logo">
+            <span class="logo-auto">AUTO</span>
+            <span class="logo-verse">VERSE</span>
+        </div>
+
+        <!-- Navigation links -->
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#hero" class="active">Home</a></li>
+            <li><a href="cars.html">Cars</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html" class="login-btn">Login</a></li>
+            <li><a href="signup.html" class="signup-btn">Signup</a></li>
+        </ul>
+
+        <!-- Hamburger icon shown only on mobile -->
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+</header>
+
+<!-- ========== HERO SECTION ========== -->
+<main>
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <p class="hero-small">WELCOME TO AUTOVERSE</p>
+            <h1 class="hero-heading">Drive Your Dream Car</h1>
+            <p class="hero-text">Luxury Sports Cars.</p>
+            <div class="hero-buttons">
+                <a href="#featured-cars" class="btn btn-red">Explore Cars</a>
+                <a href="#why-choose-us" class="btn btn-outline">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+<!-- ========== FEATURED CARS ========== -->
+    <section id="featured-cars" class="featured-cars">
+        <div class="section-heading">
+            <h2 class="section-title">Featured Cars</h2>
+            <p class="section-subtitle">A handpicked collection of the best luxury cars</p>
+        </div>
+
+        <div class="cars-grid">
+
+            <article class="car-card">
+                <div class="car-img">
+                    <img src="../Images/bmw-m4.png" alt="BMW M4">
+                </div>
+                <div class="car-details">
+                    <h3 class="car-name">BMW M4</h3>
+                    <p class="car-brand">Brand: BMW</p>
+                    <p class="car-price">Price: ₹1.20 Crore</p>
+                    <a href="car-details.html" class="car-btn">View Details</a>
+                </div>
+            </article>
+
+            <article class="car-card">
+                <div class="car-img">
+                    <img src="../Images/audi-r8.png" alt="Audi R8">
+                </div>
+                <div class="car-details">
+                    <h3 class="car-name">Audi R8</h3>
+                    <p class="car-brand">Brand: Audi</p>
+                    <p class="car-price">Price: ₹2.50 Crore</p>
+                    <a href="car-details.html" class="car-btn">View Details</a>
+                </div>
+            </article>
+
+            <article class="car-card">
+                <div class="car-img">
+                    <img src="../Images/mercedes-amg-gt.png" alt="Mercedes AMG GT">
+                </div>
+                <div class="car-details">
+                    <h3 class="car-name">Mercedes AMG GT</h3>
+                    <p class="car-brand">Brand: Mercedes</p>
+                    <p class="car-price">Price: ₹2.20 Crore</p>
+                    <a href="car-details.html" class="car-btn">View Details</a>
+                </div>
+            </article>
+
+            <article class="car-card">
+                <div class="car-img">
+                    <img src="../Images/ferrari-sf90.png" alt="Ferrari SF90">
+                </div>
+                <div class="car-details">
+                    <h3 class="car-name">Ferrari SF90</h3>
+                    <p class="car-brand">Brand: Ferrari</p>
+                    <p class="car-price">Price: ₹4.50 Crore</p>
+                    <a href="car-details.html" class="car-btn">View Details</a>
+                </div>
+            </article>
+
+            <article class="car-card">
+                <div class="car-img">
+                    <img src="../Images/lamborghini-huracan.png" alt="Lamborghini Huracan">
+                </div>
+                <div class="car-details">
+                    <h3 class="car-name">Lamborghini Huracan</h3>
+                    <p class="car-brand">Brand: Lamborghini</p>
+                    <p class="car-price">Price: ₹3.50 Crore</p>
+                    <a href="car-details.html" class="car-btn">View Details</a>
+                </div>
+            </article>
+
+            <article class="car-card">
+                <div class="car-img">
+                    <img src="../Images/porsche-911.png" alt="Porsche 911 Turbo S">
+                </div>
+                <div class="car-details">
+                    <h3 class="car-name">Porsche 911 Turbo S</h3>
+                    <p class="car-brand">Brand: Porsche</p>
+                    <p class="car-price">Price: ₹1.80 Crore</p>
+                    <a href="car-details.html" class="car-btn">View Details</a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+<!-- ========== WHY CHOOSE US ========== -->
+    <section id="why-choose-us" class="why-choose-us">
+        <div class="section-heading">
+            <h2 class="section-title">Why Choose Us</h2>
+            <p class="section-subtitle">Buying a luxury car should be simple and safe</p>
+        </div>
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+                <div class="feature-icon">P</div>
+                <h3>Premium Collection</h3>
+                <p>We handpick every car in our collection so you always get the very best.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">V</div>
+                <h3>Verified Cars</h3>
+                <p>Every car is checked and verified before it is listed on our platform.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">A</div>
+                <h3>Affordable Pricing</h3>
+                <p>We keep our prices transparent and competitive so you pay a fair amount.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">S</div>
+                <h3>24×7 Support</h3>
+                <p>Our support team is always available to help you before and after a purchase.</p>
+            </div>
+
+        </div>
+    </section>
+
+<!-- ========== POPULAR BRANDS ========== -->
+    <section class="popular-brands">
+        <div class="section-heading">
+            <h2 class="section-title">Popular Brands</h2>
+            <p class="section-subtitle">The world's most loved car manufacturers</p>
+        </div>
+
+        <div class="brands-grid">
+
+            <div class="brand-card">
+                <h3>BMW</h3>
+            </div>
+
+            <div class="brand-card">
+                <h3>Audi</h3>
+            </div>
+
+            <div class="brand-card">
+                <h3>Mercedes</h3>
+            </div>
+
+            <div class="brand-card">
+                <h3>Ferrari</h3>
+            </div>
+
+            <div class="brand-card">
+                <h3>Porsche</h3>
+            </div>
+
+            <div class="brand-card">
+                <h3>Lamborghini</h3>
+            </div>
+
+        </div>
+    </section>
+
+<!-- ========== STATISTICS ========== -->
+    <section class="statistics">
+        <div class="section-heading">
+            <h2 class="section-title">Our Journey in Numbers</h2>
+            <p class="section-subtitle">The milestones we are proud of</p>
+        </div>
+
+        <div class="stats-grid">
+
+            <div class="stat-box">
+                <h3 class="stat-number">500+</h3>
+                <p class="stat-label">Cars</p>
+            </div>
+
+            <div class="stat-box">
+                <h3 class="stat-number">50+</h3>
+                <p class="stat-label">Brands</p>
+            </div>
+
+            <div class="stat-box">
+                <h3 class="stat-number">10000+</h3>
+                <p class="stat-label">Customers</p>
+            </div>
+
+            <div class="stat-box">
+                <h3 class="stat-number">15+</h3>
+                <p class="stat-label">Years Experience</p>
+            </div>
+
+        </div>
+    </section>
+
+<!-- ========== TESTIMONIALS ========== -->
+    <section class="testimonials">
+        <div class="section-heading">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <p class="section-subtitle">Real words from happy car owners</p>
+        </div>
+
+        <div class="testimonials-grid">
+
+            <article class="testimonial-card">
+                <div class="testimonial-img">RS</div>
+                <h3>Rahul Sharma</h3>
+                <p class="stars">★★★★★</p>
+                <p class="testimonial-text">Bought my BMW M4 through Autoverse and the whole process was smooth and quick. The team was very professional.</p>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-img">PP</div>
+                <h3>Priya Patel</h3>
+                <p class="stars">★★★★★</p>
+                <p class="testimonial-text">I was a little nervous about buying online but Autoverse made it easy. Got my Audi R8 at a great price.</p>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-img">AM</div>
+                <h3>Arjun Mehta</h3>
+                <p class="stars">★★★★★</p>
+                <p class="testimonial-text">Verified dealers and honest prices. I saved a lot of money on my Porsche 911. Highly recommended to everyone.</p>
+            </article>
+
+        </div>
+    </section>
+
+<!-- ========== NEWSLETTER ========== -->
+    <section class="newsletter">
+        <div class="newsletter-box">
+            <h2 class="newsletter-title">Stay in the Loop</h2>
+            <p class="newsletter-text">Subscribe to our newsletter and get the latest offers, new arrivals and car news in your inbox.</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" id="newsletterEmail" name="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+    <div class="footer-content">
+
+        <div class="footer-about">
+            <div class="footer-logo">
+                <span class="logo-auto">AUTO</span>
+                <span class="logo-verse">VERSE</span>
+            </div>
+            <p class="footer-text">Your trusted destination for premium sports and luxury cars across the world.</p>
+        </div>
+
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="cars.html">Cars</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contact Details</h3>
+            <p>Email: support@autoverse.com</p>
+            <p>Phone: +91 98765 43210</p>
+        </div>
+
+        <div class="footer-social">
+            <h3>Follow Us</h3>
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">YouTube</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 AUTOVERSE. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<!-- main.js holds all the small interactions of the home page -->
+<script src="../JS/main.js"></script>
+
+</body>
+</html>
