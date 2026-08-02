@@ -1,0 +1,126 @@
+/* NAVBAR */
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar{
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    background: rgba(0,0,0,0.95);
+    border-bottom: 1px solid #222;
+}
+
+.nav-logo{
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.logo-auto{ color: #fff; }
+.logo-verse{ color: #e63946; }
+
+.nav-links{
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.nav-links a{
+    color: #fff;
+    font-weight: 500;
+}
+
+.nav-links a:hover,
+.nav-links .active{
+    color: #e63946;
+}
+
+/* PAGE */
+.page-hero{
+    padding: 140px 20px 80px;
+    text-align: center;
+    background: linear-gradient(to bottom,#0d0d0d,#000);
+}
+
+.page-hero h1{
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.page-hero p{
+    color: #999;
+}
+
+.about-section{
+    padding: 70px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.about-text{
+    text-align: center;
+    color: #ccc;
+    line-height: 1.8;
+    max-width: 850px;
+    margin: auto;
+}
+
+.mission-box{
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 14px;
+    padding: 40px;
+    text-align: center;
+    color: #ccc;
+}
+
+.team-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap: 24px;
+}
+
+.team-card{
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 14px;
+    padding: 30px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.team-card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 10px 30px rgba(230,57,70,0.2);
+}
+
+.team-avatar{
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: #e63946;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.team-role{
+    color: #e63946;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.team-desc{
+    color: #bfbfbf;
+    font-size: 14px;
+    line-height: 1.6;
+}
