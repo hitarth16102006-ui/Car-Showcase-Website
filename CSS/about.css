@@ -45,9 +45,14 @@
 .page-hero{
     padding: 140px 20px 80px;
     text-align: center;
-    background: linear-gradient(to bottom,#0d0d0d,#000);
-}
 
+    background: linear-gradient(rgba(0,0,0,0.50), rgba(0,0,0,0.60)),
+                url('../Images/backgroundImage.png');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 .page-hero h1{
     font-size: 48px;
     margin-bottom: 15px;
@@ -78,6 +83,14 @@
     padding: 40px;
     text-align: center;
     color: #ccc;
+
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+
+.mission-box:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(230,57,70,0.18);
 }
 
 .team-grid{
@@ -93,11 +106,14 @@
     padding: 30px;
     text-align: center;
     transition: 0.3s;
+
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
+
 .team-card:hover{
-    transform: translateY(-6px);
-    box-shadow: 0 10px 30px rgba(230,57,70,0.2);
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 15px 35px rgba(230,57,70,0.25);
 }
 
 .team-avatar{
@@ -124,3 +140,33 @@
     font-size: 14px;
     line-height: 1.6;
 }
+
+/* ===== SECTION LOAD ANIMATION ===== */
+
+.about-section{
+    animation: fadeUp 0.8s ease both;
+}
+
+.about-section:nth-of-type(1){
+    animation-delay: 0.2s;
+}
+
+.about-section:nth-of-type(2){
+    animation-delay: 0.4s;
+}
+
+.about-section:nth-of-type(3){
+    animation-delay: 0.6s;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
