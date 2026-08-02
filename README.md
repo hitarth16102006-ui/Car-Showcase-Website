@@ -1,49 +1,90 @@
-# 🚗 Car Showcase Website
+# 🚗 AUTOVERSE – Car Showcase Website
 
-A modern, responsive, and interactive **Car Showcase Website** developed as a **Frontend Engineering-II Semester Project** using **HTML5, CSS3, and JavaScript**.
-
-The website allows users to explore different cars, view detailed specifications, compare models, and interact with a clean and responsive user interface.
-
----
-
-## 📌 Project Information
-
-- **Course:** Frontend Engineering-II
-- **Project Title:** Car Showcase Website
-- **Technology Stack:** HTML5, CSS3, JavaScript
-- **Development Type:** Team Project
+<p align="center">
+  <strong>Discover • Compare • Drive</strong>
+</p>
 
 ---
 
-## 👨‍💻 Team Members
+## 📖 About the Project
 
-| Name | Role |
-|------|------|
-| **Hitarth Gujral** | Team Leader, Home Page, Project Integration, GitHub Management |
-| **Vansh Goyal** | Cars Listing Module |
-| **Angel Goel** | Car Details Module |
-| **Tegveer Singh** | Authentication & Information Pages |
+AUTOVERSE is a modern and responsive **Car Showcase Website** developed as a second-year Computer Science Engineering Web Development project.
+
+The website provides users with a premium platform to explore luxury and sports cars, compare their specifications, and view detailed information about each vehicle.
+
+The project is built using only **HTML**, **CSS**, and **JavaScript**, following responsive web design principles and semantic HTML practices.
 
 ---
 
-# 📂 Project Structure
+## 🎯 Objectives
+
+- Create a responsive car showcase website.
+- Practice semantic HTML and modern CSS.
+- Improve JavaScript fundamentals.
+- Learn Git and GitHub collaboration.
+- Develop a clean and user-friendly interface.
+- Apply responsive web design techniques.
+
+---
+
+## ✨ Features
+
+### 🏠 Home Page
+
+- Luxury Hero Section
+- Fixed Navigation Bar
+- Featured Cars
+- Popular Brands
+- Why Choose Us
+- Statistics Section
+- Customer Testimonials
+- Newsletter Subscription
+- Footer
+
+### 🚘 Cars Page
+
+- Car Listings
+- Search Cars
+- Filter Cars
+- Sort Cars
+
+### 📋 Car Details Page
+
+- Large Car Images
+- Specifications
+- Features
+- Similar Cars
+
+### 👤 Authentication
+
+- Login Page
+- Signup Page
+- Form Validation
+
+### 📞 Contact
+
+- Contact Form
+- About Us
+- Company Information
+
+---
+
+# 🛠️ Technologies Used
+
+- HTML5
+- CSS3
+- JavaScript (ES6)
+- Git
+- GitHub
+
+---
+
+# 📁 Project Structure
 
 ```
-Car-Showcase-Website/
+AUTOVERSE
 │
-├── CSS/
-│   ├── style.css
-│   ├── home.css
-│   ├── cars.css
-│   ├── car-details.css
-│   ├── login.css
-│   ├── signup.css
-│   ├── about.css
-│   ├── contact.css
-│   ├── animations.css
-│   └── responsive.css
-│
-├── HTML/
+├── HTML
 │   ├── index.html
 │   ├── cars.html
 │   ├── car-details.html
@@ -52,7 +93,19 @@ Car-Showcase-Website/
 │   ├── about.html
 │   └── contact.html
 │
-├── JS/
+├── CSS
+│   ├── style.css
+│   ├── home.css
+│   ├── cars.css
+│   ├── car-details.css
+│   ├── login.css
+│   ├── signup.css
+│   ├── about.css
+│   ├── contact.css
+│   ├── responsive.css
+│   └── animations.css
+│
+├── JS
 │   ├── main.js
 │   ├── cars.js
 │   ├── details.js
@@ -61,96 +114,26 @@ Car-Showcase-Website/
 │   ├── contact.js
 │   └── auth.js
 │
-├── Images/
+├── Images
 │
 └── README.md
 ```
 
 ---
 
-# ✨ Features
+# 🎨 Theme
 
+- Premium Luxury Design
+- Dark User Interface
+- Black, White and Red Color Palette
+- Minimalistic Layout
 - Responsive Design
-- Modern Landing Page
-- Fixed Navigation Bar
-- User Registration
-- User Login
-- Car Listing Page
-- Car Details Page
-- About Us Page
-- Contact Form
-- Logout Functionality
-- Interactive User Interface
-- Smooth Animations
-- Mobile Friendly Layout
-
----
-
-# 🛠 Technologies Used
-
-- HTML5
-- CSS3
-- JavaScript (ES6)
-
----
-
-# 🎯 Project Modules
-
-## 🏠 Home
-- Hero Section
-- Featured Cars
-- Featured Brands
-- Why Choose Us
-- Footer
-
----
-
-## 🚘 Cars
-
-- Browse Cars
-- Search Cars
-- Filter Cars
-- View Car Details
-
----
-
-## 📄 Car Details
-
-- Car Images
-- Specifications
-- Features
-- Similar Cars
-
----
-
-## 👤 Authentication
-
-- Login
-- Signup
-- Logout
-
----
-
-## ℹ About
-
-- Company Information
-- Mission
-- Vision
-- Team
-
----
-
-## 📞 Contact
-
-- Contact Form
-- Validation
-- Company Details
 
 ---
 
 # 📱 Responsive Design
 
-The website is designed to work smoothly on:
+The website is designed to work on:
 
 - Desktop
 - Laptop
@@ -159,66 +142,117 @@ The website is designed to work smoothly on:
 
 ---
 
-# 📋 Git Workflow
+# 👨‍💻 Team Members
 
-Each team member works on their own branch.
-
-```
-main
-│
-├── hitarth
-├── vansh
-├── angel
-└── tegveer
-```
-
-Workflow:
-
-1. Clone Repository
-2. Create Personal Branch
-3. Develop Assigned Module
-4. Commit Changes
-5. Push Branch
-6. Create Pull Request
-7. Merge into Main
+| Name | Responsibility |
+|------|----------------|
+| **Hitarth Gujral (Team Leader)** | Home Page, Navigation Bar, Footer, Responsive Design, Project Integration, GitHub Management |
+| **Vansh Goyal** | Cars Page, Search, Filter, Car Cards |
+| **Angel Goel** | Car Details Page, Specifications, Features, Similar Cars |
+| **Tegveer Singh** | Login, Signup, About, Contact, Authentication |
 
 ---
 
-# 🚀 How to Run
+# 🚀 Getting Started
 
-1. Clone the repository
+## Clone the Repository
 
 ```bash
 git clone https://github.com/hitarth16102006-ui/Car-Showcase-Website.git
 ```
 
-2. Open the project in Visual Studio Code.
+Move into the project folder.
 
-3. Open `HTML/index.html` using Live Server.
+```bash
+cd Car-Showcase-Website
+```
 
----
+Open the project.
 
-# 📅 Development Status
-
-- [x] Project Structure
-- [x] GitHub Repository Setup
-- [ ] HTML Development
-- [ ] CSS Styling
-- [ ] JavaScript Functionality
-- [ ] Responsive Design
-- [ ] Testing
-- [ ] Final Deployment
+```bash
+code .
+```
 
 ---
 
-# 📜 License
+# 🔄 Team Workflow
 
-This project is developed for educational purposes as part of the **Frontend Engineering-II** course.
+Before starting work:
+
+```bash
+git pull origin main
+```
+
+Check modified files:
+
+```bash
+git status
+```
+
+Add changes:
+
+```bash
+git add .
+```
+
+Commit changes:
+
+```bash
+git commit -m "Meaningful Commit Message"
+```
+
+Push changes:
+
+```bash
+git push origin main
+```
 
 ---
 
-## ⭐ Developed By
+# 📌 Team Rules
 
-**Team Car Showcase Website**
+- Pull the latest code before starting work.
+- Work only on assigned files.
+- Test your code before pushing.
+- Inform the team before pushing changes.
+- Do not modify another member's files without discussion.
+- Resolve merge conflicts carefully.
 
-Frontend Engineering-II Semester Project
+---
+
+# 🌟 Future Enhancements
+
+- User Authentication
+- Wishlist Feature
+- Compare Cars
+- Dark/Light Theme Toggle
+- Advanced Search & Filters
+- Backend Integration
+- Database Support
+- Admin Dashboard
+
+---
+
+# 📚 Learning Outcomes
+
+This project helped us understand:
+
+- Semantic HTML
+- CSS Flexbox
+- CSS Grid
+- Responsive Web Design
+- CSS Animations
+- JavaScript DOM Manipulation
+- Git & GitHub Collaboration
+- Project Management
+- Team Development Workflow
+
+---
+
+# 📄 License
+
+This project is created for educational purposes as part of a Web Development course.
+
+---
+
+## ⭐ If you like this project, don't forget to star the repository!
