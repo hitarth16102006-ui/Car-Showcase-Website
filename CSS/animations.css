@@ -16,6 +16,26 @@
     }
 }
 
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(50px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
 /* the hero text fades in one part after another
    when the page loads */
 .hero-small {
@@ -44,6 +64,12 @@
     animation-fill-mode: both;
 }
 
+.hero-content{
+
+animation:fadeUp 1.2s ease;
+
+}
+
 /* ============ SIMPLE BUTTON HOVER ============ */
 .btn {
     transition: transform 0.3s ease;
@@ -64,7 +90,7 @@
 
 /* the car image zooms in slowly when the card is hovered */
 .car-card:hover .car-img img {
-    transform: scale(1.08);
+    transform: scale(1.1);
 }
 
 /* ============ SIMPLE CARD HOVER ============ */
@@ -74,7 +100,7 @@
 
 .car-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 10px 30px rgba(230, 57, 70, 0.2);
+    box-shadow: 20px 20px 20px rgba(187, 2, 17, 0.2);
 }
 
 .feature-card {

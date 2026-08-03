@@ -59,26 +59,10 @@ img {
     display: inline-block;
     font-size: 15px;
     font-weight: 600;
-    padding: 14px 34px;
-    border-radius: 4px;
+   padding:18px 40px;
+    border-radius: 50px;
 }
 
-.btn-red {
-    background-color: #e63946;
-    color: #ffffff;
-}
 
-.btn-red:hover {
-    background-color: #c9303c;
-}
 
-.btn-outline {
-    border: 2px solid #ffffff;
-    color: #ffffff;
-}
-
-.btn-outline:hover {
-    background-color: #ffffff;
-    color: #000000;
-}
 
