@@ -108,3 +108,4 @@ newsletterForm.addEventListener('submit', function (event) {
     alert('Thank you for subscribing, ' + email + '!');
     newsletterEmail.value = '';
 });
+
