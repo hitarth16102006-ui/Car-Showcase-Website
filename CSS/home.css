@@ -684,3 +684,44 @@ box-shadow: 2px 8px 50px rgba(243, 7, 7, 0.5);
     transform: translateY(-3px);
 
 }
+
+/* ==========================
+   THEME TOGGLE BUTTON
+========================== */
+
+.theme-toggle{
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,255,255,.2);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    font-size:20px;
+
+    color:white;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(10px);
+
+    transition:.3s;
+
+}
+
+.theme-toggle:hover{
+
+    background:#e63946;
+
+    transform:rotate(180deg);
+
+}

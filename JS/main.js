@@ -109,3 +109,49 @@ newsletterForm.addEventListener('submit', function (event) {
     newsletterEmail.value = '';
 });
 
+// ==========================
+// Theme Toggle
+// ==========================
+
+const themeToggle = document.getElementById("themeToggle");
+
+// Check saved theme
+if(localStorage.getItem("theme") === "light"){
+
+    document.body.classList.add("light-theme");
+    themeToggle.innerHTML = "☀️";
+
+}
+
+themeToggle.addEventListener("click", function(){
+
+    document.body.classList.toggle("light-theme");
+
+    if(document.body.classList.contains("light-theme")){
+
+        themeToggle.innerHTML = "☀️";
+
+        localStorage.setItem("theme","light");
+
+    }
+    else{
+
+        themeToggle.innerHTML = "🌙";
+
+        localStorage.setItem("theme","dark");
+
+    }
+
+});
+
+/*LOADING SCREEN*/
+
+window.addEventListener("load", function(){
+
+    setTimeout(function(){
+
+        document.getElementById("loader").classList.add("hide");
+
+    },2000);
+
+});

@@ -147,3 +147,21 @@ animation:fadeUp 1.2s ease;
 .navbar.scrolled {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
 }
+
+/* LOADER ANIMATION*/
+
+@keyframes loading{
+
+    from{
+
+        width:0%;
+
+    }
+
+    to{
+
+        width:100%;
+
+    }
+
+}
