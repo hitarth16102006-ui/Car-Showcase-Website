@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars | AUTOVERSE</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/cars.css">
+</head>
+<body>
+
+<header class="header">
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">
+            <span class="logo-auto">AUTO</span>
+            <span class="logo-verse">VERSE</span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cars.html" class="active">Cars</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="nav-buttons">
+            <a href="login.html" class="login-btn">Login</a>
+            <a href="signup.html" class="signup-btn">Signup</a>
+        </div>
+    </nav>
+</header>
+
+<main class="cars-page">
+    <section class="cars-hero">
+        <p class="eyebrow">PREMIUM COLLECTION</p>
+        <h1>Explore Our <span>Cars</span></h1>
+        <p>Discover luxury and performance machines from the world's most iconic automotive brands.</p>
+    </section>
+
+    <section class="cars-section">
+        <div class="toolbar">
+            <div class="search-box">
+                <span class="search-icon">&#128269;</span>
+                <input type="text" placeholder="Search cars..." aria-label="Search cars">
+            </div>
+
+            <select class="filter-select" aria-label="Filter cars by brand">
+                <option>All Brands</option>
+                <option>BMW</option>
+                <option>Audi</option>
+                <option>Mercedes</option>
+                <option>Ferrari</option>
+                <option>Lamborghini</option>
+                <option>Porsche</option>
+            </select>
+        </div>
+
+        <div class="cars-grid">
+            <article class="car-card">
+                <div class="car-img">
+                    <span class="brand-tag">BMW</span>
+                    <img src="../Images/bmw-m4.png" alt="BMW M4">
+                </div>
+                <div class="car-details">
+                    <h2>BMW M4</h2>
+                    <p class="brand">Brand: BMW</p>
+                    <p class="price">₹1.20 Crore</p>
+                    <a href="#" class="details-btn">View Details</a>
+                </div>
+            </article>
+
+            <article class="car-card">
+                <div class="car-img">
+                    <span class="brand-tag">Audi</span>
+                    <img src="../Images/audi-r8.png" alt="Audi R8">
+                </div>
+                <div class="car-details">
+                    <h2>Audi R8</h2>
+                    <p class="brand">Brand: Audi</p>
+                    <p class="price">₹2.50 Crore</p>
+                    <a href="#" class="details-btn">View Details</a>
+                </div>
+            </article>
+
+            <article class="car-card">
+                <div class="car-img">
+                    <span class="brand-tag">Mercedes</span>
+                    <img src="../Images/mercedes-amg-gt.png" alt="Mercedes AMG GT">
+                </div>
+                <div class="car-details">
+                    <h2>Mercedes AMG GT</h2>
+                    <p class="brand">Brand: Mercedes</p>
+                    <p class="price">₹2.20 Crore</p>
+                    <a href="#" class="details-btn">View Details</a>
+                </div>
+            </article>
+
+            <article class="car-card">
+                <div class="car-img">
+                    <span class="brand-tag">Ferrari</span>
+                    <img src="../Images/ferrari-sf90.png" alt="Ferrari SF90">
+                </div>
+                <div class="car-details">
+                    <h2>Ferrari SF90</h2>
+                    <p class="brand">Brand: Ferrari</p>
+                    <p class="price">₹4.50 Crore</p>
+                    <a href="#" class="details-btn">View Details</a>
+                </div>
+            </article>
+
+            <article class="car-card">
+                <div class="car-img">
+                    <span class="brand-tag">Lamborghini</span>
+                    <img src="../Images/lamborghini-huracan.png" alt="Lamborghini Huracan">
+                </div>
+                <div class="car-details">
+                    <h2>Lamborghini Huracan</h2>
+                    <p class="brand">Brand: Lamborghini</p>
+                    <p class="price">₹3.50 Crore</p>
+                    <a href="#" class="details-btn">View Details</a>
+                </div>
+            </article>
+
+            <article class="car-card">
+                <div class="car-img porsche-placeholder">
+                    <span class="brand-tag">Porsche</span>
+                    <img src="../Images/porsche-911.png" alt="">
+                    <div class="placeholder-car">PORSCHE<br><strong>911 TURBO S</strong></div>
+                </div>
+                <div class="car-details">
+                    <h2>Porsche 911 Turbo S</h2>
+                    <p class="brand">Brand: Porsche</p>
+                    <p class="price">₹1.80 Crore</p>
+                    <a href="#" class="details-btn">View Details</a>
+                </div>
+            </article>
+        </div>
+    </section>
+</main>
+
+<script src="cars.js"></script>
+</body>
+</html>
