@@ -11,28 +11,53 @@
 
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/cars.css">
+    <link rel="stylesheet" href="../CSS/responsive.css">
 </head>
 <body>
 
-<header class="header">
-    <nav class="navbar">
-        <a href="index.html" class="nav-logo">
-            <span class="logo-auto">AUTO</span>
-            <span class="logo-verse">VERSE</span>
-        </a>
+<div class="cursor-glow"></div>
 
-        <ul class="nav-links">
+<header class="header">
+    <nav class="navbar" id="navbar">
+
+    <!-- Logo -->
+    <div class="nav-logo">
+        <span class="logo-auto">AUTO</span>
+        <span class="logo-verse">VERSE</span>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="nav-center">
+
+        <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Home</a></li>
             <li><a href="cars.html" class="active">Cars</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
 
-        <div class="nav-buttons">
-            <a href="login.html" class="login-btn">Login</a>
-            <a href="signup.html" class="signup-btn">Signup</a>
-        </div>
-    </nav>
+    </div>
+
+    <!-- Buttons -->
+    <div class="nav-buttons">
+
+        <a href="login.html" class="login-btn">Login</a>
+
+        <a href="signup.html" class="signup-btn">Signup</a>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme" title="Toggle theme">&#9790;</button>
+        
+    </div>
+
+    <!-- Mobile Menu -->
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+</nav>
 </header>
 
 <main class="cars-page">
@@ -45,11 +70,13 @@
     <section class="cars-section">
         <div class="toolbar">
             <div class="search-box">
+                <label class="sr-only" for="carSearch">Search cars</label>
                 <span class="search-icon">&#128269;</span>
-                <input type="text" placeholder="Search cars..." aria-label="Search cars">
+                <input id="carSearch" name="search" type="search" placeholder="Search cars..." autocomplete="off">
             </div>
 
-            <select class="filter-select" aria-label="Filter cars by brand">
+            <label class="sr-only" for="brandFilter">Filter cars by brand</label>
+            <select id="brandFilter" name="brand" class="filter-select">
                 <option>All Brands</option>
                 <option>BMW</option>
                 <option>Audi</option>
@@ -69,8 +96,8 @@
                 <div class="car-details">
                     <h2>BMW M4</h2>
                     <p class="brand">Brand: BMW</p>
-                    <p class="price">₹1.20 Crore</p>
-                    <a href="#" class="details-btn">View Details</a>
+                    <p class="price">&#8377;1.20 Crore</p>
+                    <a href="car-details.html" class="details-btn">View Details</a>
                 </div>
             </article>
 
@@ -82,8 +109,8 @@
                 <div class="car-details">
                     <h2>Audi R8</h2>
                     <p class="brand">Brand: Audi</p>
-                    <p class="price">₹2.50 Crore</p>
-                    <a href="#" class="details-btn">View Details</a>
+                    <p class="price">&#8377;2.50 Crore</p>
+                    <a href="car-details.html" class="details-btn">View Details</a>
                 </div>
             </article>
 
@@ -95,8 +122,8 @@
                 <div class="car-details">
                     <h2>Mercedes AMG GT</h2>
                     <p class="brand">Brand: Mercedes</p>
-                    <p class="price">₹2.20 Crore</p>
-                    <a href="#" class="details-btn">View Details</a>
+                    <p class="price">&#8377;2.20 Crore</p>
+                    <a href="car-details.html" class="details-btn">View Details</a>
                 </div>
             </article>
 
@@ -108,8 +135,8 @@
                 <div class="car-details">
                     <h2>Ferrari SF90</h2>
                     <p class="brand">Brand: Ferrari</p>
-                    <p class="price">₹4.50 Crore</p>
-                    <a href="#" class="details-btn">View Details</a>
+                    <p class="price">&#8377;4.50 Crore</p>
+                    <a href="car-details.html" class="details-btn">View Details</a>
                 </div>
             </article>
 
@@ -121,28 +148,72 @@
                 <div class="car-details">
                     <h2>Lamborghini Huracan</h2>
                     <p class="brand">Brand: Lamborghini</p>
-                    <p class="price">₹3.50 Crore</p>
-                    <a href="#" class="details-btn">View Details</a>
+                    <p class="price">&#8377;3.50 Crore</p>
+                    <a href="car-details.html" class="details-btn">View Details</a>
                 </div>
             </article>
 
             <article class="car-card">
-                <div class="car-img porsche-placeholder">
+                <div class="car-img">
                     <span class="brand-tag">Porsche</span>
-                    <img src="../Images/porsche-911.png" alt="">
+                    <img src="../Images/porsche-911.png" alt="Porsche 911 Turbo S">
                     <div class="placeholder-car">PORSCHE<br><strong>911 TURBO S</strong></div>
                 </div>
                 <div class="car-details">
                     <h2>Porsche 911 Turbo S</h2>
                     <p class="brand">Brand: Porsche</p>
-                    <p class="price">₹1.80 Crore</p>
-                    <a href="#" class="details-btn">View Details</a>
+                    <p class="price">&#8377;1.80 Crore</p>
+                    <a href="car-details.html" class="details-btn">View Details</a>
                 </div>
             </article>
         </div>
     </section>
 </main>
 
-<script src="cars.js"></script>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-about">
+            <div class="footer-logo">
+                <span class="logo-auto">AUTO</span>
+                <span class="logo-verse">VERSE</span>
+            </div>
+            <p class="footer-text">Your trusted destination for premium sports and luxury cars, crafted for drivers who value performance and design.</p>
+        </div>
+
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cars.html">Cars</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-explore">
+            <h3>Explore</h3>
+            <ul>
+                <li><a href="cars.html">BMW</a></li>
+                <li><a href="cars.html">Audi</a></li>
+                <li><a href="cars.html">Ferrari</a></li>
+                <li><a href="cars.html">Lamborghini</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contact</h3>
+            <p>Email: hitarth@gmail.com</p>
+            <p>Phone: 6239180869</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 AUTOVERSE. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="../JS/navbar.js"></script>
+<script src="../JS/cars.js"></script>
+<script src="../JS/cursor-glow.js"></script>
 </body>
 </html>

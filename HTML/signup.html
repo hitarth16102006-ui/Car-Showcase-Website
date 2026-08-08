@@ -17,25 +17,50 @@
 </head>
 <body>
 
-<!-- NAVBAR -->
+<div class="cursor-glow"></div>
+
+<!-- ========== NAVIGATION BAR ========== -->
 <header class="header">
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
 
-        <div class="nav-logo">
-            <span class="logo-auto">AUTO</span>
-            <span class="logo-verse">VERSE</span>
-        </div>
+    <!-- Logo -->
+    <div class="nav-logo">
+        <span class="logo-auto">AUTO</span>
+        <span class="logo-verse">VERSE</span>
+    </div>
 
-        <ul class="nav-links">
+    <!-- Navigation Links -->
+    <div class="nav-center">
+
+        <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Home</a></li>
             <li><a href="cars.html">Cars</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
-            <li><a href="login.html" class="login-btn">Login</a></li>
-            <li><a href="signup.html" class="signup-btn">Signup</a></li>
         </ul>
 
-    </nav>
+    </div>
+
+    <!-- Buttons -->
+    <div class="nav-buttons">
+
+        <a href="login.html" class="login-btn">Login</a>
+
+        <a href="signup.html" class="signup-btn">Signup</a>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme" title="Toggle theme">&#9790;</button>
+    
+    </div>
+
+    <!-- Mobile Menu -->
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+</nav>
 </header>
 
 <!-- SIGNUP SECTION -->
@@ -48,13 +73,25 @@
 
         <form class="auth-form">
 
-            <input type="text" placeholder="Full Name" required>
+            <div class="form-field">
+                <label for="signupName">Full Name</label>
+                <input id="signupName" name="name" type="text" placeholder="Full Name" autocomplete="name" required>
+            </div>
 
-            <input type="email" placeholder="Email Address" required>
+            <div class="form-field">
+                <label for="signupEmail">Email Address</label>
+                <input id="signupEmail" name="email" type="email" placeholder="Email Address" autocomplete="email" required>
+            </div>
 
-            <input type="password" placeholder="Password" required>
+            <div class="form-field">
+                <label for="signupPassword">Password</label>
+                <input id="signupPassword" name="password" type="password" placeholder="Password" autocomplete="new-password" required>
+            </div>
 
-            <input type="password" placeholder="Confirm Password" required>
+            <div class="form-field">
+                <label for="signupConfirmPassword">Confirm Password</label>
+                <input id="signupConfirmPassword" name="confirm-password" type="password" placeholder="Confirm Password" autocomplete="new-password" required>
+            </div>
 
             <button type="submit" class="btn btn-red">Signup</button>
 
@@ -69,5 +106,49 @@
 
 </main>
 
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-about">
+            <div class="footer-logo">
+                <span class="logo-auto">AUTO</span>
+                <span class="logo-verse">VERSE</span>
+            </div>
+            <p class="footer-text">Your trusted destination for premium sports and luxury cars, crafted for drivers who value performance and design.</p>
+        </div>
+
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cars.html">Cars</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-explore">
+            <h3>Explore</h3>
+            <ul>
+                <li><a href="cars.html">BMW</a></li>
+                <li><a href="cars.html">Audi</a></li>
+                <li><a href="cars.html">Ferrari</a></li>
+                <li><a href="cars.html">Lamborghini</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contact</h3>
+            <p>Email: hitarth@gmail.com</p>
+            <p>Phone: 6239180869</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 AUTOVERSE. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="../JS/navbar.js"></script>
+<script src="../JS/cursor-glow.js"></script>
 </body>
 </html>

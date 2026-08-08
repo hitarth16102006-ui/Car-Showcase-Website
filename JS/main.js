@@ -3,13 +3,9 @@
    Small interactions used on the home page
    ================================================ */
 
-/* elements we need to work with */
-var navbar = document.getElementById('navbar');
-var menuToggle = document.getElementById('menuToggle');
+/* home page elements we need to work with */
 var menu = document.getElementById('navLinks');
 var allLinks = document.querySelectorAll('a');
-var navLinks = document.querySelectorAll('.nav-links a');
-var sections = document.querySelectorAll('main section');
 var newsletterForm = document.getElementById('newsletterForm');
 var newsletterEmail = document.getElementById('newsletterEmail');
 
@@ -18,14 +14,11 @@ var newsletterEmail = document.getElementById('newsletterEmail');
    to that section instead of jumping instantly */
 
 allLinks.forEach(function (link) {
-
     var href = link.getAttribute('href');
 
     // only handle links that point to a section on this page
-    if (href.charAt(0) === '#') {
-
+    if (href && href.charAt(0) === '#') {
         link.addEventListener('click', function (event) {
-
             event.preventDefault();
 
             // find the section the link is pointing to
@@ -38,120 +31,88 @@ allLinks.forEach(function (link) {
             }
 
             // close the mobile menu after a link is clicked
-            menu.classList.remove('open');
+            if (menu) {
+                menu.classList.remove('open');
+            }
         });
     }
-});
-
-/* ============ NAVBAR ACTIVE LINK ============ */
-/* highlight the link of the section that is
-   currently visible on the screen */
-
-window.addEventListener('scroll', function () {
-
-    var scrollPosition = window.scrollY;
-
-    sections.forEach(function (section) {
-
-        // if we have scrolled up to the section
-        if (section.offsetTop - 90 <= scrollPosition) {
-
-            var sectionId = section.getAttribute('id');
-
-            navLinks.forEach(function (navLink) {
-
-                navLink.classList.remove('active');
-
-                if (navLink.getAttribute('href') === '#' + sectionId) {
-                    navLink.classList.add('active');
-                }
-            });
-        }
-    });
-});
-
-/* ============ NAVBAR SHADOW ON SCROLL ============ */
-/* add a small shadow to the navbar once the user
-   scrolls a little bit down the page */
-
-window.addEventListener('scroll', function () {
-
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-});
-
-/* ============ MOBILE MENU ============ */
-/* open and close the navigation menu when the
-   hamburger icon is clicked on mobile screens */
-
-menuToggle.addEventListener('click', function () {
-    menu.classList.toggle('open');
 });
 
 /* ============ NEWSLETTER ============ */
 /* show a simple message when the user subscribes */
 
-newsletterForm.addEventListener('submit', function (event) {
+if (newsletterForm && newsletterEmail) {
+    newsletterForm.addEventListener('submit', function (event) {
+        event.preventDefault();
 
-    event.preventDefault();
+        var email = newsletterEmail.value;
 
-    var email = newsletterEmail.value;
+        if (email === '') {
+            alert('Please enter your email address.');
+            return;
+        }
 
-    if (email === '') {
-        alert('Please enter your email address.');
+        alert('Thank you for subscribing, ' + email + '!');
+        newsletterEmail.value = '';
+    });
+}
+
+/* ============ LOADING SCREEN ============ */
+
+function hideLoader(loader) {
+    loader.classList.add('hide');
+    loader.setAttribute('aria-hidden', 'true');
+}
+
+function hideLoaderAfterAnimation(loader, loadingBar) {
+    var hasHiddenLoader = false;
+
+    function finishLoading() {
+        if (hasHiddenLoader) {
+            return;
+        }
+
+        hasHiddenLoader = true;
+        hideLoader(loader);
+    }
+
+    if (!loadingBar) {
+        finishLoading();
         return;
     }
 
-    alert('Thank you for subscribing, ' + email + '!');
-    newsletterEmail.value = '';
-});
+    if (typeof loadingBar.getAnimations === 'function') {
+        var animations = loadingBar.getAnimations();
 
-// ==========================
-// Theme Toggle
-// ==========================
+        if (animations.length > 0) {
+            Promise.all(animations.map(function (animation) {
+                return animation.finished.catch(function () {
+                    return null;
+                });
+            })).then(finishLoading);
+            return;
+        }
+    }
 
-const themeToggle = document.getElementById("themeToggle");
+    var loadingBarStyles = window.getComputedStyle(loadingBar);
 
-// Check saved theme
-if(localStorage.getItem("theme") === "light"){
+    if (loadingBarStyles.animationName === 'none' || loadingBarStyles.animationDuration === '0s') {
+        finishLoading();
+        return;
+    }
 
-    document.body.classList.add("light-theme");
-    themeToggle.innerHTML = "☀️";
-
+    loadingBar.addEventListener('animationend', finishLoading, { once: true });
 }
 
-themeToggle.addEventListener("click", function(){
+var loader = document.getElementById('loader');
+var loadingBar = document.querySelector('.loading-bar');
+var shouldSkipHomeLoader = window.__skipHomeLoader === true || document.documentElement.classList.contains('skip-home-loader');
 
-    document.body.classList.toggle("light-theme");
-
-    if(document.body.classList.contains("light-theme")){
-
-        themeToggle.innerHTML = "☀️";
-
-        localStorage.setItem("theme","light");
-
+if (loader) {
+    if (shouldSkipHomeLoader) {
+        hideLoader(loader);
+    } else {
+        hideLoaderAfterAnimation(loader, loadingBar);
     }
-    else{
+}
 
-        themeToggle.innerHTML = "🌙";
-
-        localStorage.setItem("theme","dark");
-
-    }
-
-});
-
-/*LOADING SCREEN*/
-
-window.addEventListener("load", function(){
-
-    setTimeout(function(){
-
-        document.getElementById("loader").classList.add("hide");
-
-    },2000);
-
-});

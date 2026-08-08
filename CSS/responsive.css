@@ -1,150 +1,22 @@
 /* ================================================
    responsive.css
-   Makes the home page look good on all screen sizes
+   Shared mobile-first enhancements
    ================================================ */
 
-/* ============ TABLET (max-width: 992px) ============ */
-@media (max-width: 992px) {
-
-    .navbar {
-        padding: 0 30px;
-    }
-
-    /* two columns instead of three or four */
-    .cars-grid,
-    .features-grid,
-    .testimonials-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .brands-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-row-gap: 20px;
-    }
-
-    .footer-content {
-        grid-template-columns: repeat(2, 1fr);
-        grid-row-gap: 30px;
-    }
-
-    .hero-heading {
-        font-size: 46px;
-    }
-
-    /* reduce the side padding of the sections */
-    .featured-cars,
-    .why-choose-us,
-    .popular-brands,
-    .statistics,
-    .testimonials,
-    .newsletter {
-        padding: 60px 30px;
-    }
-
-    .footer {
-        padding: 50px 30px 0 30px;
+@media (min-width: 480px) {
+    .section-heading {
+        margin-bottom: 3rem;
     }
 }
 
-/* ============ MOBILE (max-width: 768px) ============ */
-@media (max-width: 768px) {
-
-    /* show the hamburger icon */
-    .menu-toggle {
-        display: block;
-    }
-
-    /* hide the menu and show it as a dropdown */
-    .nav-links {
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background-color: #0d0d0d;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 0;
-        display: none;
-    }
-
-    .nav-links.open {
-        display: flex;
-    }
-
-    .nav-links li {
-        margin: 12px 0;
-    }
-
-    .hero-heading {
-        font-size: 36px;
-    }
-
-    .newsletter-form {
-        flex-direction: column;
-    }
-
-    .newsletter-input {
-        width: 100%;
-        border-radius: 4px;
-        margin-bottom: 10px;
-    }
-
-    .newsletter-btn {
-        width: 100%;
-        border-radius: 4px;
+@media (min-width: 768px) {
+    .section-subtitle {
+        font-size: 1rem;
     }
 }
 
-/* ============ SMALL MOBILE (max-width: 480px) ============ */
-@media (max-width: 480px) {
-
-    .navbar {
-        padding: 0 20px;
-    }
-
-    .hero-heading {
-        font-size: 28px;
-    }
-
-    .hero-small {
-        font-size: 13px;
-        letter-spacing: 2px;
-    }
-
-    .hero-text {
-        font-size: 15px;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .hero-buttons .btn {
-        margin: 8px 0;
-        width: 200px;
-    }
-
-    /* every grid becomes a single column */
-    .cars-grid,
-    .features-grid,
-    .testimonials-grid,
-    .brands-grid,
-    .stats-grid,
-    .footer-content {
-        grid-template-columns: 1fr;
-    }
-
-    .featured-cars,
-    .why-choose-us,
-    .popular-brands,
-    .statistics,
-    .testimonials,
-    .newsletter {
-        padding: 50px 20px;
+@media (min-width: 1200px) {
+    .section-title {
+        font-size: 2.6rem;
     }
 }
