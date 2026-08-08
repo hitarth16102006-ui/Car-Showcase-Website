@@ -475,7 +475,6 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-    const loader = document.getElementById("loader");
     const loadingBar = document.querySelector(".loading-bar");
 
     function startHero() {
@@ -483,7 +482,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /*
-        Start hero animation when the loading bar finishes.
+       If the Home loader was skipped because the user
+       came back from another page, start the hero
+       animation immediately.
+    */
+
+    if (document.documentElement.classList.contains("skip-home-loader")) {
+
+        startHero();
+
+        return;
+    }
+
+
+    /*
+       Normal first visit:
+       wait for the loading bar to finish.
     */
 
     if (loadingBar) {
@@ -500,8 +514,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     } else {
 
-        // Fallback if loading bar doesn't exist
-        setTimeout(startHero, 1000);
+        startHero();
 
     }
 
