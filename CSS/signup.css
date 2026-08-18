@@ -3,15 +3,6 @@
    Signup page sections only
    ================================================ */
 
-.auth-card {
-    width: 100%;
-    max-width: 470px;
-    background: #181818;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.38);
-}
-
-@media (min-width: 480px) {
-    .auth-card {
-        padding: 3rem;
-    }
+.auth-visual {
+    background-position: center 25%;
 }

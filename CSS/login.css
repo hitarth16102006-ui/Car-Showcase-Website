@@ -3,17 +3,77 @@
    Login page sections only
    ================================================ */
 
-.auth-card {
-    width: 100%;
-    max-width: 430px;
-    background: #181818;
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.38);
+.auth-visual {
+    background-position: center 30%;
 }
 
-@media (min-width: 480px) {
-    .auth-card {
-        padding: 3rem;
-    }
+/* ---------- Forgot / Reset password (clean centered card) ---------- */
+.reset-page {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 130px 1rem 4rem;
+    background:
+        linear-gradient(rgba(5, 5, 5, 0.85), rgba(5, 5, 5, 0.95)),
+        url("../Images/backgroundImage.png") center / cover no-repeat;
+}
+
+.reset-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 2.5rem;
+    text-align: center;
+    border: 1px solid #292929;
+    border-radius: 10px;
+    background: #0d0d0d;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+
+.reset-card .auth-card-logo {
+    margin-bottom: 2rem;
+}
+
+.reset-card h1 {
+    margin-bottom: 0.75rem;
+    font-size: 1.6rem;
+}
+
+.reset-card p {
+    margin-bottom: 1.75rem;
+    color: #a6a6a6;
+    line-height: 1.7;
+}
+
+.reset-card .auth-form {
+    text-align: left;
+}
+
+.reset-card .auth-switch {
+    margin-top: 1.5rem;
+}
+
+.reset-success-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(37, 211, 102, 0.14);
+    border: 1px solid rgba(37, 211, 102, 0.4);
+    color: #25d366;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+body.light-theme .reset-page {
+    background-image:
+        linear-gradient(rgba(251, 248, 241, 0.82), rgba(251, 248, 241, 0.95)),
+        url("../Images/backgroundImage.png");
+}
+
+body.light-theme .reset-card {
+    background: #fbf8f1;
+    border-color: #dcceb6;
 }

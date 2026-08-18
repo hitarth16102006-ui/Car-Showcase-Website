@@ -144,6 +144,10 @@
     box-shadow: 0 14px 36px rgba(230, 57, 70, 0.25);
 }
 
+body.light-theme .btn-explorecars {
+    box-shadow: 0 14px 36px rgba(184, 138, 59, 0.3);
+}
+
 .learn-btn {
     border-color: rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.08);
@@ -194,7 +198,6 @@
     gap: 1.5rem;
 }
 
-.car-card,
 .feature-card,
 .brand-card,
 .stat-box,
@@ -206,7 +209,6 @@
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.car-card:hover,
 .feature-card:hover,
 .brand-card:hover,
 .stat-box:hover,
@@ -214,6 +216,43 @@
     transform: translateY(-5px);
     border-color: rgba(230, 57, 70, 0.55);
     box-shadow: 0 18px 45px rgba(230, 57, 70, 0.14);
+}
+
+/* Popular Brands - a clean underline accent that grows from the
+   centre and sits flush on the card's own edge (matching feature-card),
+   instead of a separate inset ring that didn't line up with the border. */
+.brand-card {
+    position: relative;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.brand-card::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #d4af37, #e63946);
+    transform: translateX(-50%);
+    transition: width 0.35s ease;
+}
+
+.brand-card:hover {
+    background: #1e1e1e;
+}
+
+.brand-card:hover::after {
+    width: 70%;
+}
+
+.brand-card:hover h3 {
+    transform: scale(1.05);
+    color: #ffffff;
+}
+
+.brand-card h3 {
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .car-img {
@@ -607,4 +646,75 @@
     height: 2px;
     background: #e63946;
     transform: translateX(-50%);
+}
+
+.section-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.testimonials-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 92%;
+    max-width: 1200px;
+    margin-inline: auto;
+}
+
+.testimonials-carousel .testimonials-grid {
+    width: 100%;
+    margin: 0;
+}
+
+.testimonial-arrow {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(230, 57, 70, 0.4);
+    border-radius: 50%;
+    background: rgba(230, 57, 70, 0.08);
+    color: #e63946;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.testimonial-arrow:hover {
+    background: rgba(230, 57, 70, 0.22);
+    transform: scale(1.08);
+    box-shadow: 0 0 16px rgba(230, 57, 70, 0.25);
+}
+
+.testimonial-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.55rem;
+    margin-top: 2rem;
+}
+
+.testimonial-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 1px solid rgba(230, 57, 70, 0.5);
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.testimonial-dot.active {
+    background: #e63946;
+    transform: scale(1.2);
+}
+
+@media (min-width: 768px) {
+    .testimonial-arrow {
+        display: inline-flex;
+    }
 }
