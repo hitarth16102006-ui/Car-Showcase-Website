@@ -1,161 +1,186 @@
-````markdown
-# 🚗 AUTOVERSE — Premium Car Showcase Website
+🚗 AUTOVERSE --- Premium Car Showcase Website
 
-> **Discover • Compare • Customize • Drive**
+Discover • Compare • Customize • Drive
 
-**Developed by Hitarth Gujral, Vansh Goyal and Angel Goel**
+Developed by Hitarth Gujral, Vansh Goyal and Angel Goel
 
-AUTOVERSE is a modern, responsive and interactive car showcase website designed to provide users with a premium automotive browsing experience.
+AUTOVERSE is a modern, responsive and interactive car showcase website
+created as a Frontend Engineering-II academic project. The website
+provides a premium automotive browsing experience where users can
+explore vehicles, search and filter cars, view detailed specifications,
+change car colours and variants, save vehicles, and interact with
+enquiry and test-drive forms.
 
-The project allows users to explore cars from different brands, search and filter vehicles, view detailed specifications, switch between car colours and variants, save cars to their wishlist, manage their garage, compare vehicles, and submit enquiries or test-drive requests.
+The project demonstrates the practical use of HTML5, CSS3 and Vanilla
+JavaScript to build a complete multi-page frontend application without
+relying on a frontend framework.
 
-Built as a **Frontend Engineering-II academic project**, AUTOVERSE focuses on applying HTML5, CSS3 and Vanilla JavaScript concepts to a complete real-world style web application.
+🌐 Project Repository
 
----
+GitHub: https://github.com/hitarth16102006-ui/Car-Showcase-Website
 
-## 🌐 Project Repository
+👥 Team Members
 
-🔗 **GitHub Repository:**  
-https://github.com/hitarth16102006-ui/Car-Showcase-Website
+AUTOVERSE was developed collaboratively by:
 
----
+Team Member                         Role & Responsibilities
 
-# 👥 Team Members
+Hitarth Gujral                  Team Leader --- Home page,
+navigation, footer, responsive
+design, project integration, GitHub
+management and final testing
 
-AUTOVERSE was developed as a collaborative academic project by:
+Vansh Goyal                     Frontend Developer --- Cars
+listing, car cards, search,
+filtering and car data
 
-| Team Member | Role & Responsibilities |
-|---|---|
-| **Hitarth Gujral** | **Team Leader** — Home page, navigation, footer, responsive design, project integration, GitHub management and final testing |
-| **Vansh Goyal** | **Frontend Developer** — Cars listing, car cards, search, filtering and car data |
-| **Angel Goel** | **Frontend Developer** — Car details, specifications, image gallery, colour selection, variants and similar cars |
+Team
 
-### Team
+Hitarth Gujral • Vansh Goyal • Angel Goel
 
-**Hitarth Gujral • Vansh Goyal • Angel Goel**
+✨ Features
 
-Together, the team worked on designing, developing, testing and integrating the AUTOVERSE car showcase platform.
+🏠 Premium Home Page
 
----
+The home page provides the main entry point to AUTOVERSE with:
 
-# ✨ Key Features
+Premium automotive hero section
 
-## 🏠 Premium Home Page
+Featured vehicles
 
-- Cinematic hero section
-- Featured cars
-- Popular car brands
-- Animated statistics
-- Customer testimonials
-- Newsletter section
-- Responsive navigation
-- Premium automotive UI
-- Dark/light theme support
+Popular car brands
 
----
+Animated statistics
 
-## 🚘 Cars Listing
+Customer-focused sections
+
+Newsletter section
+
+Responsive navigation
+
+Smooth animations and transitions
+
+Dark/light theme support
+
+🚘 Cars Listing
 
 The Cars page provides an interactive catalogue of vehicles.
 
-### Features
+Features
 
-- Dynamically generated car cards
-- Live search
-- Brand filtering
-- Car information
-- Price display
-- Wishlist buttons
-- Responsive grid layout
+Dynamically generated car cards
 
-The car catalogue is powered by centralized JavaScript data rather than manually hard-coded individual cards.
+Live search
 
----
+Brand filtering
 
-# 🔎 Live Search & Filtering
+Vehicle information
 
-Users can instantly search through the car catalogue.
+Price display
 
-The search system:
+Wishlist functionality
 
-1. Reads the user's input
-2. Normalizes the search text
-3. Filters the car data
-4. Checks car names and brands
-5. Applies the selected brand filter
-6. Re-renders the matching results
+Responsive grid layout
 
-### Concepts Used
+Car information is maintained in centralized JavaScript data, allowing
+the same dataset to be reused across different parts of the website.
 
-- JavaScript arrays
-- `filter()`
-- String methods
-- Event listeners
-- DOM manipulation
-- Dynamic rendering
+🔎 Live Search & Filtering
+
+Users can search for vehicles directly from the Cars page.
+
+The search and filtering process:
+
+Reads the user's search input.
+
+Normalizes the text for consistent matching.
+
+Checks the available car data.
+
+Matches car names and brands.
+
+Applies the selected brand filter.
+
+Dynamically updates the displayed cards.
+
+JavaScript Concepts Used
+
+Arrays
+
+Objects
+
+filter()
+
+String methods
+
+Event listeners
+
+DOM manipulation
+
+Dynamic rendering
 
 Example:
 
-```javascript
 searchInput.addEventListener("input", applyFilters);
-````
 
----
+📋 Dynamic Car Details
 
-# 📋 Dynamic Car Details
+AUTOVERSE uses a data-driven car-details system.
 
-AUTOVERSE uses a **data-driven car details system**.
-
-Instead of creating a separate HTML page for every vehicle, one details page dynamically displays information according to the selected car.
+Instead of creating a separate HTML file for every vehicle, a common
+details page dynamically displays the information of the selected car.
 
 Example:
 
-```text
 car-details.html?id=bmw-m4
-```
 
-JavaScript reads the car ID from the URL and retrieves the corresponding vehicle from the central car dataset.
+JavaScript reads the ID from the URL and retrieves the corresponding car
+from the centralized dataset.
 
-### Concepts Used
+Concepts Used
 
-* `URLSearchParams`
-* Query parameters
-* JavaScript objects
-* `map()`
-* `find()`
-* DOM manipulation
-* Dynamic HTML rendering
-* `innerHTML`
+URLSearchParams
 
-### Flow
+Query parameters
 
-```text
+JavaScript objects
+
+find()
+
+map()
+
+DOM manipulation
+
+innerHTML
+
+Dynamic rendering
+
+Flow
+
 User selects a car
        ↓
-Car ID is added to URL
+Car ID is added to the URL
        ↓
-URLSearchParams reads ID
+URLSearchParams reads the ID
        ↓
-getCarById() finds the car
+The matching car is found
        ↓
 Car data is retrieved
        ↓
-Details are dynamically rendered
-```
+The details page is dynamically rendered
 
----
+🎨 Dynamic Car Colour Selection
 
-# 🎨 Dynamic Car Colour Selection
+One of the major interactive features of AUTOVERSE is the ability to
+change the selected car's colour.
 
-One of the special features of AUTOVERSE is the ability to change the displayed colour of a vehicle.
+On the Car Details page, users can select different colour swatches.
 
-Users can select different colour swatches on the Car Details page.
+The selected colour is used to display the corresponding vehicle images
+in the gallery.
 
-The selected colour determines which colour-specific images are displayed in the gallery.
+Flow
 
-### Flow
-
-```text
 Colour Swatch
       ↓
 Selected Colour
@@ -165,129 +190,141 @@ Colour-specific Image Data
 Gallery Update
       ↓
 Updated Car Images
-```
 
-This is implemented using JavaScript and structured car image data rather than simply applying a CSS colour filter.
+This feature is implemented through JavaScript and structured vehicle
+image data.
 
----
+🏎️ Variant Selection
 
-# 🏎️ Variant Selection
-
-Users can also switch between available vehicle variants.
+Users can switch between available vehicle variants from the Car Details
+page.
 
 For example:
 
-```text
 M4 Competition
       ↓
 M4 CS
-```
 
-When a variant is selected, the corresponding vehicle information and specifications are updated.
+When a different variant is selected, the corresponding information and
+specifications are updated.
 
-This demonstrates:
+Concepts Used
 
-* JavaScript state handling
-* Objects
-* Conditional logic
-* Dynamic rendering
-* DOM manipulation
+JavaScript objects
 
----
+Event handling
 
-# ❤️ Wishlist
+Conditional logic
+
+State handling
+
+DOM manipulation
+
+Dynamic rendering
+
+❤️ Wishlist
 
 Users can save vehicles using the heart/wishlist functionality.
 
-The selected car IDs are stored in the browser using:
+The selected vehicle IDs are stored in the browser using localStorage.
 
-```javascript
-localStorage
-```
+Storage Flow
 
-### Storage Flow
-
-```text
 User clicks ❤️
       ↓
-Car ID is added/removed
+Car ID is added or removed
       ↓
 JSON.stringify()
       ↓
 localStorage
       ↓
-Saved data persists after refresh
-```
+Data remains after refresh
 
-### Concepts Used
+Concepts Used
 
-* `localStorage`
-* `JSON.stringify()`
-* `JSON.parse()`
-* Arrays
-* Event handling
-* State management
-* Event delegation
+localStorage
 
----
+JSON.stringify()
 
-# 🚘 Garage
+JSON.parse()
 
-The Garage provides a user-oriented area for managing saved automotive activity.
+Arrays
 
-It can be used to keep track of:
+Event handling
 
-* Saved cars
-* Wishlist items
-* Enquiries
-* Test-drive related information
+State management
 
-The Garage works with browser-side state and localStorage in the current frontend implementation.
+Event delegation
 
----
+🚘 Garage
 
-# ⚖️ Car Comparison
+The Garage provides an area for users to manage their saved automotive
+activity.
 
-AUTOVERSE provides a comparison experience where users can select cars and view their information side-by-side.
+It can be used for managing information such as:
 
-The comparison feature helps users evaluate:
+Saved vehicles
 
-* Specifications
-* Performance
-* Features
-* Vehicle information
+Wishlist items
 
-The data is dynamically generated from the centralized car dataset.
+Enquiries
 
----
+Test-drive related information
 
-# 👤 Authentication
+The current implementation uses browser-side state and localStorage.
 
-AUTOVERSE includes:
+⚖️ Car Comparison
 
-* Login
-* Signup
-* Forgot Password
-* Form validation
-* Password confirmation
-* Login state handling
-* Logout functionality
+AUTOVERSE includes a comparison experience that allows users to evaluate
+selected vehicles.
 
-> **Note:** Authentication is currently browser-side and is not intended to represent production-level secure authentication.
+The comparison interface can present vehicle information such as:
 
-A future backend implementation would use proper password hashing, sessions/tokens and server-side validation.
+Specifications
 
----
+Performance
 
-# 📞 Contact & Test Drive
+Features
+
+General vehicle information
+
+The information is generated from the centralized car dataset.
+
+👤 Authentication
+
+AUTOVERSE includes frontend authentication-related pages and
+functionality:
+
+Login
+
+Signup
+
+Forgot Password
+
+Form validation
+
+Password confirmation
+
+Login state handling
+
+Logout functionality
+
+Important: The current authentication system is a
+frontend/browser-side implementation and is not intended to provide
+production-level security.
+
+A production implementation would require a backend, secure password
+hashing, server-side validation and secure session/token management.
+
+📞 Contact & Test Drive
 
 The Contact page provides different enquiry options.
 
-Depending on the selected enquiry type, additional fields can appear dynamically.
+Depending on the selected enquiry type, additional form fields can be
+displayed dynamically.
 
 For example:
 
-```text
 Book a Test Drive
         ↓
 Date
@@ -295,93 +332,108 @@ Time
 Location
         ↓
 Submit Request
-```
 
-This demonstrates JavaScript-driven dynamic forms and event handling.
+This demonstrates:
 
----
+Forms
 
-# 📱 Responsive Design
+Form validation
 
-AUTOVERSE follows a **mobile-first responsive design approach**.
+Change events
 
-The website adapts across:
+Conditional UI
 
-* 🖥️ Desktop
-* 💻 Laptop
-* 📱 Tablet
-* 📱 Mobile
+DOM manipulation
 
-### Responsive Features
+JavaScript event handling
 
-* Responsive navigation
-* Flexible layouts
-* CSS Grid
-* Flexbox
-* Responsive typography
-* Adaptive spacing
-* Responsive forms
-* Mobile-friendly buttons
-* Responsive car cards
-* Responsive images
-* Responsive animations
+📱 Responsive Design
 
-The layout progressively adapts using CSS media queries.
+AUTOVERSE is designed to work across different screen sizes.
 
-Example:
+The website has been tested on:
 
-```css
-@media (min-width: 768px) {
-    .cars-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-```
+🖥️ Desktop
 
-### Design Principle
+💻 Laptop
 
-> **One codebase. Different layouts depending on the viewport.**
+📱 Tablet
 
----
+📱 Mobile
 
-# 🎨 UI & Theme
+Responsive Features
 
-AUTOVERSE uses a premium automotive visual style with:
+Responsive navigation
 
-* Dark luxury interface
-* Gold/red accent elements
-* Poppins typography
-* Smooth transitions
-* Hover effects
-* CSS animations
-* Responsive components
-* Light/dark theme functionality
+Mobile navigation menu
 
-The website is designed to provide a consistent visual experience across all pages.
+Flexible layouts
 
----
+CSS Grid
 
-# 🛠️ Technology Stack
+Flexbox
 
-| Technology             | Purpose                                         |
-| ---------------------- | ----------------------------------------------- |
-| **HTML5**              | Website structure and semantic markup           |
-| **CSS3**               | Styling, layouts and animations                 |
-| **Vanilla JavaScript** | Logic and interactivity                         |
-| **CSS Grid**           | Responsive two-dimensional layouts              |
-| **Flexbox**            | Component alignment and one-dimensional layouts |
-| **LocalStorage**       | Browser-side persistence                        |
-| **Git**                | Version control                                 |
-| **GitHub**             | Collaboration and repository management         |
-| **VS Code**            | Development                                     |
-| **Chrome DevTools**    | Debugging and responsive testing                |
-| **Jest**               | JavaScript logic testing                        |
+Responsive typography
 
----
+Adaptive spacing
 
-# 📂 Project Structure
+Responsive forms
 
-```text
+Responsive car cards
+
+Responsive images
+
+Mobile-friendly buttons
+
+Responsive animations
+
+The layout changes according to the viewport using CSS media queries.
+
+Design Principle
+
+One codebase. Different layouts depending on the viewport.
+
+🎨 UI & Theme
+
+AUTOVERSE follows a premium automotive design language featuring:
+
+Dark luxury interface
+
+Red and gold accent elements
+
+Modern typography
+
+Smooth transitions
+
+Hover effects
+
+CSS animations
+
+Responsive components
+
+Light/dark theme functionality
+
+The design aims to maintain a consistent visual identity throughout the
+website.
+
+🛠️ Technology Stack
+
+Technology               Purpose
+
+HTML5                Website structure and semantic markup
+CSS3                 Styling, layouts, animations and responsive design
+Vanilla JavaScript   Logic and interactivity
+CSS Grid             Two-dimensional responsive layouts
+Flexbox              One-dimensional alignment and layouts
+LocalStorage         Browser-side data persistence
+Git                  Version control
+GitHub               Repository and team collaboration
+VS Code              Development environment
+Chrome DevTools      Debugging and responsive testing
+Jest                 Testing selected JavaScript logic
+
+📂 Project Structure
+
 AUTOVERSE/
 │
 ├── HTML/
@@ -432,19 +484,17 @@ AUTOVERSE/
 ├── .gitignore
 ├── package.json
 └── README.md
-```
 
----
-
-# 🧠 Core JavaScript Concepts
+🧠 JavaScript Concepts Used
 
 AUTOVERSE demonstrates several important JavaScript concepts.
 
-## Arrays
+Arrays
 
-Vehicle information is stored as a collection of JavaScript objects.
+Vehicle information is maintained as a collection of JavaScript objects.
 
-```javascript
+Example:
+
 const CARS = [
     {
         id: "bmw-m4",
@@ -453,236 +503,245 @@ const CARS = [
         price: "₹1.20 Crore"
     }
 ];
-```
 
-## Objects
+Objects
 
-Each car is represented as an object containing related properties such as:
+Each vehicle can contain related properties such as:
 
-* ID
-* Brand
-* Name
-* Price
-* Specifications
-* Images
-* Colours
-* Variants
-* Features
+ID
 
----
+Brand
 
-## Array Methods
+Name
 
-The project uses methods such as:
+Price
 
-```javascript
+Specifications
+
+Images
+
+Colours
+
+Variants
+
+Features
+
+Using objects allows related information to be grouped together.
+
+Array Methods
+
+The project uses methods including:
+
 filter()
 map()
 forEach()
 find()
-```
 
-### `filter()`
+filter()
 
-Selects cars that satisfy search or filtering conditions.
+Used to select vehicles matching search and filter conditions.
 
-### `map()`
+map()
 
-Transforms data into dynamically generated content.
+Used to transform data into dynamically generated content.
 
-### `forEach()`
+forEach()
 
-Performs an operation for each item in an array.
+Used to perform an operation for each item in a collection.
 
-### `find()`
+find()
 
-Locates a specific car object.
+Used to locate a specific vehicle object.
 
----
+🌐 DOM Manipulation
 
-# 🌐 DOM Manipulation
+JavaScript dynamically updates parts of the webpage instead of requiring
+a full page reload.
 
-JavaScript dynamically updates:
+Examples include:
 
-* Car cards
-* Specifications
-* Images
-* Forms
-* Wishlist states
-* UI elements
-* Navigation states
-* Themes
+Car cards
 
-Important DOM methods include:
+Vehicle specifications
 
-```javascript
+Images
+
+Wishlist state
+
+Forms
+
+Navigation
+
+Theme controls
+
+Dynamic content
+
+Important DOM methods and properties include:
+
 document.getElementById()
 document.querySelector()
 document.querySelectorAll()
 element.classList
 element.innerHTML
-```
 
----
+🖱️ Event Handling
 
-# 🖱️ Event Handling
+The website uses browser events such as:
 
-The project uses browser events such as:
-
-```text
 click
 input
 change
 submit
 DOMContentLoaded
-```
 
 Example:
 
-```javascript
 searchInput.addEventListener("input", applyFilters);
-```
 
-These events allow the website to respond to user actions.
+Events allow the website to respond immediately to user actions.
 
----
+💾 Browser Storage
 
-# 💾 Browser Storage
+The project uses browser localStorage for client-side persistence.
 
-The wishlist and other browser-side state use:
+Common operations include:
 
-```javascript
 localStorage.setItem()
 localStorage.getItem()
-```
 
-JavaScript objects and arrays are converted to strings using:
+Arrays and objects can be converted into strings using:
 
-```javascript
 JSON.stringify()
-```
 
-and restored using:
+and converted back using:
 
-```javascript
 JSON.parse()
-```
 
----
+👥 Event Delegation
 
-# 👥 Event Delegation
+Dynamic elements such as wishlist buttons can be handled using event
+delegation.
 
-The project uses event delegation for dynamically generated interactive elements such as wishlist buttons.
-
-Instead of attaching a separate event listener to every dynamically created button, an event can be handled through a common parent and the clicked element can be identified.
+Instead of attaching separate listeners to every dynamically generated
+element, a parent element can handle the event and identify the actual
+clicked element.
 
 Important concepts include:
 
-```javascript
 event.target
 closest()
 getAttribute()
-```
 
-This makes dynamic interfaces easier to manage.
+This approach is useful when elements are generated dynamically using
+JavaScript.
 
----
+♿ Accessibility
 
-# ♿ Accessibility
+The website includes several accessibility considerations:
 
-AUTOVERSE includes several accessibility considerations:
+Semantic HTML5
 
-* Semantic HTML5
-* Skip-to-content navigation
-* Meaningful image `alt` text
-* Accessible buttons
-* ARIA attributes
-* Keyboard-friendly controls
-* Visually hidden `.sr-only` labels
-* `prefers-reduced-motion` support
+Skip-to-content navigation
 
-These features help make the website more usable for keyboard and assistive-technology users.
+Meaningful image alt text
 
----
+Accessible buttons
 
-# 🔍 SEO Features
+ARIA attributes where required
 
-The project includes several basic SEO and metadata features:
+Keyboard-friendly controls
 
-* Unique page titles
-* Meta descriptions
-* Open Graph metadata
-* Twitter card metadata
-* Favicon
-* Semantic HTML structure
+Visually hidden .sr-only labels
 
-Future improvements could include:
+prefers-reduced-motion support
 
-* Canonical URLs
-* Open Graph images
-* Structured data / JSON-LD
-* Advanced vehicle metadata
+These practices help make the website more usable for different users
+and assistive technologies.
 
----
+🔍 SEO & Metadata
 
-# 🧪 Testing
+The website includes basic SEO and metadata features such as:
+
+Page titles
+
+Meta descriptions
+
+Open Graph metadata
+
+Twitter card metadata
+
+Favicon
+
+Semantic HTML structure
+
+These features improve the way pages are identified and shared.
+
+🧪 Testing
 
 The project was tested for:
 
-* Navigation
-* Search
-* Filtering
-* Car details
-* Colour selection
-* Variant selection
-* Wishlist persistence
-* Form validation
-* Responsive layouts
-* Invalid car IDs
-* Different viewport sizes
+Page navigation
 
-Chrome DevTools was used to verify responsive behaviour across different screen sizes.
+Search functionality
 
-Jest is also used for testing selected JavaScript logic.
+Brand filtering
 
----
+Car details
 
-# 🔄 Development Workflow
+Colour selection
 
-The team used Git and GitHub for collaboration.
+Variant selection
 
-### Basic Workflow
+Wishlist persistence
 
-```bash
+Form validation
+
+Invalid car IDs
+
+Responsive layouts
+
+Different viewport sizes
+
+Chrome DevTools was used to test responsive behaviour at different
+screen widths.
+
+Selected JavaScript logic can also be tested using Jest.
+
+🔄 Development Workflow
+
+The team used Git and GitHub for version control and collaboration.
+
+Basic Workflow
+
 git pull origin main
-```
 
-Make changes and test the project.
+After making and testing changes:
 
-```bash
 git status
 git add .
 git commit -m "Meaningful commit message"
 git push origin main
-```
 
-### Team Rules
+Team Rules
 
-* Pull the latest code before working
-* Test changes before pushing
-* Use meaningful commit messages
-* Avoid editing another member's assigned files
-* Communicate before major changes
-* Resolve conflicts carefully
-* Do not force-push unless the team agrees
+Pull the latest code before starting work.
 
----
+Work on the assigned part of the project.
 
-# 🌳 Git Workflow
+Test changes before pushing.
 
-Our basic collaborative workflow is:
+Use meaningful commit messages.
 
-```text
+Communicate before making major changes.
+
+Avoid editing another member's assigned files without discussion.
+
+Resolve Git conflicts carefully.
+
+Avoid force-pushing unless the team agrees.
+
+🌳 Git Collaboration Workflow
+
 GitHub Repository
        ↓
 git pull
@@ -698,116 +757,156 @@ git commit
 git push
        ↓
 Team Review
-```
 
-GitHub was used to maintain the project repository and coordinate the work of all three team members.
+GitHub was used to maintain the project repository and coordinate the
+work of the three team members.
 
----
+🎓 Learning Outcomes
 
-# 🎓 Learning Outcomes
+Through AUTOVERSE, the team applied and strengthened knowledge of:
 
-Through AUTOVERSE, we applied and strengthened our understanding of:
+Semantic HTML5
 
-* Semantic HTML5
-* CSS Grid
-* CSS Flexbox
-* Responsive Web Design
-* CSS Animations
-* JavaScript
-* Arrays & Objects
-* Array Methods
-* DOM Manipulation
-* Event Handling
-* URL Parameters
-* LocalStorage
-* Form Validation
-* Git
-* GitHub Collaboration
-* Debugging
-* Browser Developer Tools
-* Team-based Software Development
+CSS Grid
 
----
+CSS Flexbox
 
-# 🚀 Future Scope
+Responsive Web Design
 
-AUTOVERSE can be extended into a complete production-level automotive platform.
+CSS Animations
 
-### Backend & Database
+JavaScript
 
-* Node.js backend
-* Express.js API
-* Real database integration
-* Persistent vehicle inventory
+Arrays and Objects
 
-### Secure Authentication
+Array Methods
 
-* Password hashing
-* Server-side validation
-* Sessions or token-based authentication
-* Secure user accounts
+DOM Manipulation
 
-### Admin Dashboard
+Event Handling
+
+URL Parameters
+
+LocalStorage
+
+Form Validation
+
+Git
+
+GitHub Collaboration
+
+Browser Developer Tools
+
+Debugging
+
+Team-based Software Development
+
+🚀 Future Scope
+
+AUTOVERSE can be extended into a complete production-level automotive
+platform.
+
+Backend & Database
+
+Node.js backend
+
+Express.js API
+
+Real database integration
+
+Persistent vehicle inventory
+
+Secure Authentication
+
+Password hashing
+
+Server-side validation
+
+Secure sessions
+
+Token-based authentication
+
+User accounts
+
+Admin Dashboard
 
 An administrator could manage:
 
-* Cars
-* Brands
-* Specifications
-* Images
-* Pricing
-* Inventory
-* User enquiries
+Cars
 
-### Real-Time Inventory
+Brands
 
-The system could display:
+Specifications
 
-* Vehicle availability
-* Live pricing
-* Stock status
-* Dealer information
+Images
 
-### Booking System
+Pricing
 
-The enquiry system could be extended into a real booking platform with:
+Inventory
 
-* Test-drive scheduling
-* Confirmation emails
-* Appointment management
-* Dealer notifications
+User enquiries
 
-### Payment Integration
+Real-Time Inventory
 
-Future versions could support secure online payments for bookings or other automotive services.
+Future versions could display:
 
----
+Vehicle availability
 
-# ⚠️ Current Limitations
+Live pricing
+
+Stock status
+
+Dealer information
+
+Booking System
+
+The current enquiry flow could be extended into a real booking platform
+with:
+
+Test-drive scheduling
+
+Confirmation emails
+
+Appointment management
+
+Dealer notifications
+
+Payment Integration
+
+Secure online payment could be introduced for bookings or other
+automotive services.
+
+⚠️ Current Limitations
 
 The current project is primarily a frontend implementation.
 
 Therefore:
 
-* There is no production backend.
-* Authentication is browser-side.
-* Vehicle data is stored in JavaScript.
-* Wishlist persistence uses browser localStorage.
-* Test-drive and enquiry forms are frontend demonstrations.
-* Browser-side storage can be modified by the user.
-* Production-level security would require server-side implementation.
+There is no production backend.
 
-These limitations provide opportunities for future backend development.
+Authentication is browser-side.
 
----
+Vehicle data is stored in JavaScript.
 
-# 🎯 Project Goal
+Wishlist persistence uses browser localStorage.
 
-AUTOVERSE was created to demonstrate how fundamental web development concepts can be combined into a complete interactive application.
+Test-drive and enquiry forms are frontend demonstrations.
 
-Rather than building isolated HTML pages, the project combines:
+Browser-side storage can be modified by the user.
 
-```text
+Production-level security would require server-side implementation.
+
+These limitations provide clear opportunities for future backend
+development.
+
+🎯 Project Objective
+
+The main objective of AUTOVERSE was to demonstrate how fundamental
+frontend development concepts can be combined into a complete
+interactive application.
+
+The project combines:
+
 HTML
   ↓
 CSS
@@ -823,50 +922,42 @@ User Interaction
 Browser Storage
   ↓
 Responsive Experience
-```
 
-The result is a modern, responsive and interactive automotive showcase experience.
+The result is a modern, responsive and interactive automotive showcase
+website.
 
----
+📄 Academic Project
 
-# 📄 Academic Project
+Project: AUTOVERSE --- Car Showcase Website
 
-**Project:** AUTOVERSE — Car Showcase Website
+Course: Frontend Engineering-II
 
-**Course:** Frontend Engineering-II
+Project Type: Academic / Educational Project
 
-**Project Type:** Academic / Educational Project
+Technologies: HTML5 • CSS3 • Vanilla JavaScript
 
-**Technologies:** HTML5 • CSS3 • Vanilla JavaScript
+Repository:
+https://github.com/hitarth16102006-ui/Car-Showcase-Website
 
-**Repository:**
-[https://github.com/hitarth16102006-ui/Car-Showcase-Website](https://github.com/hitarth16102006-ui/Car-Showcase-Website)
+Team
 
-### Team
+Hitarth Gujral • Vansh Goyal • Angel Goel
 
-**Hitarth Gujral • Vansh Goyal • Angel Goel**
+⭐ Acknowledgement
 
----
+AUTOVERSE was developed as a collaborative academic project to apply
+frontend web development concepts in a practical real-world style
+application.
 
-# ⭐ Acknowledgement
+The three team members contributed to the design, development, testing
+and integration of the project.
 
-This project was developed as a collaborative academic project to apply frontend web development concepts in a practical real-world style application.
-
-We would like to acknowledge the guidance provided during the Frontend Engineering-II course and the collaborative effort of all three team members in designing, developing, testing and integrating AUTOVERSE.
-
----
-
-# 📜 License
+📜 License
 
 This project is created for educational and academic purposes.
 
----
+🚗 AUTOVERSE
 
-# 🚗 AUTOVERSE
+Discover. Compare. Customize. Drive.
 
-### Discover. Compare. Customize. Drive.
-
-**Built with HTML5 • CSS3 • JavaScript • Creativity • Teamwork**
-
-```
-```
+Built with HTML5 • CSS3 • JavaScript • Creativity • Teamwork
