@@ -1,258 +1,85 @@
-# 🚗 AUTOVERSE – Car Showcase Website
+# 🚗 AUTOVERSE — Premium Car Showcase Website
 
-<p align="center">
-  <strong>Discover • Compare • Drive</strong>
-</p>
+> **Discover • Compare • Customize • Drive**
 
----
+AUTOVERSE is a modern, responsive and interactive car showcase website designed to provide users with a premium automotive browsing experience.
 
-## 📖 About the Project
+The project allows users to explore cars from different brands, search and filter vehicles, view detailed specifications, switch between car colours and variants, save cars to their wishlist, and submit enquiries or test-drive requests.
 
-AUTOVERSE is a modern and responsive **Car Showcase Website** developed as a second-year Computer Science Engineering Web Development project.
-
-The website provides users with a premium platform to explore luxury and sports cars, compare their specifications, and view detailed information about each vehicle.
-
-The project is built using only **HTML**, **CSS**, and **JavaScript**, following responsive web design principles and semantic HTML practices.
+Built as a **Frontend Engineering-II academic project**, AUTOVERSE focuses on applying HTML5, CSS3 and Vanilla JavaScript concepts to a complete real-world style web application.
 
 ---
 
-## 🎯 Objectives
+## 🌐 Project Repository
 
-- Create a responsive car showcase website.
-- Practice semantic HTML and modern CSS.
-- Improve JavaScript fundamentals.
-- Learn Git and GitHub collaboration.
-- Develop a clean and user-friendly interface.
-- Apply responsive web design techniques.
+🔗 **GitHub:**  
+https://github.com/hitarth16102006-ui/Car-Showcase-Website
 
 ---
 
-## ✨ Features
+# ✨ Key Features
 
-### 🏠 Home Page
+## 🏠 Premium Home Page
 
-- Luxury Hero Section
-- Fixed Navigation Bar
-- Featured Cars
-- Popular Brands
-- Why Choose Us
-- Statistics Section
-- Customer Testimonials
-- Newsletter Subscription
-- Footer
-
-### 🚘 Cars Page
-
-- Car Listings
-- Search Cars
-- Filter Cars
-- Sort Cars
-
-### 📋 Car Details Page
-
-- Large Car Images
-- Specifications
-- Features
-- Similar Cars
-
-### 👤 Authentication
-
-- Login Page
-- Signup Page
-- Form Validation
-
-### 📞 Contact
-
-- Contact Form
-- About Us
-- Company Information
+- Cinematic hero section
+- Featured cars
+- Popular car brands
+- Animated statistics
+- Customer testimonials
+- Newsletter section
+- Responsive navigation
+- Premium dark automotive UI
 
 ---
 
-# 🛠️ Technologies Used
+## 🚘 Cars Listing
 
-- HTML5
-- CSS3
-- JavaScript (ES6)
-- Git
-- GitHub
+The Cars page provides an interactive catalogue of vehicles.
 
----
+### Features
 
-# 📁 Project Structure
+- Dynamic car cards
+- Live search
+- Brand filtering
+- Car information
+- Price display
+- Wishlist buttons
+- Responsive grid layout
 
-```
-AUTOVERSE
-│
-├── HTML
-│   ├── index.html
-│   ├── cars.html
-│   ├── car-details.html
-│   ├── login.html
-│   ├── signup.html
-│   ├── about.html
-│   └── contact.html
-│
-├── CSS
-│   ├── style.css
-│   ├── home.css
-│   ├── cars.css
-│   ├── car-details.css
-│   ├── login.css
-│   ├── signup.css
-│   ├── about.css
-│   ├── contact.css
-│   ├── responsive.css
-│   └── animations.css
-│
-├── JS
-│   ├── main.js
-│   ├── cars.js
-│   ├── details.js
-│   ├── login.js
-│   ├── signup.js
-│   ├── contact.js
-│   └── auth.js
-│
-├── Images
-│
-└── README.md
-```
+The car catalogue is powered by JavaScript data rather than manually hard-coded individual cards.
 
 ---
 
-# 🎨 Theme
+## 🔎 Live Search & Filtering
 
-- Premium Luxury Design
-- Dark User Interface
-- Black, White and Red Color Palette
-- Minimalistic Layout
-- Responsive Design
+Users can instantly search through the car catalogue.
 
----
+The search system:
 
-# 📱 Responsive Design
+1. Reads the user's input
+2. Normalizes the search text
+3. Filters the car data
+4. Checks car names and brands
+5. Re-renders the matching results
 
-The website is designed to work on:
+### Concepts Used
 
-- Desktop
-- Laptop
-- Tablet
-- Mobile Devices
-
----
-
-# 👨‍💻 Team Members
-
-| Name | Responsibility |
-|------|----------------|
-| **Hitarth Gujral (Team Leader)** | Home Page, Navigation Bar, Footer, Responsive Design, Project Integration, GitHub Management |
-| **Vansh Goyal** | Cars Page, Search, Filter, Car Cards |
-| **Angel Goel** | Car Details Page, Specifications, Features, Similar Cars |
-| **Tegveer Singh** | Login, Signup, About, Contact, Authentication |
+- JavaScript arrays
+- `filter()`
+- String methods
+- Event listeners
+- DOM manipulation
+- Dynamic rendering
 
 ---
 
-# 🚀 Getting Started
+# 📋 Dynamic Car Details
 
-## Clone the Repository
+AUTOVERSE uses a **data-driven car details system**.
 
-```bash
-git clone https://github.com/hitarth16102006-ui/Car-Showcase-Website.git
-```
+Instead of creating a separate HTML page for every vehicle, one details page dynamically displays information according to the selected car.
 
-Move into the project folder.
+Example:
 
-```bash
-cd Car-Showcase-Website
-```
-
-Open the project.
-
-```bash
-code .
-```
-
----
-
-# 🔄 Team Workflow
-
-Before starting work:
-
-```bash
-git pull origin main
-```
-
-Check modified files:
-
-```bash
-git status
-```
-
-Add changes:
-
-```bash
-git add .
-```
-
-Commit changes:
-
-```bash
-git commit -m "Meaningful Commit Message"
-```
-
-Push changes:
-
-```bash
-git push origin main
-```
-
----
-
-# 📌 Team Rules
-
-- Pull the latest code before starting work.
-- Work only on assigned files.
-- Test your code before pushing.
-- Inform the team before pushing changes.
-- Do not modify another member's files without discussion.
-- Resolve merge conflicts carefully.
-
----
-
-# 🌟 Future Enhancements
-
-- User Authentication
-- Wishlist Feature
-- Compare Cars
-- Dark/Light Theme Toggle
-- Advanced Search & Filters
-- Backend Integration
-- Database Support
-- Admin Dashboard
-
----
-
-# 📚 Learning Outcomes
-
-This project helped us understand:
-
-- Semantic HTML
-- CSS Flexbox
-- CSS Grid
-- Responsive Web Design
-- CSS Animations
-- JavaScript DOM Manipulation
-- Git & GitHub Collaboration
-- Project Management
-- Team Development Workflow
-
----
-
-# 📄 License
-
-This project is created for educational purposes as part of a Web Development course.
-
----
-
-## ⭐ If you like this project, don't forget to star the repository!
+```text
+car-details.html?id=bmw-m4
