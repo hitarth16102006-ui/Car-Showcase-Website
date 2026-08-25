@@ -1,0 +1,2079 @@
+﻿/* ================================================
+   style.css
+   Global design system and shared components
+   ================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    min-width: 320px;
+    overflow-x: hidden;
+    font-family: 'Poppins', Arial, sans-serif;
+    background: #080808;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+/* Soft cursor light for desktop pointer devices */
+.cursor-glow {
+    position: fixed;
+    top: -90px;
+    left: -90px;
+    width: 180px;
+    height: 180px;
+    display: none;
+    border-radius: 50%;
+    background: rgba(236, 5, 25, 0.25);
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 10000;
+}
+
+main,
+footer {
+    position: relative;
+    z-index: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .cursor-glow {
+        display: block;
+    }
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid #e63946;
+    outline-offset: 3px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.section-heading {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto 2.5rem;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 1.75rem;
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+}
+
+.section-subtitle {
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+    color: #a6a6a6;
+}
+
+.btn,
+.car-btn,
+.details-btn,
+.newsletter-btn,
+.btn-red {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0.85rem 1.5rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #ffffff;
+    background: #e63946;
+    box-shadow: 0 10px 24px rgba(230, 57, 70, 0.18);
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover,
+.car-btn:hover,
+.details-btn:hover,
+.newsletter-btn:hover,
+.btn-red:hover {
+    background: #c9303c;
+    transform: translateY(-2px);
+    box-shadow: 0 18px 45px rgba(230, 57, 70, 0.14);
+}
+
+.btn:active,
+.car-btn:active,
+.details-btn:active,
+.newsletter-btn:active,
+.btn-red:active {
+    transform: translateY(0);
+}
+
+/* Forms */
+.form-field {
+    display: grid;
+    gap: 0.4rem;
+}
+
+.auth-page {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-top: 70px;
+}
+
+.auth-visual {
+    position: relative;
+    display: none;
+    min-height: 320px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.auth-visual::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(5, 5, 5, 0.15), rgba(5, 5, 5, 0.85)),
+        linear-gradient(90deg, rgba(5, 5, 5, 0.1), rgba(5, 5, 5, 0.55));
+}
+
+.auth-visual-content {
+    position: absolute;
+    z-index: 1;
+    left: 2.5rem;
+    bottom: 2.5rem;
+    right: 2.5rem;
+}
+
+.auth-visual-eyebrow {
+    margin-bottom: 0.5rem;
+    color: #d4af37;
+    letter-spacing: 0.28em;
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+.auth-visual-content h2 {
+    font-size: 2rem;
+    line-height: 1.1;
+    color: #ffffff;
+}
+
+.auth-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 1.25rem 4rem;
+    background: #050505;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+}
+
+.auth-card-logo {
+    margin-bottom: 2rem;
+}
+
+.auth-card h1 {
+    margin-bottom: 0.35rem;
+    font-size: 1.85rem;
+    line-height: 1.1;
+}
+
+.auth-card > p {
+    margin-bottom: 2rem;
+    color: #a6a6a6;
+}
+
+.auth-form {
+    display: grid;
+    gap: 1rem;
+    text-align: left;
+}
+
+.auth-form label {
+    color: #d6d6d6;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.auth-form input {
+    width: 100%;
+    min-height: 52px;
+    border: 1px solid #333333;
+    border-radius: 10px;
+    background: #121212;
+    color: #ffffff;
+    padding: 0 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-form input:focus {
+    border-color: #e63946;
+    box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.14);
+}
+
+.auth-form button:not(.password-toggle) {
+    width: 100%;
+    margin-top: 0.5rem;
+    border: 0;
+}
+
+.auth-switch {
+    margin-top: 1.5rem;
+    color: #a6a6a6;
+    font-size: 0.95rem;
+}
+
+.auth-switch a {
+    color: #e63946;
+    font-weight: 800;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Password field with show/hide toggle (sits beside the input, not overlapping it) ---------- */
+.password-input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.password-input-row input {
+    flex: 1;
+    min-width: 0;
+}
+
+.password-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    background: #121212;
+    color: #a6a6a6;
+    cursor: pointer;
+    transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+
+.password-toggle svg {
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+}
+
+.password-toggle .icon-eye-off {
+    display: none;
+}
+
+.password-toggle.active .icon-eye {
+    display: none;
+}
+
+.password-toggle.active .icon-eye-off {
+    display: block;
+}
+
+.password-toggle:hover {
+    border-color: #e63946;
+    color: #e63946;
+}
+
+.password-toggle.active {
+    border-color: #e63946;
+    color: #e63946;
+    background: rgba(230, 57, 70, 0.1);
+}
+
+/* ---------- Auth extras row: remember me / forgot password ---------- */
+.auth-extras-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: -0.25rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #a6a6a6;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.remember-me input {
+    width: 16px;
+    height: 16px;
+    min-height: 0;
+    flex-shrink: 0;
+    accent-color: #e63946;
+}
+
+.forgot-link {
+    color: #e63946;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+.auth-terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    color: #a6a6a6;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.auth-terms span {
+    min-width: 0;
+    flex: 1;
+}
+
+.auth-terms input:focus-visible,
+.remember-me input:focus-visible {
+    outline: 2px solid rgba(230, 57, 70, 0.5);
+    outline-offset: 2px;
+}
+
+.auth-terms input {
+    width: 16px;
+    height: 16px;
+    min-height: 0;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    accent-color: #e63946;
+}
+
+/* ---------- Divider + Google button ---------- */
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin: 1.5rem 0;
+    color: #6a6a6a;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #262626;
+}
+
+.google-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 52px;
+    border: 1px solid #333333;
+    border-radius: 999px;
+    background: #121212;
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.google-btn:hover {
+    border-color: #555555;
+    background: #181818;
+}
+
+.google-btn svg {
+    flex-shrink: 0;
+}
+
+@media (min-width: 900px) {
+    .auth-page {
+        grid-template-columns: 1.05fr 1fr;
+    }
+
+    .auth-visual {
+        display: block;
+        min-height: 100vh;
+    }
+
+    .auth-panel {
+        padding: 2.5rem 3rem;
+    }
+}
+
+/* ---------- Navbar ---------- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar {
+    width: 94%;
+    max-width: 1400px;
+    min-height: 72px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+        "logo menu"
+        "links links"
+        "buttons buttons";
+    align-items: center;
+    gap: 0 1rem;
+    padding: 0 1rem;
+    background: rgba(8, 8, 8, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 0;
+    border-radius: 0 0 8px 8px;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    transition:
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        width 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(8, 8, 8, 1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.nav-logo {
+    grid-area: logo;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.nav-logo-link {
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.nav-logo-link:hover {
+    transform: scale(1.04);
+    filter: drop-shadow(0 0 10px rgba(230, 57, 70, 0.45));
+}
+
+/* ---------- Scroll-reveal (used site-wide via navbar.js) ---------- */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+.logo-auto,
+.logo-verse {
+    color: #e63946;
+    text-shadow: 0 0 18px rgba(230, 57, 70, 0.35);
+}
+
+.logo-auto {
+    color: #ffffff;
+}
+
+.logo-verse {
+    color: #e63946;
+}
+
+.nav-center {
+    grid-area: links;
+    width: 100%;
+}
+
+.nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    padding: 1rem 0 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-links.open {
+    display: flex;
+}
+
+.nav-links a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 42px;
+    padding: 0.25rem 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0.25rem;
+    width: 0;
+    height: 2px;
+    background: #e63946;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #e63946;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-buttons {
+    grid-area: buttons;
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0 0 1rem;
+}
+
+.navbar.menu-open .nav-buttons {
+    display: flex;
+}
+
+.nav-welcome {
+    display: inline-flex;
+    align-items: center;
+    min-height: 42px;
+    padding: 0 0.25rem;
+    color: #d6d6d6;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 0.25s ease;
+}
+
+.nav-welcome:hover {
+    color: #ffffff;
+}
+
+.nav-welcome:hover strong {
+    text-decoration: underline;
+}
+
+.nav-welcome strong {
+    margin-left: 0.3rem;
+    color: #e63946;
+}
+
+.login-btn,
+.signup-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 96px;
+    min-height: 42px;
+    padding: 0.65rem 1.1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.login-btn {
+    border: 1px solid #e63946;
+    background: transparent;
+    color: #ffffff;
+}
+
+.signup-btn {
+    border: 1px solid #e63946;
+    background: #e63946;
+}
+
+.login-btn:hover {
+    background: #e63946;
+    border-color: #e63946;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(230, 57, 70, 0.25);
+}
+
+.signup-btn:hover {
+    background: transparent;
+    border-color: #e63946;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: none;
+}
+
+.theme-toggle {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: #e63946;
+    border-color: #e63946;
+    transform: rotate(180deg);
+}
+
+.menu-toggle {
+    grid-area: menu;
+    justify-self: end;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    width: 26px;
+    height: 3px;
+    border-radius: 999px;
+    background: #ffffff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ---------- Shared page hero ---------- */
+.page-hero {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 360px;
+    padding: 134px 1rem 4rem;
+    text-align: center;
+    background:
+        linear-gradient(rgba(8, 8, 8, 0.72), rgba(8, 8, 8, 0.9)),
+        url("../Images/backgroundImage.png") center / cover no-repeat;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.page-hero::after {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    right: -100px;
+    bottom: -160px;
+    border-radius: 50%;
+    background: rgba(230, 57, 70, 0.16);
+    z-index: -1;
+}
+
+.page-hero h1 {
+    font-size: 2rem;
+    line-height: 1.08;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+}
+
+.page-hero p {
+    width: 100%;
+    max-width: 720px;
+    margin-inline: auto;
+    color: #a6a6a6;
+    font-size: 0.95rem;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+    background: #080808;
+    border-top: 1px solid #292929;
+    color: #a6a6a6;
+}
+
+.footer-content {
+    width: 92%;
+    max-width: 1200px;
+    margin-inline: auto;
+    display: grid;
+    gap: 2rem;
+    padding: 3rem 0;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.footer-logo .logo-auto,
+.footer-logo .logo-verse {
+    font-size: 1.25rem;
+}
+
+.footer-text {
+    max-width: 34rem;
+    color: #a6a6a6;
+}
+
+.footer h3 {
+    position: relative;
+    margin-bottom: 1.1rem;
+    padding-bottom: 0.6rem;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+}
+
+.footer h3::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 32px;
+    height: 2px;
+    background: #e63946;
+}
+
+.footer li {
+    margin-bottom: 0.6rem;
+    break-inside: avoid;
+}
+
+.footer-explore ul {
+    column-count: 2;
+    column-gap: 1.5rem;
+}
+
+.footer a {
+    display: inline-flex;
+    align-items: center;
+    color: #a6a6a6;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer a::before {
+    content: "\203A";
+    display: inline-block;
+    width: 0;
+    margin-right: 0;
+    color: #e63946;
+    overflow: hidden;
+    transition: width 0.3s ease, margin-right 0.3s ease;
+}
+
+.footer a:hover {
+    color: #ffffff;
+    padding-left: 0.1rem;
+}
+
+.footer a:hover::before {
+    width: 0.7em;
+    margin-right: 0.3rem;
+}
+
+/* Social icons are their own self-contained circular buttons, not
+   text links - the chevron prefix above doesn't apply to them. */
+.footer a.social-icon::before,
+.footer a.social-icon:hover::before {
+    content: none;
+    width: 0;
+    margin-right: 0;
+}
+
+.footer a.social-icon:hover {
+    padding-left: 0;
+}
+
+.footer-bottom {
+    border-top: 1px solid #292929;
+    padding: 1.2rem 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #777777;
+}
+
+/* ---------- Footer social icons ---------- */
+.footer-social {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 1rem;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    color: #a6a6a6;
+    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.social-icon svg {
+    fill: currentColor;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    border-color: #e63946;
+    background: #e63946;
+    color: #ffffff;
+}
+
+body.light-theme .social-icon {
+    border-color: #dcceb6;
+    background: rgba(23, 24, 23, 0.04);
+    color: #68655f;
+}
+
+body.light-theme .social-icon:hover {
+    border-color: #b88a3b;
+    background: #b88a3b;
+    color: #fbf8f1;
+}
+
+/* ---------- Car cards (shared across home, cars, wishlist, similar-cars) ---------- */
+.car-card {
+    border: 1px solid #292929;
+    border-radius: 10px;
+    background: #181818;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.car-card::before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #d4af37, #e63946);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.car-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: 0 18px 45px rgba(212, 175, 55, 0.16);
+}
+
+.car-card:hover::before {
+    transform: scaleX(1);
+}
+
+/* ---------- Wishlist heart button (car cards + details page) ---------- */
+.wishlist-heart {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    color: #ffffff;
+    cursor: pointer;
+    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.wishlist-heart svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    transition: fill 0.25s ease;
+}
+
+.wishlist-heart:hover {
+    border-color: #e63946;
+    transform: scale(1.08);
+}
+
+.wishlist-heart.active {
+    color: #e63946;
+    border-color: #e63946;
+    background: rgba(230, 57, 70, 0.14);
+}
+
+.wishlist-heart.active svg {
+    fill: #e63946;
+}
+
+.wishlist-heart.wishlist-pop {
+    animation: wishlistPop 0.26s ease;
+}
+
+@keyframes wishlistPop {
+    0% { transform: scale(1); }
+    45% { transform: scale(1.28); }
+    100% { transform: scale(1); }
+}
+
+/* Position the heart on car cards (cars.html, home featured, similar cars) */
+.car-img {
+    position: relative;
+}
+
+.car-img .wishlist-heart {
+    position: absolute;
+    z-index: 3;
+    top: 1rem;
+    right: 1rem;
+}
+
+/* Position on the car-details gallery frame */
+.gallery-frame .wishlist-heart {
+    position: absolute;
+    z-index: 3;
+    top: 1rem;
+    right: 1rem;
+}
+
+/* ---------- Wishlist nav link + badge (every page) ---------- */
+.wishlist-nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 42px;
+    padding: 0 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 0.88rem;
+    font-weight: 700;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.wishlist-nav-label {
+    white-space: nowrap;
+}
+
+.wishlist-nav-link svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+}
+
+.wishlist-nav-link:hover {
+    background: #e63946;
+    border-color: #e63946;
+    transform: translateY(-2px);
+}
+
+.wishlist-nav-count {
+    position: relative;
+    top: 0;
+    right: 0;
+    margin-left: 0.1rem;
+    min-width: 18px;
+    height: 18px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    border-radius: 999px;
+    background: #e63946;
+    color: #ffffff;
+    font-size: 0.68rem;
+    font-weight: 800;
+    line-height: 1;
+    border: 2px solid #080808;
+}
+
+/* ---------- Footer Wishlist column (every page) ---------- */
+.footer-wishlist ul {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.footer-wishlist-empty {
+    color: #6a6a6a;
+    font-style: italic;
+}
+
+body.light-theme .wishlist-heart {
+    border-color: #dcceb6;
+    background: rgba(251, 248, 241, 0.85);
+    color: #171817;
+}
+
+body.light-theme .wishlist-heart:hover {
+    border-color: #b88a3b;
+}
+
+body.light-theme .wishlist-heart.active {
+    color: #b88a3b;
+    border-color: #b88a3b;
+    background: rgba(184, 138, 59, 0.16);
+}
+
+body.light-theme .wishlist-heart.active svg {
+    fill: #b88a3b;
+}
+
+body.light-theme .wishlist-nav-link {
+    color: #171817;
+    border-color: #dcceb6;
+    background: rgba(23, 24, 23, 0.05);
+}
+
+body.light-theme .wishlist-nav-link:hover {
+    background: #b88a3b;
+    border-color: #b88a3b;
+    color: #fbf8f1;
+}
+
+body.light-theme .wishlist-nav-count {
+    background: #b88a3b;
+    border-color: #fbf8f1;
+}
+
+body.light-theme .footer-wishlist-empty {
+    color: #9c8b6f;
+}
+
+/* ---------- Light theme: Ivory / Charcoal / Gold, no red clashes ---------- */
+body.light-theme {
+    background: #f5f0e6;
+    color: #171817;
+}
+
+body.light-theme .navbar {
+    background: rgba(251, 248, 241, 0.95);
+}
+
+body.light-theme .navbar.scrolled {
+    background: rgba(251, 248, 241, 0.98);
+    box-shadow: 0 8px 24px rgba(23, 24, 23, 0.14);
+}
+
+body.light-theme .logo-auto {
+    color: #171817;
+}
+
+body.light-theme .logo-verse {
+    color: #b88a3b;
+    text-shadow: none;
+}
+
+body.light-theme .nav-links a,
+body.light-theme .login-btn {
+    color: #171817;
+}
+
+body.light-theme .nav-links a:hover,
+body.light-theme .nav-links a.active {
+    color: #b88a3b;
+}
+
+body.light-theme .nav-links a::after {
+    background: #b88a3b;
+}
+
+body.light-theme .menu-toggle span {
+    background: #171817;
+}
+
+body.light-theme .theme-toggle {
+    color: #171817;
+    border-color: #dcceb6;
+    background: rgba(23, 24, 23, 0.05);
+}
+
+body.light-theme .section-title {
+    color: #171817;
+}
+
+body.light-theme .footer {
+    background: #fbf8f1;
+    color: #171817;
+}
+
+body.light-theme .footer h3 {
+    color: #171817;
+}
+
+/* ================================================
+   LIGHT THEME - FULL SITE OVERRIDES
+   Uses body.light-theme prefix so specificity wins
+   over dark-mode colours regardless of load order.
+   Gold (Champagne / Soft / Antique) replaces red as
+   the accent throughout this theme - red is kept
+   only for elements shared visually across both
+   themes where swapping it would break brand colour
+   consistency (primary CTA buttons, price tags).
+   ================================================ */
+
+/* Headings and primary text that were hardcoded white */
+body.light-theme .hero-heading,
+body.light-theme .hero-heading .word,
+body.light-theme .car-info h1,
+body.light-theme .page-hero h1,
+body.light-theme .auth-card h1,
+body.light-theme .contact-info h2,
+body.light-theme .contact-info strong,
+body.light-theme .stat-label {
+    color: #171817;
+}
+
+body.light-theme .hero-heading .word.highlight,
+body.light-theme .hero-heading .highlight {
+    color: #b88a3b;
+}
+
+/* Secondary / muted text that was hardcoded light grey */
+body.light-theme .hero-text,
+body.light-theme .page-hero p,
+body.light-theme .auth-card > p,
+body.light-theme .about-text,
+body.light-theme .footer-text,
+body.light-theme .contact-info p,
+body.light-theme .details-description,
+body.light-theme .cars-hero p:last-child,
+body.light-theme .team-desc,
+body.light-theme .testimonial-text,
+body.light-theme .contact-form label,
+body.light-theme .auth-form label,
+body.light-theme .picker-label,
+body.light-theme .brand-group span,
+body.light-theme .breadcrumb,
+body.light-theme .nav-welcome {
+    color: #68655f;
+}
+
+body.light-theme .breadcrumb a {
+    color: #292a28;
+}
+
+body.light-theme .breadcrumb a:hover {
+    color: #b88a3b;
+}
+
+body.light-theme .section-subtitle,
+body.light-theme .auth-switch,
+body.light-theme .footer a,
+body.light-theme .footer-bottom,
+body.light-theme .mission-box {
+    color: #68655f;
+}
+
+body.light-theme .team-card h3,
+body.light-theme .picker-label span {
+    color: #171817;
+}
+
+body.light-theme .footer a:hover {
+    color: #b88a3b;
+}
+
+body.light-theme .footer a::before {
+    color: #b88a3b;
+}
+
+body.light-theme .footer h3::after {
+    background: #b88a3b;
+}
+
+/* Section backgrounds that were hardcoded dark - soft beige, not grey */
+body.light-theme .featured-cars,
+body.light-theme .popular-brands,
+body.light-theme .why-choose-us,
+body.light-theme .testimonials,
+body.light-theme .statistics,
+body.light-theme .contact-section,
+body.light-theme .brand-strip {
+    background: #ede4d5;
+}
+
+body.light-theme .featured-cars::before,
+body.light-theme .why-choose-us::before,
+body.light-theme .popular-brands::before,
+body.light-theme .statistics::before,
+body.light-theme .testimonials::before {
+    background: #b88a3b;
+}
+
+/* Car cards (home, cars/explore, wishlist, similar-cars) stay
+   permanently black/luxury-dark in both themes - this is the look
+   that's meant to be consistent everywhere a car is shown as a card,
+   regardless of the site-wide theme toggle. In light theme they get
+   a warm gold-tinted frame and soft shadow instead of the barely-
+   visible dark-grey border, so they read as an intentional inset
+   against the cream page rather than a harsh black block. */
+body.light-theme .car-card,
+body.light-theme .similar-card {
+    background: #161412;
+    border-color: rgba(184, 138, 59, 0.4);
+    box-shadow: 0 14px 34px rgba(23, 24, 23, 0.16);
+}
+
+body.light-theme .car-card:hover,
+body.light-theme .similar-card:hover {
+    border-color: rgba(184, 138, 59, 0.75);
+    box-shadow: 0 20px 44px rgba(184, 138, 59, 0.22);
+}
+
+body.light-theme .car-card::before {
+    background: linear-gradient(90deg, #b88a3b, #e63946);
+}
+
+body.light-theme .car-details,
+body.light-theme .similar-card-content {
+    background: transparent;
+}
+
+body.light-theme .car-name,
+body.light-theme .car-card h2,
+body.light-theme .similar-card-content h3 {
+    color: #ffffff;
+}
+
+body.light-theme .car-brand,
+body.light-theme .brand {
+    color: #a6a6a6;
+}
+
+body.light-theme .price,
+body.light-theme .car-price {
+    color: #e63946;
+}
+
+body.light-theme .brand-tag {
+    background: rgba(0, 0, 0, 0.65);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Card components that were hardcoded dark */
+body.light-theme .feature-card,
+body.light-theme .brand-card,
+body.light-theme .stat-box,
+body.light-theme .testimonial-card,
+body.light-theme .team-card,
+body.light-theme .mission-box,
+body.light-theme .spec-item,
+body.light-theme .performance-item,
+body.light-theme .details-gallery,
+body.light-theme .car-info,
+body.light-theme .contact-form,
+body.light-theme .contact-info,
+body.light-theme .features-list li {
+    background: #fbf8f1;
+    border-color: #dcceb6;
+    box-shadow: 0 8px 24px rgba(23, 24, 23, 0.06);
+}
+
+body.light-theme .feature-card:hover,
+body.light-theme .brand-card:hover,
+body.light-theme .stat-box:hover,
+body.light-theme .testimonial-card:hover,
+body.light-theme .team-card:hover,
+body.light-theme .mission-box:hover {
+    border-color: rgba(184, 138, 59, 0.6);
+    box-shadow: 0 18px 45px rgba(184, 138, 59, 0.18);
+}
+
+body.light-theme .spec-item:hover,
+body.light-theme .performance-item:hover {
+    border-color: rgba(184, 138, 59, 0.6);
+    box-shadow: 0 14px 32px rgba(184, 138, 59, 0.18);
+}
+
+body.light-theme .spec-item h3,
+body.light-theme .performance-item span {
+    color: #8f682d;
+}
+
+body.light-theme .spec-item:hover h3 {
+    color: #b88a3b;
+}
+
+body.light-theme .spec-item p {
+    color: #171817;
+}
+
+body.light-theme .performance-item strong {
+    color: #b88a3b;
+}
+
+body.light-theme .team-role,
+body.light-theme .details-brand,
+body.light-theme .details-price {
+    color: #b88a3b;
+}
+
+body.light-theme .feature-icon,
+body.light-theme .testimonial-img {
+    background: #b88a3b;
+}
+
+body.light-theme .feature-card::after {
+    background: #b88a3b;
+}
+
+body.light-theme .stat-box::before {
+    background: rgba(184, 138, 59, 0.14);
+}
+
+body.light-theme .stat-number {
+    color: #b88a3b;
+}
+
+body.light-theme .brand-tag {
+    background: rgba(23, 24, 23, 0.72);
+}
+
+/* Popular Brands - gold underline accent on hover */
+body.light-theme .brand-card:hover {
+    background: #fffdf8;
+    border-color: rgba(184, 138, 59, 0.5);
+}
+
+body.light-theme .brand-card::after {
+    background: linear-gradient(90deg, #b88a3b, #8f682d);
+}
+
+body.light-theme .brand-card:hover h3 {
+    color: #171817;
+}
+
+/* Form fields that were hardcoded dark */
+body.light-theme .search-box input,
+body.light-theme .filter-select,
+body.light-theme .contact-form input,
+body.light-theme .contact-form select,
+body.light-theme .contact-form textarea,
+body.light-theme .auth-form input,
+body.light-theme .variant-btn {
+    background: #fbf8f1;
+    border-color: #dcceb6;
+    color: #171817;
+}
+
+body.light-theme .search-box input:focus,
+body.light-theme .filter-select:focus,
+body.light-theme .contact-form input:focus,
+body.light-theme .contact-form select:focus,
+body.light-theme .contact-form textarea:focus,
+body.light-theme .auth-form input:focus {
+    border-color: #b88a3b;
+    box-shadow: 0 0 0 3px rgba(184, 138, 59, 0.16);
+}
+
+body.light-theme .variant-btn:hover {
+    border-color: rgba(184, 138, 59, 0.6);
+}
+
+body.light-theme .variant-btn .variant-fuel {
+    color: #8a7f6c;
+}
+
+body.light-theme .variant-btn.active {
+    background: rgba(184, 138, 59, 0.14);
+    border-color: #b88a3b;
+    color: #171817;
+}
+
+body.light-theme .variant-btn.active .variant-fuel {
+    color: #8f682d;
+}
+
+body.light-theme .color-swatch {
+    border-color: rgba(23, 24, 23, 0.28);
+}
+
+body.light-theme .color-swatch.active {
+    border-color: #b88a3b;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35), 0 0 0 3px rgba(184, 138, 59, 0.22);
+}
+
+body.light-theme .gallery-arrow {
+    border-color: rgba(184, 138, 59, 0.5);
+    background: rgba(184, 138, 59, 0.1);
+    color: #8f682d;
+}
+
+body.light-theme .gallery-arrow:hover {
+    background: rgba(184, 138, 59, 0.22);
+    box-shadow: 0 0 16px rgba(184, 138, 59, 0.3);
+}
+
+body.light-theme .gallery-dot {
+    border-color: rgba(184, 138, 59, 0.5);
+}
+
+body.light-theme .gallery-dot.active {
+    background: #b88a3b;
+}
+
+body.light-theme .details-gallery {
+    border-color: #b88a3b;
+    box-shadow:
+        0 0 20px rgba(184, 138, 59, 0.28),
+        0 0 50px rgba(184, 138, 59, 0.1),
+        inset 0 0 22px rgba(184, 138, 59, 0.05);
+}
+
+body.light-theme .testimonial-arrow {
+    border-color: rgba(184, 138, 59, 0.45);
+    background: rgba(184, 138, 59, 0.08);
+    color: #8f682d;
+}
+
+body.light-theme .testimonial-arrow:hover {
+    background: rgba(184, 138, 59, 0.2);
+    box-shadow: 0 0 16px rgba(184, 138, 59, 0.25);
+}
+
+body.light-theme .testimonial-dot {
+    border-color: rgba(184, 138, 59, 0.5);
+}
+
+body.light-theme .testimonial-dot.active {
+    background: #b88a3b;
+}
+
+/* Newsletter block - gold gradient instead of red in light theme */
+body.light-theme .newsletter {
+    background: linear-gradient(135deg, #b88a3b, #8f682d);
+}
+
+/* Hero + page-hero + auth-page background image overlays */
+body.light-theme .hero-overlay {
+    background:
+        linear-gradient(to bottom, rgba(251, 248, 241, 0.5), rgba(251, 248, 241, 0.88)),
+        linear-gradient(to right, rgba(251, 248, 241, 0.82), rgba(251, 248, 241, 0.3));
+}
+
+body.light-theme .page-hero {
+    background-image:
+        linear-gradient(rgba(251, 248, 241, 0.78), rgba(251, 248, 241, 0.94)),
+        url("../Images/backgroundImage.png");
+}
+
+body.light-theme .auth-panel {
+    background: #fbf8f1;
+}
+
+body.light-theme .google-btn {
+    background: #ffffff;
+    border-color: #dcceb6;
+    color: #171817;
+}
+
+body.light-theme .google-btn:hover {
+    background: #f5f0e6;
+    border-color: #c9b58c;
+}
+
+body.light-theme .auth-divider {
+    color: #9c8b6f;
+}
+
+body.light-theme .auth-divider::before,
+body.light-theme .auth-divider::after {
+    background: #dcceb6;
+}
+
+body.light-theme .password-toggle {
+    border-color: #dcceb6;
+    background: #ffffff;
+    color: #68655f;
+}
+
+body.light-theme .password-toggle:hover {
+    border-color: #b88a3b;
+    color: #b88a3b;
+}
+
+body.light-theme .password-toggle.active {
+    border-color: #b88a3b;
+    color: #b88a3b;
+    background: rgba(184, 138, 59, 0.1);
+}
+
+body.light-theme .remember-me,
+body.light-theme .auth-terms {
+    color: #68655f;
+}
+
+body.light-theme .forgot-link {
+    color: #b88a3b;
+}
+
+body.light-theme .page-hero::after {
+    background: rgba(184, 138, 59, 0.16);
+}
+
+/* Placeholder cards for cars without a photo */
+body.light-theme .placeholder-car {
+    color: #9c8b6f;
+}
+
+body.light-theme .placeholder-car strong {
+    color: #292a28;
+}
+
+body.light-theme .no-results {
+    border-color: #dcceb6;
+    color: #68655f;
+}
+
+body.light-theme .btn.back-btn,
+body.light-theme .btn.learn-btn {
+    border-color: rgba(23, 24, 23, 0.18);
+    background: rgba(23, 24, 23, 0.05);
+    color: #171817;
+}
+
+body.light-theme .btn.back-btn:hover,
+body.light-theme .btn.learn-btn:hover {
+    background: rgba(23, 24, 23, 0.1);
+    border-color: rgba(23, 24, 23, 0.3);
+    color: #171817;
+    box-shadow: none;
+}
+
+body.light-theme .features-list li {
+    color: #292a28;
+}
+
+body.light-theme .features-list li:hover {
+    border-left-color: #b88a3b;
+    background: #f5f0e6;
+    color: #171817;
+}
+
+/* Primary CTA buttons (Explore Cars, Send Message, View Details, Book a
+   Test Drive, Show More Cars, etc.) - solid gold instead of solid red.
+   .newsletter-btn is deliberately excluded: it's already dark/black by
+   design and reads fine against the gold newsletter banner. */
+body.light-theme .btn,
+body.light-theme .car-btn,
+body.light-theme .details-btn,
+body.light-theme .btn-red {
+    background: #b88a3b;
+    border-color: #b88a3b;
+    color: #171817;
+    box-shadow: 0 10px 24px rgba(184, 138, 59, 0.22);
+}
+
+body.light-theme .btn:hover,
+body.light-theme .car-btn:hover,
+body.light-theme .details-btn:hover,
+body.light-theme .btn-red:hover {
+    background: #8f682d;
+    border-color: #8f682d;
+    color: #fbf8f1;
+    box-shadow: 0 18px 45px rgba(143, 104, 45, 0.22);
+}
+
+/* Login/Signup buttons - gold outline/fill instead of red */
+body.light-theme .login-btn {
+    border-color: #b88a3b;
+}
+
+body.light-theme .signup-btn {
+    background: #b88a3b;
+    border-color: #b88a3b;
+    color: #171817;
+}
+
+/* Login/Signup hover swap, in gold instead of red */
+body.light-theme .login-btn:hover {
+    background: #b88a3b;
+    border-color: #b88a3b;
+    color: #171817;
+}
+
+body.light-theme .signup-btn:hover {
+    background: transparent;
+    border-color: #b88a3b;
+    color: #b88a3b;
+}
+
+/* Loading screen - keep dark and dramatic in dark mode, switch to
+   the light palette (with a gold bar/logo) when the toggle is on,
+   so "AUTO" doesn't disappear against a mismatched background. */
+body.light-theme #loader {
+    background: #fbf8f1;
+}
+
+body.light-theme .loader-content span {
+    color: #b88a3b;
+}
+
+body.light-theme .loading-container {
+    border-color: #171817;
+}
+
+body.light-theme .loading-bar {
+    background: #b88a3b;
+}
+
+body.light-theme .loading-text {
+    color: #68655f;
+}
+
+/* Cursor glow - gold instead of red, so it fits the warm palette
+   instead of clashing the way red did. */
+body.light-theme .cursor-glow {
+    background: rgba(184, 138, 59, 0.28);
+}
+
+/* ================================================
+   LIGHT THEME - NEW SECTIONS (Contact / About / Car Details)
+   These were added after the base light theme system,
+   so they need the same treatment: hero-style full-bleed
+   sections get a cream-tinted background image, headings
+   go dark, secondary text goes muted brown-grey, and card
+   blocks swap from hardcoded dark to the site's ivory
+   card style. Gold accents switch from the header/detail
+   gold (#d4af37) to the site's established light-theme
+   gold (#b88a3b) for consistency and better contrast.
+   ================================================ */
+
+/* Hero-style full-bleed sections (dark image + white text) */
+body.light-theme .contact-hero,
+body.light-theme .manifesto-hero,
+body.light-theme .manifesto-final,
+body.light-theme .contact-final-cta,
+body.light-theme .details-final-cta {
+    background-image:
+        linear-gradient(rgba(251, 248, 241, 0.82), rgba(251, 248, 241, 0.95)),
+        url("../Images/backgroundImage.png");
+}
+
+/* Headings that were hardcoded white */
+body.light-theme .contact-hero h1,
+body.light-theme .manifesto-hero h1,
+body.light-theme .manifesto-headline,
+body.light-theme .concierge-card h3,
+body.light-theme .whatsapp-title,
+body.light-theme .contact-final-cta h2,
+body.light-theme .faq-item summary,
+body.light-theme .showroom-details h3,
+body.light-theme .details-final-cta h2,
+body.light-theme .section-title-sm,
+body.light-theme .review-name {
+    color: #171817;
+}
+
+/* Secondary / muted text that was hardcoded light grey */
+body.light-theme .contact-hero-text,
+body.light-theme .manifesto-lede,
+body.light-theme .manifesto-content h2,
+body.light-theme .manifesto-text,
+body.light-theme .timeline-text,
+body.light-theme .manifesto-stats-row span,
+body.light-theme .manifesto-final h2,
+body.light-theme .form-block-title,
+body.light-theme .consent-item,
+body.light-theme .whatsapp-text,
+body.light-theme .concierge-card p,
+body.light-theme .showroom-hours,
+body.light-theme .faq-item p,
+body.light-theme .contact-final-cta p,
+body.light-theme .overview-text,
+body.light-theme .drive-mode-card p,
+body.light-theme .ownership-card p,
+body.light-theme .review-text {
+    color: #68655f;
+}
+
+/* Gold accent labels/icons - switch to the site's light-theme gold */
+body.light-theme .manifesto-eyebrow,
+body.light-theme .manifesto-index,
+body.light-theme .timeline-year,
+body.light-theme .showroom-sub,
+body.light-theme .ownership-card h3 {
+    color: #8f682d;
+}
+
+body.light-theme .concierge-icon,
+body.light-theme .drive-mode-icon {
+    border-color: rgba(184, 138, 59, 0.5);
+    color: #8f682d;
+}
+
+body.light-theme .manifesto-tags span {
+    border-color: rgba(184, 138, 59, 0.4);
+    background: rgba(184, 138, 59, 0.08);
+    color: #8f682d;
+}
+
+/* Card blocks - swap from hardcoded dark to the site's ivory card style */
+body.light-theme .enquiry-option,
+body.light-theme .pill-radio,
+body.light-theme .consent-block,
+body.light-theme .concierge-card,
+body.light-theme .showroom-card,
+body.light-theme .faq-item,
+body.light-theme .manifesto-stats-row div,
+body.light-theme .split-list-item,
+body.light-theme .drive-mode-card,
+body.light-theme .ownership-card,
+body.light-theme .review-card {
+    background: #fbf8f1;
+    border-color: #dcceb6;
+    color: #292a28;
+}
+
+body.light-theme .enquiry-option:has(input:checked),
+body.light-theme .pill-radio:has(input:checked) {
+    border-color: #b88a3b;
+    background: rgba(184, 138, 59, 0.14);
+    color: #171817;
+}
+
+body.light-theme .concierge-card:hover,
+body.light-theme .drive-mode-card:hover {
+    border-color: rgba(184, 138, 59, 0.55);
+    box-shadow: 0 18px 45px rgba(184, 138, 59, 0.14);
+}
+
+body.light-theme .review-card:hover {
+    border-color: rgba(184, 138, 59, 0.5);
+    box-shadow: 0 16px 36px rgba(184, 138, 59, 0.14);
+}
+
+body.light-theme .split-list-item:hover {
+    background: #f5f0e6;
+}
+
+/* Section wrapper backgrounds that were hardcoded dark */
+body.light-theme .concierge-section,
+body.light-theme .faq-section,
+body.light-theme .showroom-section {
+    background: #ede4d5;
+}
+
+/* Thin dividers that were hardcoded dark */
+body.light-theme .manifesto-divider,
+body.light-theme .timeline li,
+body.light-theme .form-block {
+    border-color: #dcceb6;
+}
+
+body.light-theme .form-block-title {
+    color: #171817;
+}
+
+/* Drive-mode / ownership / concierge card headings that use inherited
+   (not explicitly-set) colour - give them an explicit dark colour so
+   they never inherit the wrong one when the theme switches. */
+body.light-theme .drive-mode-card h3 {
+    color: #171817;
+}
+
+/* Whatsapp card stays on-brand green in both themes; only the border/
+   background tint needs a touch more contrast against the ivory card. */
+body.light-theme .whatsapp-card {
+    border-color: rgba(37, 211, 102, 0.45);
+    background: rgba(37, 211, 102, 0.1);
+}
+
+body.light-theme .manifesto-hero h1 span,
+body.light-theme .manifesto-stats-row strong {
+    color: #8f682d;
+}
+
+body.light-theme .manifesto-page {
+    background: #f5f0e6;
+}
+
+body.light-theme .manifesto-block-feature {
+    background: linear-gradient(180deg, rgba(184, 138, 59, 0.08), transparent);
+}
+
+/* ---------- Loading screen ---------- */
+#loader {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    background: #000000;
+    z-index: 9999;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.loader-content {
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+}
+
+.loader-content h1 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+}
+
+.loader-content span {
+    color: #e63946;
+}
+
+.loading-container {
+    width: 100%;
+    height: 10px;
+    margin: auto;
+    overflow: hidden;
+    border: 2px solid #ffffff;
+    border-radius: 999px;
+}
+
+.loading-bar {
+    width: 0;
+    height: 100%;
+    background: #e63946;
+    animation: loading 2s linear forwards;
+}
+
+.loading-text {
+    margin-top: 1.5rem;
+    color: #a6a6a6;
+    letter-spacing: 0.18em;
+}
+
+#loader.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+html.skip-home-loader #loader {
+    display: none;
+}
+
+html.skip-home-loader .loading-bar {
+    animation: none;
+}
+
+@media (min-width: 480px) {
+    .footer-content {
+        width: 90%;
+    }
+}
+
+@media (min-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1.4fr 1fr;
+    }
+
+    .page-hero {
+        min-height: 360px;
+        padding-top: 150px;
+    }
+
+    .section-title {
+        font-size: 2.25rem;
+    }
+
+    .page-hero h1 {
+        font-size: 3rem;
+    }
+
+    .page-hero p {
+        font-size: 1.1rem;
+    }
+
+    .auth-card h1 {
+        font-size: 2.15rem;
+    }
+
+    .loader-content h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar {
+        grid-template-columns: 1fr auto 1fr;
+        grid-template-areas: "logo links buttons";
+        padding-inline: 3rem;
+    }
+
+    .nav-center {
+        justify-self: center;
+        width: auto;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+        padding: 0;
+        border: 0;
+    }
+
+    .nav-buttons {
+        display: flex;
+        justify-self: end;
+        padding: 0;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+
+    .footer-content {
+        grid-template-columns: 1.1fr 0.7fr 0.8fr 1.4fr;
+    }
+}
+
+@media (min-width: 1200px) {
+    .section-title {
+        font-size: 2.6rem;
+    }
+
+    .page-hero h1 {
+        font-size: 3.75rem;
+    }
+
+    .navbar {
+        padding-inline: 4rem;
+    }
+
+    .nav-links {
+        gap: 2.25rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr 0.6fr 0.7fr 1.4fr 0.8fr;
+    }
+
+    .footer-explore ul {
+        column-count: 3;
+    }
+}

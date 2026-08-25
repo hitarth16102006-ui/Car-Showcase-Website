@@ -1,0 +1,550 @@
+﻿/* ================================================
+   about.css
+   About page sections only
+   ================================================ */
+
+/* ---------- Manifesto hero ---------- */
+.manifesto-page {
+    background: #050505;
+}
+
+.manifesto-hero {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 68vh;
+    padding: 150px 1.25rem 5rem;
+    text-align: center;
+    background:
+        linear-gradient(rgba(5, 5, 5, 0.75), rgba(5, 5, 5, 0.95)),
+        url("../Images/backgroundImage.png") center / cover no-repeat;
+    border-bottom: 1px solid #292929;
+}
+
+.manifesto-eyebrow {
+    margin-bottom: 1.25rem;
+    color: #d4af37;
+    letter-spacing: 0.3em;
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.manifesto-hero h1 {
+    font-size: 2.4rem;
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+}
+
+.manifesto-hero h1 span {
+    color: #d4af37;
+}
+
+.manifesto-lede {
+    width: 100%;
+    max-width: 620px;
+    margin: 1.5rem auto 2.25rem;
+    color: #c9c9c9;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+/* ---------- Numbered manifesto blocks ---------- */
+.manifesto-block {
+    width: 92%;
+    max-width: 900px;
+    margin-inline: auto;
+    padding: 4.5rem 0;
+    display: grid;
+    gap: 1.25rem;
+}
+
+.manifesto-index {
+    color: #d4af37;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.3em;
+}
+
+.manifesto-content h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #a6a6a6;
+}
+
+.manifesto-headline {
+    margin-bottom: 1rem;
+    font-size: 1.9rem;
+    line-height: 1.2;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.manifesto-text {
+    max-width: 640px;
+    color: #b8b8b8;
+    line-height: 1.85;
+}
+
+.manifesto-divider {
+    width: 92%;
+    max-width: 900px;
+    margin: 0 auto;
+    border: 0;
+    border-top: 1px solid #292929;
+}
+
+.manifesto-block-feature {
+    background: linear-gradient(180deg, rgba(212, 175, 55, 0.05), transparent);
+}
+
+/* ---------- Timeline (Our Story) ---------- */
+.timeline {
+    display: grid;
+    gap: 1.1rem;
+    margin-top: 1.75rem;
+    padding-left: 0;
+    list-style: none;
+}
+
+.timeline li {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid #1e1e1e;
+}
+
+.timeline li:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.timeline-year {
+    color: #d4af37;
+    font-weight: 800;
+    font-size: 1.05rem;
+}
+
+.timeline-text {
+    color: #c9c9c9;
+    line-height: 1.7;
+}
+
+/* ---------- Design philosophy tag chips ---------- */
+.manifesto-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+}
+
+.manifesto-tags span {
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 999px;
+    background: rgba(212, 175, 55, 0.06);
+    color: #e3c874;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+/* ---------- Engineering stat row ---------- */
+.manifesto-stats-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.manifesto-stats-row div {
+    padding: 1.5rem 1.25rem;
+    border: 1px solid #292929;
+    border-radius: 8px;
+    background: #121212;
+}
+
+.manifesto-stats-row strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #d4af37;
+    font-size: 1.9rem;
+    line-height: 1;
+}
+
+.manifesto-stats-row span {
+    display: block;
+    color: #a6a6a6;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* ---------- Final CTA / Future Vision ---------- */
+.manifesto-final {
+    position: relative;
+    width: 100%;
+    padding: 6rem 1.25rem;
+    text-align: center;
+    background:
+        linear-gradient(rgba(5, 5, 5, 0.82), rgba(5, 5, 5, 0.95)),
+        url("../Images/backgroundImage.png") center / cover no-repeat;
+    border-top: 1px solid #292929;
+}
+
+.manifesto-final .manifesto-index {
+    justify-content: center;
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.manifesto-final h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #a6a6a6;
+}
+
+.manifesto-final .manifesto-headline {
+    margin-inline: auto;
+    font-size: 2rem;
+}
+
+.manifesto-final .manifesto-text {
+    margin: 0 auto 2rem;
+}
+
+/* ---------- Manifesto section imagery ---------- */
+.manifesto-block-media {
+    display: grid;
+    gap: 2rem;
+}
+
+.about-image-block {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    border-radius: 10px;
+    border: 1px solid #292929;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.about-image-block img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.about-image-block:hover img {
+    transform: scale(1.08);
+}
+
+.about-image-caption {
+    position: absolute;
+    z-index: 1;
+    left: 1rem;
+    bottom: 1rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.65);
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+    .manifesto-block-media {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+    }
+
+    .manifesto-block-media.media-left .about-image-block {
+        order: -1;
+    }
+}
+
+/* ---------- Manifesto section reveal-in animation (JS adds .in-view) ---------- */
+.manifesto-block,
+.timeline li,
+.manifesto-tags span,
+.about-image-block {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.manifesto-block.in-view,
+.timeline li.in-view,
+.manifesto-tags span.in-view,
+.about-image-block.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .manifesto-block,
+    .timeline li,
+    .manifesto-tags span,
+    .about-image-block {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .manifesto-hero h1 {
+        font-size: 3.75rem;
+    }
+
+    .manifesto-block {
+        grid-template-columns: 120px 1fr;
+        align-items: start;
+    }
+
+    .manifesto-block-media {
+        grid-template-columns: 120px 1fr;
+    }
+
+    .manifesto-block-media .manifesto-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    .manifesto-block-media .manifesto-content > *:not(.about-image-block) {
+        grid-column: 1;
+    }
+
+    .manifesto-block-media .about-image-block {
+        grid-column: 2;
+        grid-row: 1 / -1;
+    }
+
+    .manifesto-headline {
+        font-size: 2.4rem;
+    }
+
+    .manifesto-stats-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .manifesto-block-media .manifesto-stats-row {
+        grid-template-columns: 1fr;
+    }
+
+    .manifesto-final .manifesto-headline {
+        font-size: 2.75rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .manifesto-block:not(.manifesto-block-media) .manifesto-stats-row {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .manifesto-block-media .manifesto-stats-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.about-section {
+    width: 92%;
+    max-width: 1100px;
+    margin-inline: auto;
+    padding: 5rem 0;
+}
+
+.about-text {
+    width: 100%;
+    max-width: 850px;
+    margin-inline: auto;
+    color: #d6d6d6;
+    text-align: center;
+    line-height: 1.85;
+}
+
+.mission-box,
+.team-card {
+    border: 1px solid #292929;
+    border-radius: 8px;
+    background: #181818;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mission-box {
+    width: 100%;
+    max-width: 820px;
+    margin-inline: auto;
+    padding: 2rem;
+    color: #d6d6d6;
+    text-align: center;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.team-card {
+    padding: 2rem;
+    text-align: center;
+}
+
+.mission-box:hover,
+.team-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(230, 57, 70, 0.55);
+    box-shadow: 0 18px 45px rgba(230, 57, 70, 0.14);
+}
+
+.team-avatar {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #e63946;
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: 800;
+    border: 3px solid rgba(230, 57, 70, 0.18);
+box-shadow: 0 0 0 6px rgba(230, 57, 70, 0.05);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-card:hover .team-avatar {
+    transform: scale(1.08);
+    box-shadow:
+        0 0 0 8px rgba(230, 57, 70, 0.08),
+        0 8px 24px rgba(230, 57, 70, 0.22);
+}
+.team-card h3 {
+    color: #ffffff;
+    font-size: 1.15rem;
+}
+
+.team-role {
+    margin: 0.45rem 0;
+    color: #e63946;
+    font-weight: 700;
+}
+
+.team-desc {
+    color: #a6a6a6;
+    font-size: 0.92rem;
+}
+
+@media (min-width: 768px) {
+    .about-section {
+        padding: 7rem 0;
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .team-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ---------- Stats section (self-contained, home.css not loaded here) ---------- */
+.stats-section {
+    position: relative;
+}
+
+.stats-grid {
+    width: 92%;
+    max-width: 1200px;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.stat-box {
+    position: relative;
+    overflow: hidden;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border: 1px solid #292929;
+    border-radius: 8px;
+    background: #181818;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-box::before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    top: -60px;
+    right: -60px;
+    border-radius: 50%;
+    background: rgba(230, 57, 70, 0.1);
+    transition: transform 0.4s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-5px);
+    border-color: rgba(230, 57, 70, 0.55);
+    box-shadow: 0 18px 45px rgba(230, 57, 70, 0.14);
+}
+
+.stat-box:hover::before {
+    transform: scale(1.5);
+}
+
+.stat-number {
+    margin-bottom: 0.35rem;
+    color: #e63946;
+    font-size: 2rem;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.stat-label {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+@media (min-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .stat-number {
+        font-size: 3rem;
+    }
+}

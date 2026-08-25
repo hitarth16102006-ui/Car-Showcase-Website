@@ -1,0 +1,766 @@
+﻿/* ================================================
+   car-details.css
+   Car details page only
+   ================================================ */
+
+body {
+	background: #080808;
+}
+
+/* Main page layout */
+.details-page {
+	padding: 130px 1rem 6rem;
+}
+
+.details-container {
+	width: 92%;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.breadcrumb {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-bottom: 2rem;
+	color: #a6a6a6;
+	font-size: 0.9rem;
+}
+
+.breadcrumb a {
+	color: #d6d6d6;
+}
+
+.breadcrumb a:hover {
+	color: #e63946;
+}
+
+/* Main car information */
+.details-layout {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 2rem;
+	margin-bottom: 5rem;
+}
+
+.details-gallery,
+.car-info,
+.spec-item,
+.performance-item {
+	border: 1px solid #292929;
+	border-radius: 8px;
+	background: #181818;
+}
+
+.details-gallery {
+	padding: 1rem;
+	position: relative;
+	border: 2px solid #d4af37;
+	box-shadow:
+		0 0 20px rgba(212, 175, 55, 0.32),
+		0 0 50px rgba(212, 175, 55, 0.12),
+		inset 0 0 22px rgba(212, 175, 55, 0.05);
+	animation: goldGlowPulse 3.5s ease-in-out infinite;
+}
+
+@keyframes goldGlowPulse {
+	0%, 100% {
+		box-shadow:
+			0 0 20px rgba(212, 175, 55, 0.32),
+			0 0 50px rgba(212, 175, 55, 0.12),
+			inset 0 0 22px rgba(212, 175, 55, 0.05);
+	}
+	50% {
+		box-shadow:
+			0 0 28px rgba(212, 175, 55, 0.5),
+			0 0 65px rgba(212, 175, 55, 0.2),
+			inset 0 0 28px rgba(212, 175, 55, 0.08);
+	}
+}
+
+.gallery-frame {
+	position: relative;
+	overflow: hidden;
+}
+
+.gallery-caption {
+	position: absolute;
+	z-index: 2;
+	right: 1rem;
+	bottom: 1rem;
+	padding: 0.35rem 0.8rem;
+	border-radius: 999px;
+	background: rgba(0, 0, 0, 0.65);
+	color: #ffffff;
+	font-size: 0.72rem;
+	font-weight: 800;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.placeholder-car em {
+	display: block;
+	margin-top: 0.5rem;
+	color: #777777;
+	font-size: 0.72rem;
+	font-style: normal;
+	letter-spacing: 0.06em;
+	text-transform: none;
+}
+
+.gallery-controls {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	margin-top: 0.85rem;
+}
+
+.gallery-arrow {
+	width: 40px;
+	height: 40px;
+	flex-shrink: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid rgba(212, 175, 55, 0.45);
+	border-radius: 50%;
+	background: rgba(212, 175, 55, 0.08);
+	color: #d4af37;
+	font-size: 0.95rem;
+	cursor: pointer;
+	transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gallery-arrow:hover {
+	background: rgba(212, 175, 55, 0.22);
+	transform: scale(1.08);
+	box-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
+}
+
+.gallery-dots {
+	display: flex;
+	gap: 0.5rem;
+}
+
+.gallery-dot {
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	border: 1px solid rgba(212, 175, 55, 0.5);
+	background: transparent;
+	cursor: pointer;
+	transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.gallery-dot.active {
+	background: #d4af37;
+	transform: scale(1.2);
+}
+
+.main-car-image {
+	position: relative;
+	overflow: hidden;
+	aspect-ratio: 16 / 10;
+	background: #0d0d0d;
+	border-radius: 6px;
+}
+
+.main-car-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.car-info {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 2rem;
+	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
+}
+
+.details-brand {
+	margin-bottom: 0.75rem;
+	color: #e63946;
+	font-size: 0.8rem;
+	font-weight: 800;
+	letter-spacing: 0.2em;
+}
+
+.car-info h1 {
+	margin-bottom: 0.75rem;
+	font-size: 2.25rem;
+	line-height: 1.1;
+}
+
+.details-description {
+	color: #a6a6a6;
+}
+
+.details-price {
+	margin: 1.5rem 0;
+	color: #e63946;
+	font-size: 1.6rem;
+	font-weight: 800;
+}
+
+.picker-group {
+	width: 100%;
+	margin: 1.25rem 0;
+}
+
+.picker-label {
+	margin-bottom: 0.6rem;
+	color: #a6a6a6;
+	font-size: 0.85rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.picker-label span {
+	color: #ffffff;
+	text-transform: none;
+	letter-spacing: normal;
+}
+
+.variant-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+}
+
+.variant-btn {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.2rem;
+	padding: 0.6rem 1rem;
+	border: 1px solid #333333;
+	border-radius: 8px;
+	background: #0d0d0d;
+	color: #d6d6d6;
+	font-size: 0.9rem;
+	font-weight: 700;
+	cursor: pointer;
+	transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.variant-btn .variant-fuel {
+	color: #a6a6a6;
+	font-size: 0.72rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+.variant-btn:hover {
+	border-color: rgba(230, 57, 70, 0.55);
+}
+
+.variant-btn.active {
+	border-color: #e63946;
+	background: rgba(230, 57, 70, 0.14);
+	color: #ffffff;
+}
+
+.variant-btn.active .variant-fuel {
+	color: #ff8a92;
+}
+
+.color-swatches {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+}
+
+.color-swatch {
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	border: 2px solid rgba(255, 255, 255, 0.35);
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35), 0 1px 4px rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+	transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.color-swatch:hover {
+	transform: translateY(-2px);
+}
+
+.color-swatch.active {
+	border-color: #e63946;
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35), 0 0 0 3px rgba(230, 57, 70, 0.22);
+}
+
+.details-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	margin-top: auto;
+}
+
+.back-btn {
+	border-color: rgba(255, 255, 255, 0.1);
+	background: transparent;
+}
+
+.back-btn:hover {
+	background: #181818;
+}
+
+.save-to-garage-btn.saved {
+	border-color: #e63946;
+	color: #ffffff;
+	background: rgba(230, 57, 70, 0.14);
+}
+
+/* Specifications and performance */
+.details-section {
+	margin-bottom: 5rem;
+}
+
+.spec-grid,
+.performance-grid,
+.similar-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1rem;
+}
+
+.spec-item {
+	padding: 1.5rem;
+	background: #181818;
+	transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.spec-item:hover {
+	transform: translateY(-6px);
+	border-color: rgba(230, 57, 70, 0.55);
+	box-shadow: 0 14px 32px rgba(230, 57, 70, 0.18);
+}
+
+.spec-item h3 {
+    text-align: center;
+	margin-bottom: 0.35rem;
+	color: #a6a6a6;
+	font-size: 0.9rem;
+	font-weight: 600;
+	transition: color 0.3s ease;
+}
+
+.spec-item:hover h3 {
+	color: #ff8a92;
+}
+
+.spec-item p {
+    text-align: center;
+	color: #ffffff;
+	font-weight: 700;
+}
+
+.performance-item {
+	padding: 1.5rem;
+	text-align: center;
+	transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.performance-item:hover {
+	transform: translateY(-6px) scale(1.03);
+	border-color: rgba(230, 57, 70, 0.55);
+	box-shadow: 0 14px 32px rgba(230, 57, 70, 0.18);
+}
+
+.performance-item strong {
+	display: block;
+	margin-bottom: 0.35rem;
+	color: #e63946;
+	font-size: 1.8rem;
+	transition: transform 0.3s ease;
+}
+
+.performance-item:hover strong {
+	transform: scale(1.1);
+}
+
+.performance-item span {
+	color: #a6a6a6;
+	font-size: 0.9rem;
+}
+
+/* Features */
+.features-list {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.75rem;
+	padding: 0;
+}
+
+.features-list li {
+	padding: 1rem;
+	border-left: 3px solid #e63946;
+	background: #181818;
+	color: #e4e4e4;
+	transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.features-list li:hover {
+	transform: translateX(10px);
+	border-left-color: #d4af37;
+	background: #1f1f1f;
+	color: #ffffff;
+}
+
+/* Similar cars */
+.similar-carousel {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.similar-carousel .similar-grid {
+	flex: 1;
+	min-width: 0;
+}
+
+.similar-arrow {
+	width: 44px;
+	height: 44px;
+	flex-shrink: 0;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid rgba(212, 175, 55, 0.4);
+	border-radius: 50%;
+	background: rgba(212, 175, 55, 0.08);
+	color: #d4af37;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.similar-arrow:hover {
+	background: rgba(212, 175, 55, 0.22);
+	transform: scale(1.08);
+	box-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
+}
+
+.similar-dots {
+	display: flex;
+	justify-content: center;
+	gap: 0.55rem;
+	margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+	.similar-arrow {
+		display: inline-flex;
+	}
+}
+
+.similar-card {
+	min-height: 100%;
+}
+
+.similar-card-content {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	height: 100%;
+	padding: 1.5rem;
+}
+
+.similar-card-content h3 {
+	margin-bottom: 0.35rem;
+	font-size: 1.2rem;
+}
+
+.similar-card-content .details-btn {
+	margin-top: auto;
+}
+
+/* ---------- Section eyebrow (shared small label style) ---------- */
+.manifesto-eyebrow {
+	margin-bottom: 0.6rem;
+	color: #d4af37;
+	letter-spacing: 0.28em;
+	font-size: 0.7rem;
+	font-weight: 800;
+}
+
+.section-title-sm {
+	margin-bottom: 1rem;
+	font-size: 1.3rem;
+	font-weight: 800;
+	color: #ffffff;
+}
+
+/* ---------- Overview ---------- */
+.overview-section {
+	text-align: center;
+}
+
+.overview-text {
+	width: 100%;
+	max-width: 780px;
+	margin: 0 auto;
+	color: #b8b8b8;
+	line-height: 1.9;
+	font-size: 1.02rem;
+}
+
+/* ---------- Split sections: Powertrain/Design, Interior/Technology ---------- */
+.split-section {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 2.5rem;
+}
+
+.split-list {
+	display: grid;
+	gap: 0.7rem;
+}
+
+.split-list-item {
+	padding: 0.9rem 1.1rem;
+	border-left: 3px solid #d4af37;
+	background: #141414;
+	color: #d6d6d6;
+	font-size: 0.92rem;
+	transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.split-list-item:hover {
+	transform: translateX(8px);
+	background: #1a1a1a;
+}
+
+/* ---------- Driving experience modes ---------- */
+.drive-mode-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1.25rem;
+}
+
+.drive-mode-card {
+	padding: 2rem 1.5rem;
+	text-align: center;
+	border: 1px solid #292929;
+	border-radius: 8px;
+	background: #181818;
+	transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.drive-mode-card:hover {
+	transform: translateY(-6px);
+	border-color: rgba(212, 175, 55, 0.55);
+	box-shadow: 0 18px 45px rgba(212, 175, 55, 0.14);
+}
+
+.drive-mode-icon {
+	width: 56px;
+	height: 56px;
+	margin: 0 auto 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	border: 1px solid rgba(212, 175, 55, 0.4);
+	color: #d4af37;
+	font-weight: 800;
+}
+
+.drive-mode-card h3 {
+	margin-bottom: 0.5rem;
+	color: #ffffff;
+}
+
+.drive-mode-card p {
+	color: #a6a6a6;
+	font-size: 0.9rem;
+}
+
+/* ---------- Ownership ---------- */
+.ownership-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1.25rem;
+}
+
+.ownership-card {
+	padding: 1.75rem;
+	border: 1px solid #292929;
+	border-radius: 8px;
+	background: #181818;
+	transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ownership-card:hover {
+	transform: translateY(-6px);
+	border-color: rgba(212, 175, 55, 0.55);
+	box-shadow: 0 18px 45px rgba(212, 175, 55, 0.14);
+}
+
+.ownership-card:hover h3 {
+	transform: translateX(4px);
+}
+
+.ownership-card h3 {
+	margin-bottom: 0.5rem;
+	color: #d4af37;
+	font-size: 1rem;
+	display: inline-block;
+	transition: transform 0.3s ease;
+}
+
+.ownership-card p {
+	color: #a6a6a6;
+	font-size: 0.9rem;
+	line-height: 1.6;
+}
+
+/* ---------- Reviews ---------- */
+.reviews-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1.25rem;
+}
+
+.review-card {
+	padding: 1.75rem;
+	border: 1px solid #292929;
+	border-radius: 8px;
+	background: #181818;
+	transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+	transform: translateY(-4px);
+	border-color: rgba(230, 57, 70, 0.5);
+	box-shadow: 0 16px 36px rgba(230, 57, 70, 0.14);
+}
+
+.review-head {
+	display: flex;
+	align-items: center;
+	gap: 0.85rem;
+	margin-bottom: 0.75rem;
+}
+
+.review-avatar {
+	width: 46px;
+	height: 46px;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background: #e63946;
+	color: #ffffff;
+	font-weight: 800;
+	font-size: 0.9rem;
+}
+
+.review-name {
+	color: #ffffff;
+	font-weight: 700;
+	font-size: 0.95rem;
+}
+
+.review-stars {
+	color: #f4a523;
+	font-size: 0.85rem;
+	letter-spacing: 0.05em;
+}
+
+.review-text {
+	color: #a6a6a6;
+	font-size: 0.92rem;
+	line-height: 1.7;
+}
+
+/* ---------- Final CTA ---------- */
+.details-final-cta {
+	position: relative;
+	padding: 6rem 1.25rem;
+	text-align: center;
+	background:
+		linear-gradient(rgba(5, 5, 5, 0.82), rgba(5, 5, 5, 0.95)),
+		url("../Images/backgroundImage.png") center / cover no-repeat;
+	border-top: 1px solid #292929;
+}
+
+.details-final-cta h2 {
+	margin-bottom: 2rem;
+	font-size: 2rem;
+	font-weight: 800;
+	color: #ffffff;
+	letter-spacing: -0.01em;
+}
+
+@media (min-width: 768px) {
+	.split-section {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.drive-mode-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.ownership-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.reviews-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.details-final-cta h2 {
+		font-size: 2.75rem;
+	}
+}
+
+@media (min-width: 1200px) {
+	.reviews-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* Tablet layout */
+@media (min-width: 768px) {
+	.details-page {
+		padding-top: 118px;
+	}
+
+	.details-layout {
+		grid-template-columns: 1fr 1fr;
+		align-items: stretch;
+	}
+
+	.spec-grid,
+	.performance-grid,
+	.features-list {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* Desktop layout */
+@media (min-width: 1200px) {
+	.details-layout {
+		gap: 3rem;
+	}
+
+	.spec-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.performance-grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.features-list,
+	.similar-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}

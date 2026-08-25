@@ -1,0 +1,184 @@
+/* ================================================
+   garage.css
+   My Garage dashboard page only
+   ================================================ */
+
+.garage-page {
+    min-height: 100vh;
+    padding-top: 130px;
+    padding-bottom: 5rem;
+    background: #050505;
+}
+
+/* ---------- Signed-out state ---------- */
+.garage-signed-out {
+    width: 92%;
+    max-width: 560px;
+    margin: 4rem auto;
+    padding: 3rem 2rem;
+    text-align: center;
+    border: 1px solid #292929;
+    border-radius: 10px;
+    background: #0d0d0d;
+}
+
+.garage-signed-out h1 {
+    margin: 0.5rem 0 1rem;
+    font-size: 1.8rem;
+}
+
+.garage-signed-out p {
+    color: #a6a6a6;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.garage-signed-out-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+/* ---------- Hero ---------- */
+.garage-hero {
+    width: 92%;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+}
+
+.garage-hero h1 {
+    margin: 0.5rem 0;
+    font-size: 2rem;
+    line-height: 1.1;
+}
+
+.garage-hero p {
+    color: #a6a6a6;
+}
+
+/* ---------- Stats ---------- */
+.garage-stats {
+    width: 92%;
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.garage-stat {
+    padding: 1.5rem 1rem;
+    text-align: center;
+    border: 1px solid #292929;
+    border-radius: 10px;
+    background: #181818;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.garage-stat:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212, 175, 55, 0.5);
+}
+
+.garage-stat-number {
+    margin-bottom: 0.35rem;
+    color: #e63946;
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.garage-stat-label {
+    color: #a6a6a6;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* ---------- Section wrapper ---------- */
+.garage-section {
+    width: 92%;
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+}
+
+.garage-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.garage-card {
+    padding: 1.5rem;
+    border: 1px solid #292929;
+    border-radius: 10px;
+    background: #181818;
+}
+
+.garage-card h3 {
+    margin-bottom: 0.4rem;
+    color: #ffffff;
+}
+
+.garage-card p {
+    margin-bottom: 0.85rem;
+    color: #a6a6a6;
+    font-size: 0.92rem;
+}
+
+.garage-status {
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(212, 175, 55, 0.14);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: #d4af37;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.garage-empty {
+    padding: 1.5rem;
+    color: #6a6a6a;
+    border: 1px dashed #292929;
+    border-radius: 10px;
+    text-align: center;
+}
+
+body.light-theme .garage-page {
+    background: #f5f0e6;
+}
+
+body.light-theme .garage-signed-out,
+body.light-theme .garage-stat,
+body.light-theme .garage-card {
+    background: #fbf8f1;
+    border-color: #dcceb6;
+}
+
+body.light-theme .garage-signed-out h1,
+body.light-theme .garage-hero h1,
+body.light-theme .garage-card h3 {
+    color: #171817;
+}
+
+body.light-theme .garage-signed-out p,
+body.light-theme .garage-hero p,
+body.light-theme .garage-card p,
+body.light-theme .garage-stat-label {
+    color: #68655f;
+}
+
+body.light-theme .garage-stat-number {
+    color: #b88a3b;
+}
+
+body.light-theme .garage-status {
+    color: #8f682d;
+    border-color: rgba(184, 138, 59, 0.4);
+    background: rgba(184, 138, 59, 0.1);
+}

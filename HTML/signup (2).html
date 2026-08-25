@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | AUTOVERSE</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/signup.css">
+    <link rel="stylesheet" href="../CSS/responsive.css">
+</head>
+<body>
+
+<div class="cursor-glow"></div>
+
+<header class="header">
+    <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+        <a href="index.html" class="nav-logo-link">
+            <span class="logo-auto">AUTO</span>
+            <span class="logo-verse">VERSE</span>
+        </a>
+    </div>
+
+    <div class="nav-center">
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cars.html">Cars</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+
+    <div class="nav-buttons">
+        <a href="login.html" class="login-btn">Login</a>
+        <a href="signup.html" class="signup-btn">Signup</a>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme" title="Toggle theme">&#9790;</button>
+    </div>
+
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</nav>
+</header>
+
+<main class="auth-page">
+
+    <div class="auth-visual" style="background-image:url('../Images/ford-mustang-shelby-back.png');">
+        <div class="auth-visual-content">
+            <p class="auth-visual-eyebrow">AUTOVERSE</p>
+            <h2>Begin Your Journey.<br>Your next drive starts here.</h2>
+        </div>
+    </div>
+
+    <div class="auth-panel">
+        <div class="auth-card">
+            <div class="auth-card-logo">
+                <span class="logo-auto">AUTO</span><span class="logo-verse">VERSE</span>
+            </div>
+
+            <h1>Create Account</h1>
+            <p>Join the AUTOVERSE experience.</p>
+
+            <form class="auth-form" id="signupForm">
+                <div class="form-field">
+                    <label for="signupName">Full Name</label>
+                    <input id="signupName" name="name" type="text" placeholder="Full Name" autocomplete="name" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="signupEmail">Email Address</label>
+                    <input id="signupEmail" name="email" type="email" placeholder="Email Address" autocomplete="email" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="signupPhone">Phone Number</label>
+                    <input id="signupPhone" name="phone" type="tel" placeholder="Phone Number" autocomplete="tel">
+                </div>
+
+                <div class="form-field">
+                    <label for="signupPassword">Password</label>
+                    <div class="password-input-row">
+                        <input id="signupPassword" name="password" type="password" placeholder="Password" autocomplete="new-password" required>
+                        <button type="button" class="password-toggle" data-target="signupPassword" aria-label="Show password">
+                            <svg class="icon-eye" viewBox="0 0 24 24" width="20" height="20"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                            <svg class="icon-eye-off" viewBox="0 0 24 24" width="20" height="20"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a18.5 18.5 0 0 1 4.22-5.06M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 7 11 7a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="signupConfirmPassword">Confirm Password</label>
+                    <div class="password-input-row">
+                        <input id="signupConfirmPassword" name="confirm-password" type="password" placeholder="Confirm Password" autocomplete="new-password" required>
+                        <button type="button" class="password-toggle" data-target="signupConfirmPassword" aria-label="Show password">
+                            <svg class="icon-eye" viewBox="0 0 24 24" width="20" height="20"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                            <svg class="icon-eye-off" viewBox="0 0 24 24" width="20" height="20"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a18.5 18.5 0 0 1 4.22-5.06M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 7 11 7a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <label class="auth-terms">
+                    <input type="checkbox" id="agreeTerms" required>
+                    <span>I agree to the Terms &amp; Conditions and Privacy Policy.</span>
+                </label>
+
+                <button type="submit" class="btn btn-red">Create Account <span class="arrow">&rarr;</span></button>
+            </form>
+
+            <div class="auth-divider">OR</div>
+
+            <button type="button" class="google-btn" id="googleSignUpBtn">
+                <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.9C16.66 14.2 17.64 11.9 17.64 9.2z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.84.86-3.06.86-2.35 0-4.34-1.59-5.05-3.72H.98v2.33A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.95 10.7A5.4 5.4 0 0 1 3.67 9c0-.59.1-1.17.28-1.7V4.97H.98A9 9 0 0 0 0 9c0 1.45.35 2.83.98 4.03l2.97-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .98 4.97l2.97 2.33C4.66 5.17 6.65 3.58 9 3.58z"/></svg>
+                Continue with Google
+            </button>
+
+            <p class="auth-switch">
+                Already a member?
+                <a href="login.html">Sign In &rarr;</a>
+            </p>
+        </div>
+    </div>
+
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-about">
+            <div class="footer-logo">
+                <span class="logo-auto">AUTO</span>
+                <span class="logo-verse">VERSE</span>
+            </div>
+            <p class="footer-text">Your trusted destination for premium sports and luxury cars, crafted for drivers who value performance and design.</p>
+        </div>
+
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cars.html">Cars</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-explore">
+            <h3>Explore</h3>
+            <ul id="footerExploreList"></ul>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contact</h3>
+            <p>Email: hitarth@gmail.com</p>
+            <p>Phone: 6239180869</p>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="AUTOVERSE on Facebook" class="social-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="AUTOVERSE on Instagram" class="social-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.89 1.11 1.15 1.77.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77A4.9 4.9 0 0 1 5.45.53c.64-.25 1.37-.42 2.43-.47C8.94.01 9.28 0 12 0m0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10m0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4M17.5 4.6a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4"/></svg>
+                </a>
+                <a href="https://www.snapchat.com/" target="_blank" rel="noopener" aria-label="AUTOVERSE on Snapchat" class="social-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2c3.5 0 5.6 2.6 5.7 5.9.03.9 0 1.7-.05 2.3.4.2.9.3 1.35.55.35.2.5.6.4 1-.15.55-.85.9-1.5 1.1-.1.65.35 1.55 1.15 2.1.3.2.25.65-.1.8-.5.2-1 .3-1.4.45-.1.25-.15.55-.3.85-.15.3-.5.35-.85.3-.5-.05-1-.2-1.5-.15-.55.05-1 .4-1.55.75-.65.4-1.35.75-2.35.75s-1.7-.35-2.35-.75c-.55-.35-1-.7-1.55-.75-.5-.05-1 .1-1.5.15-.35.05-.7 0-.85-.3-.15-.3-.2-.6-.3-.85-.4-.15-.9-.25-1.4-.45-.35-.15-.4-.6-.1-.8.8-.55 1.25-1.45 1.15-2.1-.65-.2-1.35-.55-1.5-1.1-.1-.4.05-.8.4-1 .45-.25.95-.35 1.35-.55-.05-.6-.08-1.4-.05-2.3C6.4 4.6 8.5 2 12 2"/></svg>
+                </a>
+                <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener" aria-label="AUTOVERSE on WhatsApp" class="social-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.35A10 10 0 1 0 12 2m0 18.2a8.16 8.16 0 0 1-4.16-1.14l-.3-.18-3.1.85.85-3-.2-.32A8.2 8.2 0 1 1 12 20.2m4.5-6.15c-.25-.12-1.45-.72-1.67-.8-.22-.08-.39-.12-.55.13-.16.24-.63.8-.78.96-.14.16-.28.18-.53.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.22-1.46-1.37-1.7-.14-.25-.02-.38.11-.5.11-.11.25-.28.37-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.42-.55-.42h-.47c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.13 3.64.58.25 1.03.4 1.38.5.58.19 1.11.16 1.53.1.47-.07 1.45-.6 1.65-1.17.2-.58.2-1.08.14-1.18-.06-.1-.22-.16-.47-.28"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 AUTOVERSE. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="../JS/cars-data.js"></script>
+<script src="../JS/navbar.js"></script>
+<script src="../JS/wishlist.js"></script>
+<script src="../JS/auth.js"></script>
+<script src="../JS/signup.js"></script>
+<script src="../JS/cursor-glow.js"></script>
+</body>
+</html>

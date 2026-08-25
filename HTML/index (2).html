@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUTOVERSE | Car Showcase Website</title>
+
+    <!-- Google Fonts for a clean premium look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- All stylesheets used on the home page -->
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/home.css">
+    <link rel="stylesheet" href="../CSS/responsive.css">
+    <link rel="stylesheet" href="../CSS/animations.css">
+    <script>
+        (function () {
+            try {
+                if (sessionStorage.getItem('skipHomeLoader') === 'true') {
+                    sessionStorage.removeItem('skipHomeLoader');
+                    document.documentElement.classList.add('skip-home-loader');
+                    window.__skipHomeLoader = true;
+                }
+            } catch (error) {
+                window.__skipHomeLoader = false;
+            }
+        }());
+    </script>
+</head>
+<body>
+
+<div class="cursor-glow"></div>
+
+    <!-- ==========================
+        LOADING SCREEN
+========================== -->
+
+<div id="loader">
+
+    <div class="loader-content">
+
+        <h1>AUTO<span>VERSE</span></h1>
+
+        <div class="loading-container">
+
+            <div class="loading-bar"></div>
+
+        </div>
+
+        <p class="loading-text">Loading...</p>
+
+    </div>
+
+</div>
+
+<!-- ========== NAVIGATION BAR ========== -->
+<header class="header">
+    <nav class="navbar" id="navbar">
+
+    <!-- Logo -->
+    <div class="nav-logo">
+        <a href="index.html" class="nav-logo-link">
+            <span class="logo-auto">AUTO</span>
+            <span class="logo-verse">VERSE</span>
+        </a>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="nav-center">
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="cars.html">Cars</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+    </div>
+
+    <!-- Buttons -->
+    <div class="nav-buttons">
+
+        <a href="login.html" class="login-btn">Login</a>
+
+        <a href="signup.html" class="signup-btn">Signup</a>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme" title="Toggle theme">&#9790;</button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+</nav>
+</header>
+
+<!-- ========== HERO SECTION ========== -->
+<main>
+    <section class="hero" id="hero">
+
+    
+    <div class="hero-overlay"></div>
+
+    <!-- Hero Content -->
+    <div class="hero-content">
+
+        <p class="hero-small">
+            PREMIUM AUTOMOTIVE EXPERIENCE
+        </p>
+
+     <h1 class="hero-heading">
+    <span class="word">Drive</span>
+    <span class="word">Your</span>
+    <span class="word highlight">Dream</span>
+    <span class="word highlight">Car</span>
+</h1>
+
+        <p class="hero-text">
+            Explore the world's most coveted automobiles.
+            From Porsche to Ferrari &mdash; your perfect drive awaits.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#featured-cars"
+               class="btn btn-explorecars">
+                Explore Cars
+                <span class="arrow">&rarr;</span>
+            </a>
+
+            <a href="#why-choose-us"
+               class="btn learn-btn">
+                Learn More
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="brand-strip">
+    <div class="brand-track">
+        <div class="brand-group" id="brandGroupA"></div>
+        <div class="brand-group" id="brandGroupB"></div>
+    </div>
+</section>
+
+
+
+<!-- ========== FEATURED CARS ========== -->
+    <section id="featured-cars" class="featured-cars">
+        <div class="section-heading">
+            <h2 class="section-title">Featured Cars</h2>
+            <p class="section-subtitle">A handpicked collection of the best luxury cars</p>
+        </div>
+
+        <div class="cars-grid">
+
+            <article class="car-card">
+
+    <div class="car-img">
+        
+
+        <img src="../Images/bmw-m4.png" alt="BMW M4">
+
+    </div>
+
+    <div class="car-details">
+
+        <h3 class="car-name">BMW M4</h3>
+
+        <p class="car-brand">Brand: BMW</p>
+
+        <p class="car-price">Price: &#8377;1.20 Crore</p>
+
+        <a href="car-details.html?id=bmw-m4" class="car-btn">View Details</a>
+
+    </div>
+
+</article>
+
+            <article class="car-card">
+                <div class="car-img">
+                    <img src="../Images/audi-r8.png" alt="Audi R8">
+                </div>
+                <div class="car-details">
+                    <h3 class="car-name">Audi R8</h3>
+                    <p class="car-brand">Brand: Audi</p>
+                    <p class="car-price">Price: &#8377;2.50 Crore</p>
+                    <a href="car-details.html?id=audi-r8" class="car-btn">View Details</a>
+                </div>
+            </article>
+
+            <article class="car-card">
+                <div class="car-img">
+                    <img src="../Images/mercedes-amg-gt.png" alt="Mercedes AMG GT">
+                </div>
+                <div class="car-details">
+                    <h3 class="car-name">Mercedes AMG GT</h3>
+                    <p class="car-brand">Brand: Mercedes</p>
+                    <p class="car-price">Price: &#8377;2.20 Crore</p>
+                    <a href="car-details.html?id=mercedes-amg-gt" class="car-btn">View Details</a>
+                </div>
+            </article>
+
+            <article class="car-card">
+                <div class="car-img">
+                    <img src="../Images/ferrari-sf90.png" alt="Ferrari SF90">
+                </div>
+                <div class="car-details">
+                    <h3 class="car-name">Ferrari SF90</h3>
+                    <p class="car-brand">Brand: Ferrari</p>
+                    <p class="car-price">Price: &#8377;4.50 Crore</p>
+                    <a href="car-details.html?id=ferrari-sf90" class="car-btn">View Details</a>
+                </div>
+            </article>
+
+            <article class="car-card">
+                <div class="car-img">
+                    <img src="../Images/lamborghini-huracan.png" alt="Lamborghini Huracan">
+                </div>
+                <div class="car-details">
+                    <h3 class="car-name">Lamborghini Huracan</h3>
+                    <p class="car-brand">Brand: Lamborghini</p>
+                    <p class="car-price">Price: &#8377;3.50 Crore</p>
+                    <a href="car-details.html?id=lamborghini-huracan" class="car-btn">View Details</a>
+                </div>
+            </article>
+
+            <article class="car-card">
+                <div class="car-img">
+                    <img src="../Images/porsche-911.png" alt="Porsche 911 Turbo S">
+                </div>
+                <div class="car-details">
+                    <h3 class="car-name">Porsche 911 Turbo S</h3>
+                    <p class="car-brand">Brand: Porsche</p>
+                    <p class="car-price">Price: &#8377;1.80 Crore</p>
+                    <a href="car-details.html?id=porsche-911-turbo-s" class="car-btn">View Details</a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+<!-- ========== WHY CHOOSE US ========== -->
+    <section id="why-choose-us" class="why-choose-us">
+        <div class="section-heading">
+            <h2 class="section-title">Why Choose Us</h2>
+            <p class="section-subtitle">Buying a luxury car should be simple and safe</p>
+        </div>
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+                <div class="feature-icon">P</div>
+                <h3>Premium Collection</h3>
+                <p>We handpick every car in our collection so you always get the very best.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">V</div>
+                <h3>Verified Cars</h3>
+                <p>Every car is checked and verified before it is listed on our platform.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">A</div>
+                <h3>Affordable Pricing</h3>
+                <p>We keep our prices transparent and competitive so you pay a fair amount.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">S</div>
+                <h3>24&times;7 Support</h3>
+                <p>Our support team is always available to help you before and after a purchase.</p>
+            </div>
+
+        </div>
+
+        <div class="section-cta">
+            <a href="cars.html" class="btn">Show More Cars <span class="arrow">&rarr;</span></a>
+        </div>
+    </section>
+
+<!-- ========== POPULAR BRANDS ========== -->
+    <section class="popular-brands">
+        <div class="section-heading">
+            <h2 class="section-title">Popular Brands</h2>
+            <p class="section-subtitle">Click a brand to see every one of their cars we carry</p>
+        </div>
+
+        <div class="brands-grid" id="brandsGrid"></div>
+    </section>
+
+<!-- ========== STATISTICS ========== -->
+    <section class="statistics">
+        <div class="section-heading">
+            <h2 class="section-title">Our Journey in Numbers</h2>
+            <p class="section-subtitle">The milestones we are proud of</p>
+        </div>
+
+        <div class="stats-grid">
+
+            <div class="stat-box">
+                <h3 class="stat-number">500+</h3>
+                <p class="stat-label">Cars</p>
+            </div>
+
+            <div class="stat-box">
+                <h3 class="stat-number">50+</h3>
+                <p class="stat-label">Brands</p>
+            </div>
+
+            <div class="stat-box">
+                <h3 class="stat-number">10000+</h3>
+                <p class="stat-label">Customers</p>
+            </div>
+
+            <div class="stat-box">
+                <h3 class="stat-number">15+</h3>
+                <p class="stat-label">Years Experience</p>
+            </div>
+
+        </div>
+    </section>
+
+<!-- ========== TESTIMONIALS ========== -->
+    <section class="testimonials">
+        <div class="section-heading">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <p class="section-subtitle">Real words from happy car owners</p>
+        </div>
+
+        <div class="testimonials-carousel">
+            <button type="button" class="testimonial-arrow testimonial-prev" id="testimonialPrev" aria-label="Previous reviews">&#10094;</button>
+
+            <div class="testimonials-grid" id="testimonialsGrid"></div>
+
+            <button type="button" class="testimonial-arrow testimonial-next" id="testimonialNext" aria-label="Next reviews">&#10095;</button>
+        </div>
+
+        <div class="testimonial-dots" id="testimonialDots"></div>
+    </section>
+
+<!-- ========== NEWSLETTER ========== -->
+    <section class="newsletter">
+        <div class="newsletter-box">
+            <h2 class="newsletter-title">Stay in the Loop</h2>
+            <p class="newsletter-text">Subscribe to our newsletter and get the latest offers, new arrivals and car news in your inbox.</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <label class="sr-only" for="newsletterEmail">Email address</label>
+                <input type="email" id="newsletterEmail" name="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-about">
+            <div class="footer-logo">
+                <span class="logo-auto">AUTO</span>
+                <span class="logo-verse">VERSE</span>
+            </div>
+            <p class="footer-text">Your trusted destination for premium sports and luxury cars, crafted for drivers who value performance and design.</p>
+        </div>
+
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cars.html">Cars</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-explore">
+            <h3>Explore</h3>
+            <ul id="footerExploreList"></ul>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contact</h3>
+            <p>Email: hitarth@gmail.com</p>
+            <p>Phone: 6239180869</p>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="AUTOVERSE on Facebook" class="social-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="AUTOVERSE on Instagram" class="social-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.89 1.11 1.15 1.77.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77A4.9 4.9 0 0 1 5.45.53c.64-.25 1.37-.42 2.43-.47C8.94.01 9.28 0 12 0m0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10m0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4M17.5 4.6a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4"/></svg>
+                </a>
+                <a href="https://www.snapchat.com/" target="_blank" rel="noopener" aria-label="AUTOVERSE on Snapchat" class="social-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2c3.5 0 5.6 2.6 5.7 5.9.03.9 0 1.7-.05 2.3.4.2.9.3 1.35.55.35.2.5.6.4 1-.15.55-.85.9-1.5 1.1-.1.65.35 1.55 1.15 2.1.3.2.25.65-.1.8-.5.2-1 .3-1.4.45-.1.25-.15.55-.3.85-.15.3-.5.35-.85.3-.5-.05-1-.2-1.5-.15-.55.05-1 .4-1.55.75-.65.4-1.35.75-2.35.75s-1.7-.35-2.35-.75c-.55-.35-1-.7-1.55-.75-.5-.05-1 .1-1.5.15-.35.05-.7 0-.85-.3-.15-.3-.2-.6-.3-.85-.4-.15-.9-.25-1.4-.45-.35-.15-.4-.6-.1-.8.8-.55 1.25-1.45 1.15-2.1-.65-.2-1.35-.55-1.5-1.1-.1-.4.05-.8.4-1 .45-.25.95-.35 1.35-.55-.05-.6-.08-1.4-.05-2.3C6.4 4.6 8.5 2 12 2"/></svg>
+                </a>
+                <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener" aria-label="AUTOVERSE on WhatsApp" class="social-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.35A10 10 0 1 0 12 2m0 18.2a8.16 8.16 0 0 1-4.16-1.14l-.3-.18-3.1.85.85-3-.2-.32A8.2 8.2 0 1 1 12 20.2m4.5-6.15c-.25-.12-1.45-.72-1.67-.8-.22-.08-.39-.12-.55.13-.16.24-.63.8-.78.96-.14.16-.28.18-.53.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.22-1.46-1.37-1.7-.14-.25-.02-.38.11-.5.11-.11.25-.28.37-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.42-.55-.42h-.47c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.13 3.64.58.25 1.03.4 1.38.5.58.19 1.11.16 1.53.1.47-.07 1.45-.6 1.65-1.17.2-.58.2-1.08.14-1.18-.06-.1-.22-.16-.47-.28"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 AUTOVERSE. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- main.js holds all the small interactions of the home page -->
+<script src="../JS/cars-data.js"></script>
+<script src="../JS/navbar.js"></script>
+<script src="../JS/wishlist.js"></script>
+<script src="../JS/main.js"></script>
+<script src="../JS/cursor-glow.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const loadingBar = document.querySelector(".loading-bar");
+
+    function startHero() {
+        document.body.classList.add("hero-loaded");
+    }
+
+    /*
+       If the Home loader was skipped because the user
+       came back from another page, start the hero
+       animation immediately.
+    */
+
+    if (document.documentElement.classList.contains("skip-home-loader")) {
+
+        startHero();
+
+        return;
+    }
+
+
+    /*
+       Normal first visit:
+       wait for the loading bar to finish.
+    */
+
+    if (loadingBar) {
+
+        loadingBar.addEventListener("animationend", function () {
+
+            setTimeout(function () {
+
+                startHero();
+
+            }, 150);
+
+        }, { once: true });
+
+    } else {
+
+        startHero();
+
+    }
+
+});
+</script>
+
+</body>
+</html>
