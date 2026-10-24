@@ -88,7 +88,12 @@
     transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
 }
 
-.enquiry-option input {
+.contact-form .enquiry-option input {
+    width: 16px;
+    height: 16px;
+    min-height: 0;
+    padding: 0;
+    flex-shrink: 0;
     margin-right: 0.65rem;
     accent-color: #e63946;
 }
@@ -120,7 +125,12 @@
     transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
 }
 
-.pill-radio input {
+.contact-form .pill-radio input {
+    width: 16px;
+    height: 16px;
+    min-height: 0;
+    padding: 0;
+    flex-shrink: 0;
     margin-right: 0.5rem;
     accent-color: #e63946;
 }
@@ -156,15 +166,26 @@
     flex: 1;
 }
 
-.consent-item input {
+.consent-item span a {
+    color: #e63946;
+    font-weight: 700;
+}
+
+.consent-item span a:hover {
+    text-decoration: underline;
+}
+
+.contact-form .consent-item input {
     width: 16px;
     height: 16px;
+    min-height: 0;
+    padding: 0;
     flex-shrink: 0;
     margin-top: 0.2rem;
     accent-color: #e63946;
 }
 
-.consent-item input:focus-visible {
+.contact-form .consent-item input:focus-visible {
     outline: 2px solid rgba(230, 57, 70, 0.5);
     outline-offset: 2px;
 }

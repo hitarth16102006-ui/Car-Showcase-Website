@@ -63,6 +63,14 @@
         }
 
         imgWrap.insertAdjacentHTML('afterbegin', wishlistHeartHTML(match[1]));
+
+        if (typeof compareButtonHTML === 'function') {
+            var actionsWrap = document.createElement('div');
+            actionsWrap.className = 'car-card-actions';
+            link.insertAdjacentElement('afterend', actionsWrap);
+            actionsWrap.appendChild(link);
+            actionsWrap.insertAdjacentHTML('beforeend', compareButtonHTML(match[1]));
+        }
     });
 }());
 

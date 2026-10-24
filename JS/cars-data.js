@@ -806,5 +806,31 @@ function getDefaultThumbnail(car) {
         return null;
     }
 
+    if (!car.images) {
+        return null;
+    }
+
     return car.images.front || car.images.side || car.images.back || null;
+}
+
+/* ================================================
+   Test-only export shim. Browsers never define
+   `module`, so this block is a complete no-op when
+   the file is loaded via a <script> tag - it only
+   runs under Node/Jest, letting the test suite
+   `require()` these functions without needing a
+   bundler or duplicating logic.
+   ================================================ */
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        CAR_COLORS: CAR_COLORS,
+        CARS: CARS,
+        placeholderFrameHTML: placeholderFrameHTML,
+        formatCrorePrice: formatCrorePrice,
+        getCarById: getCarById,
+        getAllBrands: getAllBrands,
+        generateGenericReviews: generateGenericReviews,
+        getCarReviews: getCarReviews,
+        getDefaultThumbnail: getDefaultThumbnail
+    };
 }

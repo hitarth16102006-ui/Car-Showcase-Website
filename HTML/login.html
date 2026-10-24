@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign In | AUTOVERSE</title>
 
+    <meta name="description" content="Sign in to your AUTOVERSE account to access your saved cars, enquiries and My Garage dashboard.">
+    <link rel="icon" type="image/svg+xml" href="../Images/favicon.svg">
+    <meta property="og:title" content="Sign In | AUTOVERSE">
+    <meta property="og:description" content="Sign in to your AUTOVERSE account to access your saved cars, enquiries and My Garage dashboard.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AUTOVERSE">
+    <meta name="twitter:card" content="summary">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -14,6 +22,8 @@
   <link rel="stylesheet" href="../CSS/responsive.css">
 </head>
 <body>
+
+<a href="#mainContent" class="skip-link">Skip to main content</a>
 
 <div class="cursor-glow"></div>
 
@@ -30,6 +40,7 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Home</a></li>
             <li><a href="cars.html">Cars</a></li>
+            <li><a href="compare.html">Compare</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -49,7 +60,7 @@
 </nav>
 </header>
 
-<main class="auth-page">
+<main id="mainContent" class="auth-page">
 
     <div class="auth-visual" style="background-image:url('../Images/audi-r8-red-front.png');">
         <div class="auth-visual-content">
@@ -126,6 +137,7 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="cars.html">Cars</a></li>
+                <li><a href="compare.html">Compare</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -158,13 +170,14 @@
     </div>
 
     <div class="footer-bottom">
-        <p>&copy; 2026 AUTOVERSE. All rights reserved.</p>
+        <p>&copy; 2026 AUTOVERSE. All rights reserved. &middot; <a href="terms.html">Terms</a> &middot; <a href="privacy.html">Privacy</a></p>
     </div>
 </footer>
 
 <script src="../JS/cars-data.js"></script>
 <script src="../JS/navbar.js"></script>
 <script src="../JS/wishlist.js"></script>
+<script src="../JS/compare.js"></script>
 <script src="../JS/auth.js"></script>
 <script src="../JS/login.js"></script>
 <script src="../JS/cursor-glow.js"></script>

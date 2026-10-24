@@ -126,6 +126,29 @@
         renderSaveToGarageBtn();
     }
 
+    var compareToggleBtn = document.getElementById('compareToggleBtn');
+
+    function renderCompareToggleBtn() {
+        if (!compareToggleBtn || typeof isCarInCompare !== 'function') {
+            return;
+        }
+
+        var inCompare = isCarInCompare(car.id);
+        compareToggleBtn.innerHTML = inCompare ? '&#10003; Added to Compare' : '&#8646; Add to Compare';
+        compareToggleBtn.classList.toggle('saved', inCompare);
+    }
+
+    if (compareToggleBtn) {
+        compareToggleBtn.addEventListener('click', function () {
+            if (typeof toggleCompare === 'function') {
+                toggleCompare(car.id);
+                renderCompareToggleBtn();
+            }
+        });
+
+        renderCompareToggleBtn();
+    }
+
     /* -------- Photo carousel: front / side / interior / back -------- */
 
     function shortName() {
@@ -544,7 +567,10 @@
                     '<h3>' + c.name + '</h3>' +
                     '<p class="brand">Brand: ' + c.brand + '</p>' +
                     '<p class="price">' + formatCrorePrice(baseVariant.priceCr) + '</p>' +
-                    '<a href="car-details.html?id=' + c.id + '" class="details-btn">View Details</a>' +
+                    '<div class="car-card-actions">' +
+                        '<a href="car-details.html?id=' + c.id + '" class="details-btn">View Details</a>' +
+                        (typeof compareButtonHTML === 'function' ? compareButtonHTML(c.id) : '') +
+                    '</div>' +
                 '</div>' +
             '</article>'
         );

@@ -192,3 +192,14 @@ document.addEventListener('DOMContentLoaded', function () {
     renderWishlistNavLink();
     renderFooterWishlistColumn();
 });
+
+/* Test-only export shim - no-op in browsers, see cars-data.js for details. */
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        getWishlistIds: getWishlistIds,
+        saveWishlistIds: saveWishlistIds,
+        isCarWishlisted: isCarWishlisted,
+        toggleWishlist: toggleWishlist,
+        wishlistHeartHTML: wishlistHeartHTML
+    };
+}

@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | AUTOVERSE</title>
 
+    <meta name="description" content="Book a test drive, request a price, or get in touch with an AUTOVERSE specialist.">
+    <link rel="icon" type="image/svg+xml" href="../Images/favicon.svg">
+    <meta property="og:title" content="Contact | AUTOVERSE">
+    <meta property="og:description" content="Book a test drive, request a price, or get in touch with an AUTOVERSE specialist.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AUTOVERSE">
+    <meta name="twitter:card" content="summary">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -14,6 +22,8 @@
     <link rel="stylesheet" href="../CSS/responsive.css">
 </head>
 <body>
+
+<a href="#mainContent" class="skip-link">Skip to main content</a>
 
 <div class="cursor-glow"></div>
 
@@ -30,6 +40,7 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Home</a></li>
             <li><a href="cars.html">Cars</a></li>
+            <li><a href="compare.html">Compare</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html" class="active">Contact</a></li>
         </ul>
@@ -49,7 +60,7 @@
 </nav>
 </header>
 
-<main>
+<main id="mainContent">
 
 <!-- ========== PREMIUM HERO ========== -->
 <section class="contact-hero">
@@ -247,7 +258,7 @@
             <div class="consent-block">
                 <label class="consent-item">
                     <input type="checkbox" name="agreeTerms" required>
-                    <span>I agree to the Terms &amp; Conditions and Privacy Policy.</span>
+                    <span>I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a> and <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
                 </label>
                 <label class="consent-item">
                     <input type="checkbox" name="agreeMarketing">
@@ -443,6 +454,7 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="cars.html">Cars</a></li>
+                <li><a href="compare.html">Compare</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -475,13 +487,14 @@
     </div>
 
     <div class="footer-bottom">
-        <p>&copy; 2026 AUTOVERSE. All rights reserved.</p>
+        <p>&copy; 2026 AUTOVERSE. All rights reserved. &middot; <a href="terms.html">Terms</a> &middot; <a href="privacy.html">Privacy</a></p>
     </div>
 </footer>
 
 <script src="../JS/cars-data.js"></script>
 <script src="../JS/navbar.js"></script>
 <script src="../JS/wishlist.js"></script>
+<script src="../JS/compare.js"></script>
 <script src="../JS/auth.js"></script>
 <script src="../JS/contact.js"></script>
 <script src="../JS/cursor-glow.js"></script>

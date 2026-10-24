@@ -1,0 +1,225 @@
+/* ================================================
+   compare.css
+   Compare Cars page only
+   ================================================ */
+
+.compare-page {
+    padding-top: 70px;
+    min-height: 100vh;
+}
+
+.compare-section {
+    width: 92%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 6rem;
+}
+
+/* ---------- Empty state ---------- */
+.compare-empty {
+    padding: 4rem 1.5rem;
+    text-align: center;
+    border: 1px dashed #292929;
+    border-radius: 10px;
+    color: #a6a6a6;
+}
+
+.compare-empty p {
+    margin-bottom: 0.5rem;
+}
+
+.compare-empty a {
+    color: #e63946;
+    font-weight: 700;
+}
+
+/* ---------- Add another car ---------- */
+.compare-add {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.compare-add label {
+    color: #d6d6d6;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.compare-add select {
+    min-height: 46px;
+    padding: 0 1rem;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    background: #121212;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+/* ---------- Table wrap (horizontal scroll on small screens) ---------- */
+.compare-table-wrap {
+    overflow-x: auto;
+}
+
+.compare-table {
+    min-width: 640px;
+}
+
+.compare-header-row,
+.compare-row {
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+}
+
+.compare-header-row {
+    align-items: start;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #292929;
+    margin-bottom: 0.5rem;
+}
+
+.compare-row-label {
+    color: #a6a6a6;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.compare-row-label-header {
+    align-self: end;
+    padding-bottom: 0.5rem;
+}
+
+.compare-col-header {
+    position: relative;
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #292929;
+    border-radius: 10px;
+    background: #141414;
+}
+
+.compare-remove {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 26px;
+    height: 26px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(230, 57, 70, 0.14);
+    color: #e63946;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.compare-remove:hover {
+    background: rgba(230, 57, 70, 0.28);
+}
+
+.compare-col-img {
+    aspect-ratio: 16 / 10;
+    margin-bottom: 0.75rem;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #0d0d0d;
+}
+
+.compare-col-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.compare-col-brand {
+    color: #d4af37;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+}
+
+.compare-col-header h3 {
+    margin-bottom: 0.85rem;
+    font-size: 1.1rem;
+}
+
+.compare-view-btn {
+    width: 100%;
+    min-height: 40px;
+    font-size: 0.85rem;
+}
+
+.compare-row {
+    padding: 0.85rem 0;
+    border-bottom: 1px solid #1e1e1e;
+}
+
+.compare-row:last-child {
+    border-bottom: 0;
+}
+
+.compare-cell {
+    color: #ffffff;
+    font-size: 0.92rem;
+    text-align: center;
+}
+
+.compare-feature-cell {
+    font-size: 1.1rem;
+}
+
+.feature-yes {
+    color: #2fbf6f;
+}
+
+.feature-no {
+    color: #555555;
+}
+
+.compare-features-heading .compare-row-label {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 800;
+    padding-top: 1rem;
+}
+
+body.light-theme .compare-add select {
+    background: #fbf8f1;
+    border-color: #dcceb6;
+    color: #171817;
+}
+
+body.light-theme .compare-col-header {
+    background: #fbf8f1;
+    border-color: #dcceb6;
+}
+
+body.light-theme .compare-col-header h3 {
+    color: #171817;
+}
+
+body.light-theme .compare-cell {
+    color: #292a28;
+}
+
+body.light-theme .compare-features-heading .compare-row-label {
+    color: #171817;
+}
+
+body.light-theme .compare-header-row {
+    border-bottom-color: #dcceb6;
+}
+
+body.light-theme .compare-row {
+    border-bottom-color: #ece3d2;
+}
+
+body.light-theme .compare-empty {
+    border-color: #dcceb6;
+    color: #68655f;
+}

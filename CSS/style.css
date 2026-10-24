@@ -264,7 +264,7 @@ textarea:focus-visible {
     box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.14);
 }
 
-.auth-form button {
+.auth-form button:not(.password-toggle) {
     width: 100%;
     margin-top: 0.5rem;
     border: 0;
@@ -365,6 +365,7 @@ textarea:focus-visible {
 .remember-me input {
     width: 16px;
     height: 16px;
+    min-height: 0;
     flex-shrink: 0;
     accent-color: #e63946;
 }
@@ -394,6 +395,15 @@ textarea:focus-visible {
     flex: 1;
 }
 
+.auth-terms span a {
+    color: #e63946;
+    font-weight: 700;
+}
+
+.auth-terms span a:hover {
+    text-decoration: underline;
+}
+
 .auth-terms input:focus-visible,
 .remember-me input:focus-visible {
     outline: 2px solid rgba(230, 57, 70, 0.5);
@@ -403,6 +413,7 @@ textarea:focus-visible {
 .auth-terms input {
     width: 16px;
     height: 16px;
+    min-height: 0;
     flex-shrink: 0;
     margin-top: 0.2rem;
     accent-color: #e63946;
@@ -905,6 +916,20 @@ textarea:focus-visible {
     color: #777777;
 }
 
+.footer-bottom a {
+    color: #a6a6a6;
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    color: #e63946;
+    text-decoration: underline;
+}
+
+body.light-theme .footer-bottom a:hover {
+    color: #b88a3b;
+}
+
 /* ---------- Footer social icons ---------- */
 .footer-social {
     display: flex;
@@ -979,6 +1004,169 @@ body.light-theme .social-icon:hover {
 
 .car-card:hover::before {
     transform: scaleX(1);
+}
+
+/* ---------- Car card actions row (View Details + Compare) ---------- */
+.car-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: auto;
+    width: 100%;
+}
+
+.car-card-actions .details-btn {
+    margin-top: 0;
+    flex-shrink: 0;
+}
+
+.compare-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #333333;
+    border-radius: 999px;
+    background: transparent;
+    color: #a6a6a6;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+
+.compare-toggle svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+}
+
+.compare-toggle:hover {
+    border-color: #d4af37;
+    color: #d4af37;
+}
+
+.compare-toggle.active {
+    border-color: #d4af37;
+    background: rgba(212, 175, 55, 0.14);
+    color: #d4af37;
+}
+
+body.light-theme .compare-toggle {
+    border-color: rgba(255, 255, 255, 0.25);
+    color: #cfcfcf;
+}
+
+body.light-theme .compare-toggle:hover,
+body.light-theme .compare-toggle.active {
+    border-color: #d4af37;
+    color: #d4af37;
+    background: rgba(212, 175, 55, 0.14);
+}
+
+/* ---------- Floating compare bar ---------- */
+.compare-bar {
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-top: 1px solid #292929;
+    background: rgba(13, 13, 13, 0.97);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation: compareBarSlideUp 0.3s ease;
+}
+
+@keyframes compareBarSlideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+.compare-bar-inner {
+    width: 92%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 0;
+}
+
+.compare-bar-cars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.compare-bar-car {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.5rem 0.4rem 0.85rem;
+    border: 1px solid #333333;
+    border-radius: 999px;
+    background: #181818;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.compare-bar-car .compare-toggle {
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(230, 57, 70, 0.16);
+    color: #e63946;
+    font-size: 0.9rem;
+    line-height: 1;
+    justify-content: center;
+}
+
+.compare-bar-btn {
+    flex-shrink: 0;
+}
+
+body.light-theme .compare-bar {
+    background: rgba(251, 248, 241, 0.97);
+    border-top-color: #dcceb6;
+}
+
+body.light-theme .compare-bar-car {
+    background: #ffffff;
+    border-color: #dcceb6;
+    color: #171817;
+}
+
+/* ---------- Skip to content link (accessibility) ---------- */
+.skip-link {
+    position: absolute;
+    z-index: 10000;
+    top: -100px;
+    left: 1rem;
+    padding: 0.85rem 1.5rem;
+    border-radius: 8px;
+    background: #e63946;
+    color: #ffffff;
+    font-weight: 800;
+    text-decoration: none;
+    transition: top 0.25s ease;
+}
+
+.skip-link:focus {
+    top: 1rem;
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+}
+
+body.light-theme .skip-link {
+    background: #b88a3b;
+    color: #171817;
 }
 
 /* ---------- Wishlist heart button (car cards + details page) ---------- */
@@ -1152,6 +1340,11 @@ body.light-theme .wishlist-nav-count {
 
 body.light-theme .footer-wishlist-empty {
     color: #9c8b6f;
+}
+
+body.light-theme .consent-item span a,
+body.light-theme .auth-terms span a {
+    color: #b88a3b;
 }
 
 /* ---------- Light theme: Ivory / Charcoal / Gold, no red clashes ---------- */

@@ -5,6 +5,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Car Details | AUTOVERSE</title>
 
+    <meta name="description" content="Detailed specifications, performance figures, gallery and customer reviews for every car on AUTOVERSE.">
+    <link rel="icon" type="image/svg+xml" href="../Images/favicon.svg">
+    <meta property="og:title" content="Car Details | AUTOVERSE">
+    <meta property="og:description" content="Detailed specifications, performance figures, gallery and customer reviews for every car on AUTOVERSE.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AUTOVERSE">
+    <meta name="twitter:card" content="summary">
+
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,6 +24,8 @@
 	<link rel="stylesheet" href="../CSS/animations.css">
 </head>
 <body>
+
+<a href="#mainContent" class="skip-link">Skip to main content</a>
 
 <div class="cursor-glow"></div>
 
@@ -42,6 +52,7 @@
 			<ul class="nav-links" id="navLinks">
 				<li><a href="index.html">Home</a></li>
 				<li><a href="cars.html" class="active">Cars</a></li>
+            <li><a href="compare.html">Compare</a></li>
 				<li><a href="about.html">About</a></li>
 				<li><a href="contact.html">Contact</a></li>
 			</ul>
@@ -61,7 +72,7 @@
 	</nav>
 </header>
 
-<main class="details-page">
+<main id="mainContent" class="details-page">
 	<div class="details-container">
 		<p class="breadcrumb">
 			<a href="index.html">Home</a>
@@ -100,6 +111,7 @@
 				<div class="details-buttons">
 					<a href="contact.html" class="btn">Book a Test Drive</a>
 					<button type="button" class="btn back-btn save-to-garage-btn" id="saveToGarageBtn">&#9825; Save to Garage</button>
+					<button type="button" class="btn back-btn compare-toggle-btn" id="compareToggleBtn">&#8646; Add to Compare</button>
 					<a href="cars.html" class="btn back-btn">Back to Cars</a>
 				</div>
 			</div>
@@ -235,6 +247,7 @@
 			<ul>
 				<li><a href="index.html">Home</a></li>
 				<li><a href="cars.html">Cars</a></li>
+            <li><a href="compare.html">Compare</a></li>
 				<li><a href="about.html">About</a></li>
 				<li><a href="contact.html">Contact</a></li>
 			</ul>
@@ -267,13 +280,14 @@
 	</div>
 
 	<div class="footer-bottom">
-		<p>&copy; 2026 AUTOVERSE. All rights reserved.</p>
+		<p>&copy; 2026 AUTOVERSE. All rights reserved. &middot; <a href="terms.html">Terms</a> &middot; <a href="privacy.html">Privacy</a></p>
 	</div>
 </footer>
 
 <script src="../JS/cars-data.js"></script>
 <script src="../JS/navbar.js"></script>
 <script src="../JS/wishlist.js"></script>
+<script src="../JS/compare.js"></script>
 <script src="../JS/details.js"></script>
 <script src="../JS/main.js"></script>
 <script src="../JS/cursor-glow.js"></script>

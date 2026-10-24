@@ -59,7 +59,10 @@
                     '<h2>' + car.name + '</h2>' +
                     '<p class="brand">Brand: ' + car.brand + '</p>' +
                     '<p class="price">' + formatCrorePrice(baseVariant.priceCr) + '</p>' +
-                    '<a href="car-details.html?id=' + car.id + '" class="details-btn">View Details</a>' +
+                    '<div class="car-card-actions">' +
+                        '<a href="car-details.html?id=' + car.id + '" class="details-btn">View Details</a>' +
+                        (typeof compareButtonHTML === 'function' ? compareButtonHTML(car.id) : '') +
+                    '</div>' +
                 '</div>' +
             '</article>'
         );
