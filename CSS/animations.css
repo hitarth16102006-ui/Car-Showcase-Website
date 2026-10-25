@@ -1,0 +1,221 @@
+﻿/* ================================================
+   animations.css
+   AUTOVERSE animations
+   ================================================ */
+
+
+/* ================================================
+   GENERAL ANIMATIONS
+   ================================================ */
+
+@keyframes fadeInUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes loading {
+
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+
+}
+
+
+/* ================================================
+   HOME HERO
+   ================================================ */
+
+
+/* Tagline */
+
+.hero-small {
+    opacity: 0;
+}
+
+
+body.hero-loaded .hero-small {
+    animation: fadeInUp 0.7s ease forwards;
+    animation-delay: 0.1s;
+}
+
+
+/* ================================================
+   WORD-BY-WORD HEADING
+   ================================================ */
+
+.hero-heading {
+    opacity: 1;
+}
+
+
+/* Every word starts invisible */
+
+.hero-heading .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(45px);
+    margin-right: 0.15em;
+}
+
+
+/* Drive */
+
+body.hero-loaded .hero-heading .word:nth-child(1) {
+    animation: heroWordReveal 0.6s ease forwards;
+    animation-delay: 0.25s;
+}
+
+
+/* Your */
+
+body.hero-loaded .hero-heading .word:nth-child(2) {
+    animation: heroWordReveal 0.6s ease forwards;
+    animation-delay: 0.40s;
+}
+
+
+/* Dream */
+
+body.hero-loaded .hero-heading .word:nth-child(3) {
+    animation: heroWordReveal 0.6s ease forwards;
+    animation-delay: 0.55s;
+}
+
+
+/* Car */
+
+body.hero-loaded .hero-heading .word:nth-child(4) {
+    animation: heroWordReveal 0.6s ease forwards;
+    animation-delay: 0.70s;
+}
+
+
+/* Last word should not have extra spacing */
+
+.hero-heading .word:last-child {
+    margin-right: 0;
+}
+
+
+/* Red words */
+
+.hero-heading .highlight {
+    color: #e63946;
+}
+
+
+/* Word animation */
+
+@keyframes heroWordReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(45px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* ================================================
+   DESCRIPTION
+   ================================================ */
+
+.hero-text {
+    opacity: 0;
+}
+
+
+body.hero-loaded .hero-text {
+    animation: fadeInUp 0.7s ease forwards;
+    animation-delay: 0.9s;
+}
+
+
+/* ================================================
+   BUTTONS
+   ================================================ */
+
+.hero-buttons {
+    opacity: 0;
+}
+
+
+body.hero-loaded .hero-buttons {
+    animation: fadeInUp 0.7s ease forwards;
+    animation-delay: 1.1s;
+}
+
+
+/* ================================================
+   ABOUT PAGE
+   ================================================ */
+
+.about-section {
+    animation: fadeUp 0.75s ease both;
+}
+
+
+.about-section:nth-of-type(2) {
+    animation-delay: 0.12s;
+}
+
+
+.about-section:nth-of-type(3) {
+    animation-delay: 0.22s;
+}
+
+
+/* ================================================
+   REDUCED MOTION
+   ================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-small,
+    .hero-heading,
+    .hero-heading .word,
+    .hero-text,
+    .hero-buttons {
+
+        opacity: 1;
+        transform: none;
+        animation: none;
+
+    }
+
+}

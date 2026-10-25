@@ -1,0 +1,15 @@
+{
+  "name": "autoverse",
+  "version": "1.0.0",
+  "description": "AUTOVERSE - a premium car showcase, comparison and enquiry platform.",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  }
+}
