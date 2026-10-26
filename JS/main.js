@@ -3,6 +3,64 @@
    Small interactions used on the home page
    ================================================ */
 
+/* ============ FIRST PROGRAM + CONSOLE DEMO ============ */
+/* console.log prints a message, console.table prints rows and columns.
+   Open the browser console (F12, or Ctrl + Shift + J) to see them. */
+
+console.log('Hello from AUTOVERSE!');
+
+/* Prints 0 to 4 with a one-second gap between each number.
+   `let i` gives every loop round its own copy of i, so each timer
+   remembers the right number. */
+function printBootSequence() {
+    for (let i = 0; i < 5; i++) {
+        setTimeout(() => console.log(`AUTOVERSE start-up step ${i}`), i * 1000);
+    }
+}
+
+/* Shows the letters of a word one at a time. Returns the timer ids so the
+   caller could cancel them with clearTimeout(). */
+function showLettersOneByOne(element, word, delay) {
+    const timers = [];
+
+    element.textContent = '';
+    element.setAttribute('aria-label', word);
+
+    for (let i = 0; i < word.length; i++) {
+        timers.push(setTimeout(() => {
+            element.textContent += word[i];
+        }, (i + 1) * delay));
+    }
+
+    return timers;
+}
+
+/* Greeting by hour of the day: an if...else if...else ladder */
+function getGreeting(hour) {
+    if (hour < 12) {
+        return 'Good morning';
+    } else if (hour < 17) {
+        return 'Good afternoon';
+    } else if (hour < 21) {
+        return 'Good evening';
+    } else {
+        return 'Good night';
+    }
+}
+
+if (typeof CARS !== 'undefined') {
+    const swap = { first: 'AUTO', second: 'VERSE' };
+
+    /* swap two values without a third variable (destructuring) */
+    let first = swap.first;
+    let second = swap.second;
+    [first, second] = [second, first];
+
+    console.log(`Brand name, swapped: ${first} ${second}`);
+    console.table(getBrandSummary().slice(0, 5));
+    printBootSequence();
+}
+
 /* ============ BRAND STRIP / POPULAR BRANDS ============ */
 /* Home-page-only sections. The footer's brand list is handled in
    navbar.js instead, since navbar.js loads on every page. */
@@ -12,28 +70,28 @@
         return;
     }
 
-    var brands = getAllBrands();
+    const brands = getAllBrands();
 
     /* ---- Moving brand strip (two identical groups for a seamless loop) ---- */
-    var brandGroupA = document.getElementById('brandGroupA');
-    var brandGroupB = document.getElementById('brandGroupB');
+    const brandGroupA = document.getElementById('brandGroupA');
+    const brandGroupB = document.getElementById('brandGroupB');
 
     if (brandGroupA && brandGroupB) {
-        var stripHTML = brands.map(function (brand) {
-            return '<span>' + brand.toUpperCase() + '</span><b>&bull;</b>';
-        }).join('');
+        const stripHTML = brands
+            .map(brand => `<span>${brand.toUpperCase()}</span><b>&bull;</b>`)
+            .join('');
 
         brandGroupA.innerHTML = stripHTML;
         brandGroupB.innerHTML = stripHTML;
     }
 
     /* ---- Popular Brands grid - clicking a brand filters the Cars page ---- */
-    var brandsGrid = document.getElementById('brandsGrid');
+    const brandsGrid = document.getElementById('brandsGrid');
 
     if (brandsGrid) {
-        brandsGrid.innerHTML = brands.map(function (brand) {
-            return '<a class="brand-card" href="cars.html?brand=' + encodeURIComponent(brand) + '"><h3>' + brand + '</h3></a>';
-        }).join('');
+        brandsGrid.innerHTML = brands
+            .map(brand => `<a class="brand-card" href="cars.html?brand=${encodeURIComponent(brand)}"><h3>${brand}</h3></a>`)
+            .join('');
     }
 }());
 
@@ -48,15 +106,15 @@
         return;
     }
 
-    document.querySelectorAll('.featured-cars .car-card').forEach(function (card) {
-        var link = card.querySelector('.car-btn, .details-btn');
-        var imgWrap = card.querySelector('.car-img');
+    document.querySelectorAll('.featured-cars .car-card').forEach(card => {
+        const link = card.querySelector('.car-btn, .details-btn');
+        const imgWrap = card.querySelector('.car-img');
 
         if (!link || !imgWrap) {
             return;
         }
 
-        var match = link.getAttribute('href').match(/[?&]id=([^&]+)/);
+        const match = link.getAttribute('href').match(/[?&]id=([^&]+)/);
 
         if (!match) {
             return;
@@ -65,7 +123,7 @@
         imgWrap.insertAdjacentHTML('afterbegin', wishlistHeartHTML(match[1]));
 
         if (typeof compareButtonHTML === 'function') {
-            var actionsWrap = document.createElement('div');
+            const actionsWrap = document.createElement('div');
             actionsWrap.className = 'car-card-actions';
             link.insertAdjacentElement('afterend', actionsWrap);
             actionsWrap.appendChild(link);
@@ -75,19 +133,22 @@
 }());
 
 /* ============ TESTIMONIALS CAROUSEL ============ */
-/* 15 reviews, shown 3 at a time, with < > arrows and dot indicators. */
+/* 15 reviews, shown 3 at a time, with < > arrows and dot indicators.
+   It starts on a random page, turns pages by itself every 8 seconds,
+   pauses while the mouse is over it, and answers the left / right
+   arrow keys. */
 
 (function () {
-    var grid = document.getElementById('testimonialsGrid');
-    var dotsWrap = document.getElementById('testimonialDots');
-    var prevBtn = document.getElementById('testimonialPrev');
-    var nextBtn = document.getElementById('testimonialNext');
+    const grid = document.getElementById('testimonialsGrid');
+    const dotsWrap = document.getElementById('testimonialDots');
+    const prevBtn = document.getElementById('testimonialPrev');
+    const nextBtn = document.getElementById('testimonialNext');
 
     if (!grid) {
         return;
     }
 
-    var reviews = [
+    const reviews = [
         { initials: 'RS', name: 'Rahul Sharma', text: 'Bought my BMW M4 through Autoverse and the whole process was smooth and quick. The team was very professional.' },
         { initials: 'PP', name: 'Priya Patel', text: 'I was a little nervous about buying online but Autoverse made it easy. Got my Audi R8 at a great price.' },
         { initials: 'AM', name: 'Arjun Mehta', text: 'Verified dealers and honest prices. I saved a lot of money on my Porsche 911. Highly recommended to everyone.' },
@@ -105,83 +166,224 @@
         { initials: 'SC', name: 'Simran Chawla', text: 'Clean design, honest pricing and a huge range of brands. My go-to site whenever I am car shopping now.' }
     ];
 
-    var reviewsPerPage = 3;
-    var totalPages = Math.ceil(reviews.length / reviewsPerPage);
-    var currentPage = 0;
+    const reviewsPerPage = 3;
+    const totalPages = Math.ceil(reviews.length / reviewsPerPage);
+    const autoPlayDelay = 8000;
+    let currentPage = Math.floor(Math.random() * totalPages);
+    let autoTimer = null;
 
     function renderPage() {
-        var start = currentPage * reviewsPerPage;
-        var pageReviews = reviews.slice(start, start + reviewsPerPage);
+        const start = currentPage * reviewsPerPage;
+        const pageReviews = reviews.slice(start, start + reviewsPerPage);
 
-        grid.innerHTML = pageReviews.map(function (review) {
-            return (
-                '<article class="testimonial-card">' +
-                    '<div class="testimonial-img">' + review.initials + '</div>' +
-                    '<h3>' + review.name + '</h3>' +
-                    '<p class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>' +
-                    '<p class="testimonial-text">' + review.text + '</p>' +
-                '</article>'
-            );
-        }).join('');
+        grid.innerHTML = pageReviews.map(review => (
+            '<article class="testimonial-card">' +
+                `<div class="testimonial-img">${review.initials}</div>` +
+                `<h3>${review.name}</h3>` +
+                '<p class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>' +
+                `<p class="testimonial-text">${review.text}</p>` +
+            '</article>'
+        )).join('');
 
         if (dotsWrap) {
             dotsWrap.innerHTML = '';
 
-            for (var i = 0; i < totalPages; i++) {
-                var dot = document.createElement('button');
+            for (let i = 0; i < totalPages; i++) {
+                const dot = document.createElement('button');
                 dot.type = 'button';
                 dot.className = 'testimonial-dot' + (i === currentPage ? ' active' : '');
-                dot.setAttribute('aria-label', 'Show reviews page ' + (i + 1));
+                dot.setAttribute('aria-label', `Show reviews page ${i + 1}`);
 
-                (function (pageIndex) {
-                    dot.addEventListener('click', function () {
-                        currentPage = pageIndex;
-                        renderPage();
-                    });
-                }(i));
+                dot.addEventListener('click', () => {
+                    currentPage = i;
+                    renderPage();
+                });
 
                 dotsWrap.appendChild(dot);
             }
         }
     }
 
+    function goToPage(delta) {
+        currentPage = (currentPage + delta + totalPages) % totalPages;
+        renderPage();
+    }
+
+    function startAutoPlay() {
+        stopAutoPlay();
+        autoTimer = setInterval(() => goToPage(1), autoPlayDelay);
+    }
+
+    function stopAutoPlay() {
+        clearInterval(autoTimer);
+        autoTimer = null;
+    }
+
     if (prevBtn) {
-        prevBtn.addEventListener('click', function () {
-            currentPage = (currentPage - 1 + totalPages) % totalPages;
-            renderPage();
-        });
+        prevBtn.addEventListener('click', () => goToPage(-1));
     }
 
     if (nextBtn) {
-        nextBtn.addEventListener('click', function () {
-            currentPage = (currentPage + 1) % totalPages;
-            renderPage();
-        });
+        nextBtn.addEventListener('click', () => goToPage(1));
     }
 
+    grid.setAttribute('tabindex', '0');
+    grid.addEventListener('mouseover', stopAutoPlay);
+    grid.addEventListener('mouseout', startAutoPlay);
+    grid.addEventListener('focus', stopAutoPlay);
+    grid.addEventListener('blur', startAutoPlay);
+
+    grid.addEventListener('keydown', event => {
+        if (event.key === 'ArrowLeft') {
+            goToPage(-1);
+        } else if (event.key === 'ArrowRight') {
+            goToPage(1);
+        }
+    });
+
     renderPage();
+    startAutoPlay();
 }());
 
 /* ============ PERSONALIZED HERO GREETING ============ */
-/* If someone is logged in, greet them by name in the hero tagline */
+/* If someone is logged in, greet them by name in the hero tagline.
+   A second line shows the greeting for the time of day and today's date. */
 
 (function () {
-    var heroSmall = document.querySelector('.hero-small');
+    const heroSmall = document.querySelector('.hero-small');
 
     if (!heroSmall) {
         return;
     }
 
     try {
-        var raw = localStorage.getItem('autoverseCurrentUser');
-        var user = raw ? JSON.parse(raw) : null;
+        const raw = localStorage.getItem('autoverseCurrentUser');
+        const user = raw ? JSON.parse(raw) : null;
 
         if (user && user.name) {
-            heroSmall.textContent = 'WELCOME BACK, ' + user.name.toUpperCase() + '!';
+            /* letters appear one by one, 45 ms apart */
+            showLettersOneByOne(heroSmall, `WELCOME BACK, ${user.name.toUpperCase()}!`, 45);
         }
     } catch (error) {
         /* localStorage unavailable - keep the default tagline */
     }
+
+    const now = new Date();
+    const dateLine = document.createElement('p');
+    dateLine.className = 'hero-date';
+    dateLine.innerText = `${getGreeting(now.getHours())} · ${typeof formatDateLong === 'function' ? formatDateLong(now) : now.toDateString()}`;
+    heroSmall.insertAdjacentElement('afterend', dateLine);
+}());
+
+/* ============ PROMO STRIP: marquee, countdown and clock ============ */
+/* Built here so index.html does not need to change. Sits above the
+   Featured Cars section. */
+
+(function () {
+    const featured = document.querySelector('.featured-cars');
+
+    if (!featured || typeof CARS === 'undefined') {
+        return;
+    }
+
+    const prices = CARS.map(car => car.variants[0].priceCr);
+    const average = prices.reduce((total, price) => total + price, 0) / prices.length;
+    const cheapest = Math.min(...prices);
+
+    const strip = document.createElement('div');
+    strip.className = 'promo-strip';
+    strip.style.cssText = 'display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:10px 20px;background:#111;color:#f5c542;font-size:14px;';
+
+    /* <marquee> is old HTML, but browsers still scroll it */
+    const marquee = document.createElement('marquee');
+    marquee.setAttribute('behavior', 'scroll');
+    marquee.setAttribute('direction', 'left');
+    marquee.setAttribute('scrollamount', '6');
+    marquee.style.flex = '1 1 320px';
+    marquee.appendChild(document.createTextNode(
+        `${CARS.length} cars • ${getAllBrands().length} brands • starting at ${formatCrorePrice(cheapest)} • average ${formatCrorePrice(average)}`
+    ));
+
+    const tools = document.createElement('div');
+    tools.className = 'promo-tools';
+    tools.style.cssText = 'display:flex;align-items:center;gap:14px;';
+
+    const countdown = document.createElement('span');
+    countdown.id = 'offerCountdown';
+
+    const clock = document.createElement('span');
+    clock.id = 'liveClock';
+
+    const clockToggle = document.createElement('button');
+    clockToggle.type = 'button';
+    clockToggle.className = 'btn clock-toggle';
+    clockToggle.textContent = 'Stop clock';
+
+    tools.appendChild(countdown);
+    tools.appendChild(clock);
+    tools.appendChild(clockToggle);
+    strip.appendChild(marquee);
+    strip.appendChild(tools);
+    featured.parentNode.insertBefore(strip, featured);
+
+    /* ---- Countdown: time left until midnight, updated every second ---- */
+    const pad = number => String(number).padStart(2, '0');
+    let countdownTimer = null;
+
+    function updateCountdown() {
+        const end = new Date();
+        end.setHours(23, 59, 59, 999);
+
+        const secondsLeft = Math.floor((end - new Date()) / 1000);
+
+        if (secondsLeft <= 0) {
+            countdown.innerText = 'Today’s offers have ended';
+            clearInterval(countdownTimer);
+            return;
+        }
+
+        const hours = Math.floor(secondsLeft / 3600);
+        const minutes = Math.floor((secondsLeft % 3600) / 60);
+        const seconds = secondsLeft % 60;
+
+        countdown.innerText = `Offers end in ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    }
+
+    updateCountdown();
+    countdownTimer = setInterval(updateCountdown, 1000);
+
+    /* ---- Digital clock with a start / stop toggle button ---- */
+    let clockTimer = null;
+
+    function tickClock() {
+        clock.innerText = new Date().toLocaleTimeString();
+    }
+
+    function startClock() {
+        if (clockTimer !== null) {
+            return;
+        }
+
+        tickClock();
+        clockTimer = setInterval(tickClock, 1000);
+        clockToggle.textContent = 'Stop clock';
+    }
+
+    function stopClock() {
+        clearInterval(clockTimer);
+        clockTimer = null;
+        clockToggle.textContent = 'Start clock';
+    }
+
+    clockToggle.addEventListener('click', () => {
+        if (clockTimer === null) {
+            startClock();
+        } else {
+            stopClock();
+        }
+    });
+
+    startClock();
 }());
 
 /* home page elements we need to work with */
@@ -194,20 +396,20 @@ var newsletterEmail = document.getElementById('newsletterEmail');
 /* when an anchor link is clicked, scroll slowly
    to that section instead of jumping instantly */
 
-allLinks.forEach(function (link) {
-    var href = link.getAttribute('href');
+allLinks.forEach(link => {
+    const href = link.getAttribute('href');
 
     // only handle links that point to a section on this page
     if (href && href.charAt(0) === '#') {
-        link.addEventListener('click', function (event) {
+        link.addEventListener('click', event => {
             event.preventDefault();
 
             // find the section the link is pointing to
-            var targetSection = document.querySelector(href);
+            const targetSection = document.querySelector(href);
 
             if (targetSection) {
                 // section position minus the height of the fixed navbar
-                var finalPosition = targetSection.getBoundingClientRect().top + window.scrollY - 70;
+                const finalPosition = targetSection.getBoundingClientRect().top + window.scrollY - 70;
                 window.scrollTo({ top: finalPosition, behavior: 'smooth' });
             }
 
@@ -223,17 +425,24 @@ allLinks.forEach(function (link) {
 /* show a simple message when the user subscribes */
 
 if (newsletterForm && newsletterEmail) {
-    newsletterForm.addEventListener('submit', function (event) {
+    newsletterForm.addEventListener('submit', event => {
         event.preventDefault();
 
-        var email = newsletterEmail.value;
+        const email = newsletterEmail.value.trim();
 
-        if (email === '') {
+        /* == (loose) is enough to test for an empty string here */
+        if (email == '') {
             alert('Please enter your email address.');
             return;
         }
 
-        alert('Thank you for subscribing, ' + email + '!');
+        /* the i flag makes the pattern ignore upper / lower case */
+        if (!/^\S+@\S+\.\S+$/i.test(email)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+
+        alert(`Thank you for subscribing, ${email}!`);
         newsletterEmail.value = '';
     });
 }
@@ -246,7 +455,7 @@ function hideLoader(loader) {
 }
 
 function hideLoaderAfterAnimation(loader, loadingBar) {
-    var hasHiddenLoader = false;
+    let hasHiddenLoader = false;
 
     function finishLoading() {
         if (hasHiddenLoader) {
@@ -263,19 +472,15 @@ function hideLoaderAfterAnimation(loader, loadingBar) {
     }
 
     if (typeof loadingBar.getAnimations === 'function') {
-        var animations = loadingBar.getAnimations();
+        const animations = loadingBar.getAnimations();
 
         if (animations.length > 0) {
-            Promise.all(animations.map(function (animation) {
-                return animation.finished.catch(function () {
-                    return null;
-                });
-            })).then(finishLoading);
+            Promise.all(animations.map(animation => animation.finished.catch(() => null))).then(finishLoading);
             return;
         }
     }
 
-    var loadingBarStyles = window.getComputedStyle(loadingBar);
+    const loadingBarStyles = window.getComputedStyle(loadingBar);
 
     if (loadingBarStyles.animationName === 'none' || loadingBarStyles.animationDuration === '0s') {
         finishLoading();
@@ -296,4 +501,3 @@ if (loader) {
         hideLoaderAfterAnimation(loader, loadingBar);
     }
 }
-

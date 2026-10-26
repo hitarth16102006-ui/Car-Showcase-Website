@@ -1,0 +1,7 @@
+{
+  "_note": "Demo accounts for login.js (fetch + JSON). Passwords here are for practice only - never store real passwords in a plain file.",
+  "users": [
+    { "name": "Demo Driver", "email": "demo@autoverse.test", "password": "autoverse123" },
+    { "name": "Test Customer", "email": "test@autoverse.test", "password": "Test@1234" }
+  ]
+}

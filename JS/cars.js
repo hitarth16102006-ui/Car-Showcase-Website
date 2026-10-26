@@ -2,17 +2,23 @@
    cars.js
    Renders the cars grid on cars.html from CARS
    (see cars-data.js) and powers the live search
-   box + brand filter dropdown.
+   box, brand filter, price range, sort menu and
+   the "Surprise me" button.
    ================================================ */
 
 (function () {
-    var grid = document.querySelector('.cars-grid');
-    var searchInput = document.getElementById('carSearch');
-    var brandFilter = document.getElementById('brandFilter');
+    const grid = document.querySelector('.cars-grid');
+    const searchInput = document.getElementById('carSearch');
+    const brandFilter = document.getElementById('brandFilter');
 
     if (!grid || typeof CARS === 'undefined') {
         return;
     }
+
+    let sortSelect = null;
+    let minInput = null;
+    let maxInput = null;
+    let resultsCount = null;
 
     /* Fill the brand dropdown with every brand that actually exists in CARS,
        instead of a hardcoded list that can drift out of date. */
@@ -21,46 +27,77 @@
             return;
         }
 
-        var brands = [];
-
-        CARS.forEach(function (car) {
-            if (brands.indexOf(car.brand) === -1) {
-                brands.push(car.brand);
-            }
-        });
-
-        brands.sort();
-
         brandFilter.innerHTML = '<option value="All">All Brands</option>';
 
-        brands.forEach(function (brand) {
-            var option = document.createElement('option');
+        getAllBrands().forEach(brand => {
+            const option = document.createElement('option');
             option.value = brand;
             option.textContent = brand;
             brandFilter.appendChild(option);
         });
     }
 
-    function carCardHTML(car) {
-        var baseVariant = car.variants[0];
-        var thumbnail = getDefaultThumbnail(car);
-        var imageMarkup = thumbnail
-            ? '<img src="' + thumbnail + '" alt="' + car.name + '">'
-            : placeholderFrameHTML(car, 'Front View', '#e63946');
+    /* Extra controls are built here so cars.html does not need to change:
+       sort menu, min / max price (in crore), "Surprise me" and a results line. */
+    function buildExtraControls() {
+        const wrap = document.createElement('div');
+        wrap.className = 'cars-extra-controls';
+        wrap.innerHTML =
+            '<select id="carSort" aria-label="Sort cars">' +
+                '<option value="default">Sort: Featured</option>' +
+                '<option value="price-asc">Price: Low to High</option>' +
+                '<option value="price-desc">Price: High to Low</option>' +
+                '<option value="name">Name: A to Z</option>' +
+            '</select>' +
+            '<input type="number" id="minPrice" min="0" step="0.1" placeholder="Min ₹ Cr" aria-label="Minimum price in crore">' +
+            '<input type="number" id="maxPrice" min="0" step="0.1" placeholder="Max ₹ Cr" aria-label="Maximum price in crore">' +
+            '<button type="button" id="surpriseBtn" class="btn">Surprise me</button>' +
+            '<p id="resultsCount" class="results-count" aria-live="polite"></p>';
 
+        grid.parentNode.insertBefore(wrap, grid);
+
+        sortSelect = document.getElementById('carSort');
+        minInput = document.getElementById('minPrice');
+        maxInput = document.getElementById('maxPrice');
+        resultsCount = document.getElementById('resultsCount');
+
+        sortSelect.addEventListener('change', applyFilters);
+        minInput.addEventListener('input', applyFilters);
+        maxInput.addEventListener('input', applyFilters);
+
+        document.getElementById('surpriseBtn').addEventListener('click', () => {
+            const lucky = pickRandom(CARS);
+            window.location.href = `car-details.html?id=${lucky.id}`;
+        });
+    }
+
+    function carCardHTML(car, index) {
+        const baseVariant = car.variants[0];
+        const thumbnail = getDefaultThumbnail(car);
+        const imageMarkup = thumbnail
+            ? `<img src="${thumbnail}" alt="${car.name}">`
+            : placeholderFrameHTML(car, 'Front View', '#e63946');
+        const stripe = isEven(index) ? 'card-even' : 'card-odd';
+        const category = getPriceCategory(baseVariant.priceCr);
+
+        /* onmouseover / onmouseout written as inline attributes: a gentle
+           one-second zoom on the photo while the pointer is over it. */
         return (
-            '<article class="car-card" data-brand="' + car.brand + '" data-name="' + car.name.toLowerCase() + '">' +
-                '<div class="car-img">' +
-                    '<span class="brand-tag">' + car.brand + '</span>' +
+            `<article class="car-card ${stripe}" data-brand="${car.brand}" data-name="${car.name.toLowerCase()}">` +
+                '<div class="car-img" ' +
+                    'onmouseover="this.style.transition=\'transform 1s\'; this.style.transform=\'scale(1.02)\';" ' +
+                    'onmouseout="this.style.transform=\'none\';">' +
+                    `<span class="brand-tag">${car.brand}</span>` +
                     (typeof wishlistHeartHTML === 'function' ? wishlistHeartHTML(car.id) : '') +
                     imageMarkup +
                 '</div>' +
                 '<div class="car-details">' +
-                    '<h2>' + car.name + '</h2>' +
-                    '<p class="brand">Brand: ' + car.brand + '</p>' +
-                    '<p class="price">' + formatCrorePrice(baseVariant.priceCr) + '</p>' +
+                    `<h2>${car.name}</h2>` +
+                    `<p class="brand">Brand: ${car.brand}</p>` +
+                    `<p class="price-category">${category}</p>` +
+                    `<p class="price">${formatCrorePrice(baseVariant.priceCr)}</p>` +
                     '<div class="car-card-actions">' +
-                        '<a href="car-details.html?id=' + car.id + '" class="details-btn">View Details</a>' +
+                        `<a href="car-details.html?id=${car.id}" class="details-btn">View Details</a>` +
                         (typeof compareButtonHTML === 'function' ? compareButtonHTML(car.id) : '') +
                     '</div>' +
                 '</div>' +
@@ -71,49 +108,118 @@
     function renderCars(list) {
         if (list.length === 0) {
             grid.innerHTML = '<p class="no-results">No cars match your search. Try a different name or brand.</p>';
-            return;
+        } else {
+            grid.innerHTML = list.map(carCardHTML).join('');
         }
 
-        grid.innerHTML = list.map(carCardHTML).join('');
+        if (resultsCount) {
+            resultsCount.innerText = `Showing ${list.length} of ${CARS.length} cars`;
+        }
+    }
+
+    /* Sort a COPY of the list according to the sort menu (switch...case). */
+    function sortCars(list) {
+        const sorted = [...list];
+        const mode = sortSelect ? sortSelect.value : 'default';
+
+        switch (mode) {
+            case 'price-asc':
+                sorted.sort((a, b) => a.variants[0].priceCr - b.variants[0].priceCr);
+                break;
+            case 'price-desc':
+                sorted.sort((a, b) => b.variants[0].priceCr - a.variants[0].priceCr);
+                break;
+            case 'name':
+                sorted.sort((a, b) => a.name.localeCompare(b.name));
+                break;
+            default:
+                break;
+        }
+
+        return sorted;
+    }
+
+    function readPriceRange() {
+        /* parseFloat keeps decimals (0.5 Cr); parseInt would cut them off */
+        let low = parseFloat(minInput ? minInput.value : '');
+        let high = parseFloat(maxInput ? maxInput.value : '');
+
+        if (isNaN(low)) {
+            low = 0;
+        }
+
+        if (isNaN(high)) {
+            high = Infinity;
+        }
+
+        /* Typed them the wrong way round? Swap without a third variable. */
+        if (isFinite(high) && low > high) {
+            low = low + high;
+            high = low - high;
+            low = low - high;
+        }
+
+        return { low: low, high: high };
     }
 
     function applyFilters() {
-        var query = searchInput ? searchInput.value.trim().toLowerCase() : '';
-        var brand = brandFilter ? brandFilter.value : 'All';
+        const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+        const brand = brandFilter ? brandFilter.value : 'All';
+        const range = readPriceRange();
 
-        var filtered = CARS.filter(function (car) {
-            var matchesQuery = query === '' ||
-                car.name.toLowerCase().indexOf(query) !== -1 ||
-                car.brand.toLowerCase().indexOf(query) !== -1;
+        const filtered = CARS.filter(car => {
+            const matchesQuery = query === '' ||
+                car.name.toLowerCase().includes(query) ||
+                car.brand.toLowerCase().includes(query);
 
-            var matchesBrand = brand === 'All' || car.brand === brand;
+            const matchesBrand = brand === 'All' || car.brand === brand;
+            const matchesPrice = isInRange(car.variants[0].priceCr, range.low, range.high);
 
-            return matchesQuery && matchesBrand;
+            return matchesQuery && matchesBrand && matchesPrice;
         });
 
-        renderCars(filtered);
+        renderCars(sortCars(filtered));
     }
 
     populateBrandFilter();
+    buildExtraControls();
 
     /* Pre-select a brand if we arrived via a "?brand=X" link (Popular
        Brands on the homepage, or footer brand links). */
-    var presetBrand = new URLSearchParams(window.location.search).get('brand');
+    const presetBrand = new URLSearchParams(window.location.search).get('brand');
 
     if (presetBrand && brandFilter) {
-        var optionExists = Array.prototype.some.call(brandFilter.options, function (opt) {
-            return opt.value === presetBrand;
-        });
+        let optionIndex = 0;
 
-        if (optionExists) {
-            brandFilter.value = presetBrand;
+        while (optionIndex < brandFilter.options.length) {
+            if (brandFilter.options[optionIndex].value === presetBrand) {
+                brandFilter.value = presetBrand;
+                break;
+            }
+
+            optionIndex++;
         }
     }
 
     applyFilters();
 
+    console.log(`cars.js: ${CARS.length} cars rendered, longest name has ${maxOf(...CARS.map(c => c.name).lengths())} characters`);
+    logBrandSummary();
+
     if (searchInput) {
         searchInput.addEventListener('input', applyFilters);
+
+        /* Keyboard: Escape clears the box, any key release re-filters */
+        searchInput.addEventListener('keyup', event => {
+            if (event.key === 'Escape') {
+                searchInput.value = '';
+            }
+
+            applyFilters();
+        });
+
+        searchInput.addEventListener('focus', () => searchInput.classList.add('focused'));
+        searchInput.addEventListener('blur', () => searchInput.classList.remove('focused'));
     }
 
     if (brandFilter) {

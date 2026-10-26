@@ -9,6 +9,11 @@
    angles: front, side, interior, back. Any angle
    set to null renders as a labelled placeholder
    frame in the gallery carousel instead of a photo.
+
+   Shared globals are declared with `var` on purpose:
+   every page loads several classic <script> files that
+   share one global scope, and `var` keeps those names
+   from clashing. Inside functions we use let / const.
    ================================================ */
 
 var CAR_COLORS = [
@@ -45,13 +50,14 @@ var INTERIOR_ICON_SVG =
 /* Builds a labelled placeholder frame for a car photo angle that
    hasn't been supplied yet. */
 function placeholderFrameHTML(car, label, tintHex) {
-    var icon = label === 'Interior' ? INTERIOR_ICON_SVG : CAR_SILHOUETTE_SVG;
+    const icon = label === 'Interior' ? INTERIOR_ICON_SVG : CAR_SILHOUETTE_SVG;
+    const shortName = car.name.replace(car.brand, '').trim().toUpperCase();
 
     return (
-        '<div class="placeholder-car" style="border-color:' + tintHex + '66; color:' + tintHex + ';">' +
-            '<div class="placeholder-icon">' + icon + '</div>' +
-            car.brand.toUpperCase() + '<br><strong>' + car.name.replace(car.brand, '').trim().toUpperCase() + '</strong>' +
-            '<em>' + label + ' photo coming soon</em>' +
+        `<div class="placeholder-car" style="border-color:${tintHex}66; color:${tintHex};">` +
+            `<div class="placeholder-icon">${icon}</div>` +
+            `${car.brand.toUpperCase()}<br><strong>${shortName}</strong>` +
+            `<em>${label} photo coming soon</em>` +
         '</div>'
     );
 }
@@ -700,14 +706,18 @@ var CARS = [
     }
 ];
 
-/* Helper: format a crore price for display, Indian style */
+/* ================================================
+   Helpers
+   ================================================ */
+
+/* Format a crore price for display, Indian style */
 function formatCrorePrice(priceCr) {
-    return "\u20B9" + priceCr.toFixed(2) + " Crore";
+    return "₹" + priceCr.toFixed(2) + " Crore";
 }
 
-/* Helper: get a car by its id */
+/* Get a car by its id */
 function getCarById(id) {
-    for (var i = 0; i < CARS.length; i++) {
+    for (let i = 0; i < CARS.length; i++) {
         if (CARS[i].id === id) {
             return CARS[i];
         }
@@ -715,20 +725,31 @@ function getCarById(id) {
     return null;
 }
 
-/* Helper: distinct, sorted list of every brand in CARS */
-function getAllBrands() {
-    var brands = [];
-
-    CARS.forEach(function (car) {
-        if (brands.indexOf(car.brand) === -1) {
-            brands.push(car.brand);
+/* Removes duplicate values IN PLACE using nested loops + splice().
+   The inner index steps back after a splice so no item is skipped. */
+function removeDuplicates(list) {
+    for (let i = 0; i < list.length; i++) {
+        for (let j = i + 1; j < list.length; j++) {
+            if (list[i] === list[j]) {
+                list.splice(j, 1);
+                j--;
+            }
         }
-    });
+    }
+
+    return list;
+}
+
+/* Distinct, sorted list of every brand in CARS */
+function getAllBrands() {
+    const brands = CARS.map(car => car.brand);
+
+    removeDuplicates(brands);
 
     return brands.sort();
 }
 
-/* Helper: reviews for a car's details page. Cars with a hand-written
+/* Reviews for a car's details page. Cars with a hand-written
    `reviews` array (the ones we have real customer-style feedback for)
    use that directly. Every other car still needs 4-5 reviews on its
    details page, so we generate believable ones from a shared name
@@ -753,20 +774,22 @@ var AUTOVERSE_REVIEW_TEMPLATES = [
 ];
 
 function generateGenericReviews(car) {
-    var shortName = car.name.replace(car.brand, "").trim() || car.name;
-    var feature = (car.features && car.features[0]) || "build quality";
-    var engine = (car.specs && car.specs.engine) || "engine";
-    var fuelType = (car.specs && car.specs.fuelType) || "powertrain";
-    var reviews = [];
+    const shortName = car.name.replace(car.brand, "").trim() || car.name;
+    const feature = (car.features && car.features[0]) || "build quality";
+    const engine = (car.specs && car.specs.engine) || "engine";
+    const fuelType = (car.specs && car.specs.fuelType) || "powertrain";
+    const reviews = [];
 
-    for (var i = 0; i < 5; i++) {
-        var person = AUTOVERSE_REVIEW_NAMES[(i * 3 + car.id.length) % AUTOVERSE_REVIEW_NAMES.length];
-        var template = AUTOVERSE_REVIEW_TEMPLATES[(i + car.id.length) % AUTOVERSE_REVIEW_TEMPLATES.length];
-        var text = template
-            .replace("{shortName}", shortName)
-            .replace("{feature}", feature)
-            .replace("{engine}", engine)
-            .replace("{fuelType}", fuelType);
+    for (let i = 0; i < 5; i++) {
+        const person = AUTOVERSE_REVIEW_NAMES[(i * 3 + car.id.length) % AUTOVERSE_REVIEW_NAMES.length];
+        const template = AUTOVERSE_REVIEW_TEMPLATES[(i + car.id.length) % AUTOVERSE_REVIEW_TEMPLATES.length];
+
+        /* /g = replace every occurrence, not just the first */
+        const text = template
+            .replace(/\{shortName\}/g, shortName)
+            .replace(/\{feature\}/g, feature)
+            .replace(/\{engine\}/g, engine)
+            .replace(/\{fuelType\}/g, fuelType);
 
         reviews.push({
             name: person.name,
@@ -780,21 +803,21 @@ function generateGenericReviews(car) {
 }
 
 function getCarReviews(car) {
-    if (car.reviews && car.reviews.length) {
+    if (Array.isArray(car.reviews) && car.reviews.length) {
         return car.reviews;
     }
 
     return generateGenericReviews(car);
 }
 
-/* Helper: best available thumbnail for listing cards / similar cars.
+/* Best available thumbnail for listing cards / similar cars.
    Cars with per-colour photos (colorImages) use the first colour that
    actually has a photo; everything else falls back to the flat
    `images` object. */
 function getDefaultThumbnail(car) {
     if (car.colorImages) {
-        for (var i = 0; i < car.colors.length; i++) {
-            var set = car.colorImages[car.colors[i].name];
+        for (let i = 0; i < car.colors.length; i++) {
+            const set = car.colorImages[car.colors[i].name];
 
             if (set) {
                 if (set.front) return set.front;
@@ -811,6 +834,321 @@ function getDefaultThumbnail(car) {
     }
 
     return car.images.front || car.images.side || car.images.back || null;
+}
+
+/* ================================================
+   Number, decision and loop helpers
+   (all of these are used by cars.js, details.js,
+   contact.js or main.js)
+   ================================================ */
+
+/* Even / odd check */
+function isEven(number) {
+    return number % 2 === 0;
+}
+
+/* Largest of two numbers (if...else) */
+function largestOfTwo(a, b) {
+    if (a > b) {
+        return a;
+    } else {
+        return b;
+    }
+}
+
+/* Largest of three numbers (nested comparisons) */
+function largestOfThree(a, b, c) {
+    if (a >= b && a >= c) {
+        return a;
+    } else if (b >= a && b >= c) {
+        return b;
+    } else {
+        return c;
+    }
+}
+
+/* Is the number inside min..max (inclusive)? */
+function isInRange(number, min, max) {
+    return number >= min && number <= max;
+}
+
+/* Price band label: an if...else if...else ladder.
+   The first true condition wins; `else` catches everything else. */
+function getPriceCategory(priceCr) {
+    if (priceCr < 1) {
+        return 'Entry Luxury';
+    } else if (priceCr < 3) {
+        return 'Premium';
+    } else if (priceCr < 6) {
+        return 'Supercar';
+    } else {
+        return 'Hypercar';
+    }
+}
+
+/* Simple calculator built on switch...case with break + default */
+function calculate(a, operator, b) {
+    let result;
+
+    switch (operator) {
+        case '+':
+            result = a + b;
+            break;
+        case '-':
+            result = a - b;
+            break;
+        case '*':
+            result = a * b;
+            break;
+        case '/':
+            result = b === 0 ? 'Cannot divide by zero' : a / b;
+            break;
+        default:
+            result = 'Invalid operator';
+    }
+
+    return result;
+}
+
+/* Counts the digits of a number with a while loop */
+function countDigits(number) {
+    let n = Math.abs(Math.floor(number));
+    let count = 0;
+
+    if (n === 0) {
+        return 1;
+    }
+
+    while (n > 0) {
+        n = Math.floor(n / 10);
+        count++;
+    }
+
+    return count;
+}
+
+/* Adds up the digits of a number with a while loop */
+function sumOfDigits(number) {
+    let n = Math.abs(Math.floor(number));
+    let sum = 0;
+
+    while (n > 0) {
+        sum += n % 10;
+        n = Math.floor(n / 10);
+    }
+
+    return sum;
+}
+
+/* Sums any number of arguments using the `arguments` object */
+function sumOf() {
+    let total = 0;
+
+    for (let i = 0; i < arguments.length; i++) {
+        total += arguments[i];
+    }
+
+    return total;
+}
+
+/* Average of any number of arguments (uses arguments.length) */
+function averageOf() {
+    if (arguments.length === 0) {
+        return 0;
+    }
+
+    return sumOf.apply(null, arguments) / arguments.length;
+}
+
+/* Remembers the last car the visitor looked at.
+   NOTE: `lastViewedCarId` is deliberately NOT declared with var / let /
+   const. Assigning to an undeclared name in sloppy mode creates an
+   implicit global variable. (Bad practice in real projects - kept here
+   only to show how implicit globals behave.) */
+function trackVisit(carId) {
+    try {
+        lastViewedCarId = carId;
+    } catch (error) {
+        /* strict mode forbids implicit globals - safe to ignore */
+    }
+
+    return carId;
+}
+
+/* ================================================
+   Random + string helpers
+   ================================================ */
+
+/* Random whole number from min to max, BOTH included */
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+/* A random item from an array */
+function pickRandom(list) {
+    return list[Math.floor(Math.random() * list.length)];
+}
+
+/* Adds up the character codes of a string (charCodeAt) */
+function charCodeSum(text) {
+    let sum = 0;
+
+    for (let i = 0; i < text.length; i++) {
+        sum += text.charCodeAt(i);
+    }
+
+    return sum;
+}
+
+/* "ferrari roma" -> "Ferrari Roma" */
+function capitalizeWords(text) {
+    const words = text.split(' ');
+
+    for (let i = 0; i < words.length; i++) {
+        if (words[i] === '') {
+            continue;
+        }
+
+        words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+    }
+
+    return words.join(' ');
+}
+
+/* "Hello" -> "hELLO" */
+function swapCase(text) {
+    let result = '';
+
+    for (let i = 0; i < text.length; i++) {
+        const letter = text[i];
+        result += letter === letter.toUpperCase() ? letter.toLowerCase() : letter.toUpperCase();
+    }
+
+    return result;
+}
+
+/* "CAR" + "1" -> "C1A1R1" (map over every character) */
+function appendToEachChar(text, suffix) {
+    return text.split('').map(character => character + suffix).join('');
+}
+
+/* Unique booking reference such as AV-421873. do...while keeps
+   generating until the number has not been used before. */
+function generateReferenceNumber(seedText, existingRefs) {
+    const taken = Array.isArray(existingRefs) ? existingRefs : [];
+    const base = charCodeSum(seedText || 'AUTOVERSE') % 100;
+    let reference;
+
+    do {
+        reference = `AV-${String(base).padStart(2, '0')}${randomInt(1000, 9999)}`;
+    } while (taken.includes(reference));
+
+    return reference;
+}
+
+/* "Sunday, October 25, 2026" - formatted from the Date object's parts */
+function formatDateLong(date) {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+        'August', 'September', 'October', 'November', 'December'];
+
+    return `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+}
+
+/* ================================================
+   Array helpers
+   ================================================ */
+
+/* Numbers in ascending order. The compare function is essential:
+   the default sort() compares as strings, so [100, 25] stays wrong. */
+function sortAscending(numbers) {
+    return [...numbers].sort((a, b) => a - b);
+}
+
+function sortDescending(numbers) {
+    return [...numbers].sort((a, b) => b - a);
+}
+
+/* Rest parameter collects the arguments into an array,
+   spread hands them to Math.max / Math.min one by one. */
+function maxOf(...numbers) {
+    return Math.max(...numbers);
+}
+
+function minOf(...numbers) {
+    return Math.min(...numbers);
+}
+
+/* Merge two arrays with spread */
+function mergeLists(first, second) {
+    return [...first, ...second];
+}
+
+/* Even numbers only, sorted ascending */
+function evenNumbersSorted(numbers) {
+    return sortAscending(numbers.filter(isEven));
+}
+
+/* Insert an item at the second-last position */
+function insertSecondLast(list, item) {
+    list.splice(list.length - 1, 0, item);
+    return list;
+}
+
+/* Remove EVERY occurrence of a value. Loop backwards so splice()
+   never shifts an item we have yet to check. */
+function removeAll(list, value) {
+    for (let i = list.length - 1; i >= 0; i--) {
+        if (list[i] === value) {
+            list.splice(i, 1);
+        }
+    }
+
+    return list;
+}
+
+/* Custom Array method: lengths of every string in the array.
+   defineProperty keeps it non-enumerable so for...in loops over
+   arrays are not polluted by it. */
+if (!Array.prototype.lengths) {
+    Object.defineProperty(Array.prototype, 'lengths', {
+        value: function () {
+            return this.map(item => String(item).length);
+        },
+        enumerable: false,
+        configurable: true,
+        writable: true
+    });
+}
+
+/* Brand -> number of cars. Uses for...in over a plain object. */
+function getBrandSummary() {
+    const counts = {};
+
+    CARS.forEach(car => {
+        counts[car.brand] = (counts[car.brand] || 0) + 1;
+    });
+
+    const summary = [];
+
+    for (const brand in counts) {
+        if (!Object.prototype.hasOwnProperty.call(counts, brand)) {
+            continue;
+        }
+
+        summary.push({ brand: brand, cars: counts[brand] });
+    }
+
+    return summary;
+}
+
+function logBrandSummary() {
+    console.table(getBrandSummary());
+}
+
+/* Browser-only start-up message (the very first console.log) */
+if (typeof window !== 'undefined' && typeof console !== 'undefined') {
+    console.log(`AUTOVERSE data ready: ${CARS.length} cars across ${getAllBrands().length} brands`);
 }
 
 /* ================================================
@@ -831,6 +1169,35 @@ if (typeof module !== 'undefined' && module.exports) {
         getAllBrands: getAllBrands,
         generateGenericReviews: generateGenericReviews,
         getCarReviews: getCarReviews,
-        getDefaultThumbnail: getDefaultThumbnail
+        getDefaultThumbnail: getDefaultThumbnail,
+        removeDuplicates: removeDuplicates,
+        isEven: isEven,
+        largestOfTwo: largestOfTwo,
+        largestOfThree: largestOfThree,
+        isInRange: isInRange,
+        getPriceCategory: getPriceCategory,
+        calculate: calculate,
+        countDigits: countDigits,
+        sumOfDigits: sumOfDigits,
+        sumOf: sumOf,
+        averageOf: averageOf,
+        trackVisit: trackVisit,
+        randomInt: randomInt,
+        pickRandom: pickRandom,
+        charCodeSum: charCodeSum,
+        capitalizeWords: capitalizeWords,
+        swapCase: swapCase,
+        appendToEachChar: appendToEachChar,
+        generateReferenceNumber: generateReferenceNumber,
+        formatDateLong: formatDateLong,
+        sortAscending: sortAscending,
+        sortDescending: sortDescending,
+        maxOf: maxOf,
+        minOf: minOf,
+        mergeLists: mergeLists,
+        evenNumbersSorted: evenNumbersSorted,
+        insertSecondLast: insertSecondLast,
+        removeAll: removeAll,
+        getBrandSummary: getBrandSummary
     };
 }

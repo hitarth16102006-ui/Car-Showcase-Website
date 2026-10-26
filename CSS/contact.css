@@ -1,4 +1,4 @@
-﻿/* ================================================
+/* ================================================
    contact.css
    Contact page sections only
    ================================================ */
@@ -614,4 +614,59 @@
     .contact-info {
         padding: 2rem;
     }
+}
+
+
+/* ================================================================
+   ADDED: Trade-in photos, "Use today" button, test-drive date
+   (the Choose files button itself is styled in style.css)
+   ================================================================ */
+.trade-in-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    min-height: 0;
+}
+
+.trade-in-preview img {
+    width: 110px;
+    height: 80px;
+    object-fit: cover;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.trade-in-preview img:hover {
+    transform: scale(1.05);
+    border-color: #d4af37;
+}
+
+.contact-form .use-today-btn {
+    justify-self: start;
+    width: auto;
+    min-height: 40px;
+    margin-top: 0.5rem;
+    padding: 0 1.1rem;
+    font-size: 0.82rem;
+}
+
+.use-today-label {
+    display: block;
+    margin-top: 0.4rem;
+    color: #d4af37;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.contact-form input.field-focused {
+    border-color: #e63946;
+}
+
+body.light-theme .trade-in-preview img {
+    border-color: #dcceb6;
+}
+
+body.light-theme .use-today-label {
+    color: #8f682d;
 }

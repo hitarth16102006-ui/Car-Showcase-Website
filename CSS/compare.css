@@ -223,3 +223,155 @@ body.light-theme .compare-empty {
     border-color: #dcceb6;
     color: #68655f;
 }
+
+
+/* ================================================================
+   ADDED: Realistic comparison look
+   - table sits in a framed panel with zebra rows + row hover
+   - label column stays visible while scrolling sideways
+   - the best value in each row gets a gold "BEST" highlight
+   - rows where every car is identical are dimmed
+   - ticks / crosses become round badges
+   (compare.js adds .compare-best and .compare-same automatically)
+   ================================================================ */
+.compare-table-wrap {
+    padding: 1.25rem;
+    border: 1px solid #292929;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #121212, #0b0b0b);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.compare-row-label {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    padding-left: 0.5rem;
+    background: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.compare-row {
+    padding: 0.95rem 0.25rem;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.compare-row:nth-child(even) {
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.compare-row:hover {
+    background: rgba(212, 175, 55, 0.07);
+}
+
+.compare-col-header {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.compare-col-header:hover {
+    transform: translateY(-3px);
+    border-color: rgba(212, 175, 55, 0.5);
+}
+
+.compare-cell {
+    position: relative;
+    justify-self: center;
+    min-width: 0;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.compare-cell.compare-best {
+    background: rgba(212, 175, 55, 0.14);
+    box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.55);
+    color: #f1d77a;
+    font-weight: 800;
+}
+
+.compare-cell.compare-best::after {
+    content: "BEST";
+    margin-left: 0.5rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    background: #d4af37;
+    color: #111111;
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    vertical-align: middle;
+}
+
+.compare-row.compare-same .compare-cell {
+    color: #8a8a8a;
+    font-weight: 500;
+}
+
+.compare-feature-cell {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 0.95rem;
+    font-weight: 800;
+}
+
+.compare-feature-cell.feature-yes {
+    background: rgba(47, 191, 111, 0.15);
+    box-shadow: inset 0 0 0 1px rgba(47, 191, 111, 0.6);
+}
+
+.compare-feature-cell.feature-no {
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0 0 0 1px #333333;
+}
+
+.compare-remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.compare-remove:hover {
+    transform: rotate(90deg);
+}
+
+.compare-add select {
+    min-width: 220px;
+}
+
+body.light-theme .compare-table-wrap {
+    background: linear-gradient(180deg, #fbf8f1, #f3ecdd);
+    border-color: #dcceb6;
+    box-shadow: 0 16px 40px rgba(23, 24, 23, 0.08);
+}
+
+body.light-theme .compare-row:nth-child(even) {
+    background: rgba(184, 138, 59, 0.06);
+}
+
+body.light-theme .compare-row:hover {
+    background: rgba(184, 138, 59, 0.12);
+}
+
+body.light-theme .compare-cell.compare-best {
+    background: rgba(184, 138, 59, 0.18);
+    box-shadow: inset 0 0 0 1px rgba(184, 138, 59, 0.7);
+    color: #6f4f19;
+}
+
+body.light-theme .compare-cell.compare-best::after {
+    background: #b88a3b;
+    color: #171817;
+}
+
+body.light-theme .compare-row.compare-same .compare-cell {
+    color: #9c8b6f;
+}

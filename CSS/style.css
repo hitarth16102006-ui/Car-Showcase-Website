@@ -1,4 +1,4 @@
-﻿/* ================================================
+/* ================================================
    style.css
    Global design system and shared components
    ================================================ */
@@ -2267,4 +2267,425 @@ html.skip-home-loader .loading-bar {
     .footer-explore ul {
         column-count: 3;
     }
+}
+
+
+/* ================================================================
+   ADDED: Navbar alignment fix
+   Every item in the button row is now exactly 42px tall and centred
+   on the same line (Wishlist, Login, Sign up, Export, Logout,
+   theme toggle, welcome text).
+   ================================================================ */
+.nav-buttons {
+    align-items: center;
+}
+
+.nav-buttons > * {
+    align-self: center;
+    height: 42px;
+    min-height: 42px;
+    margin: 0;
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+.nav-buttons .login-btn,
+.nav-buttons .signup-btn,
+.nav-buttons .wishlist-nav-link,
+.nav-buttons .theme-toggle,
+.nav-buttons .nav-welcome {
+    vertical-align: middle;
+}
+
+.nav-buttons button.login-btn {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.nav-buttons .wishlist-nav-link {
+    padding-block: 0;
+}
+
+.nav-buttons .wishlist-nav-link svg {
+    flex-shrink: 0;
+    display: block;
+}
+
+.nav-buttons .wishlist-nav-count {
+    top: 0;
+    right: 0;
+    border-width: 0;
+}
+
+.nav-buttons .theme-toggle svg,
+.nav-buttons .theme-toggle span {
+    display: block;
+    line-height: 1;
+}
+
+.nav-buttons .theme-toggle:hover {
+    transform: rotate(180deg);
+}
+
+/* ================================================================
+   ADDED: Wishlist heart + Compare button on cards
+   Same height, same baseline, and they never change size when a car
+   is added / removed (the tick or the filled heart).
+   ================================================================ */
+.car-card-actions {
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.car-card-actions .details-btn,
+.car-card-actions .compare-toggle {
+    height: 44px;
+    min-height: 44px;
+    box-sizing: border-box;
+}
+
+.car-card-actions .details-btn {
+    padding: 0 1.25rem;
+}
+
+.compare-toggle {
+    justify-content: center;
+    gap: 0.4rem;
+    line-height: 1;
+}
+
+.car-card-actions .compare-toggle {
+    min-width: 112px;
+    padding: 0 0.9rem;
+}
+
+.compare-toggle svg {
+    flex-shrink: 0;
+    display: block;
+}
+
+.compare-toggle.active svg {
+    stroke-width: 2.4;
+}
+
+.compare-toggle.active span::before {
+    content: "\2713\00a0";
+}
+
+.wishlist-heart svg {
+    display: block;
+}
+
+.wishlist-heart.active {
+    box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.18);
+}
+
+/* Details-page buttons: Save to Garage / Add to Compare line up as a row */
+.details-buttons {
+    align-items: stretch;
+}
+
+.details-buttons > .btn,
+.details-buttons > button {
+    min-height: 48px;
+    height: 48px;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+/* ================================================================
+   ADDED: Floating compare bar - reorder arrows + Clear button
+   ================================================================ */
+.compare-bar-tools {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+}
+
+.compare-bar-hint {
+    color: #8a8a8a;
+    font-size: 0.78rem;
+    white-space: nowrap;
+}
+
+.compare-bar-hint:empty {
+    display: none;
+}
+
+.compare-reorder,
+.compare-clear {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    border: 1px solid #333333;
+    background: #181818;
+    color: #d6d6d6;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+
+.compare-reorder {
+    width: 38px;
+    border-radius: 50%;
+    font-size: 1.15rem;
+}
+
+.compare-reorder:hover {
+    border-color: #d4af37;
+    color: #d4af37;
+    background: rgba(212, 175, 55, 0.12);
+    transform: translateY(-2px);
+}
+
+.compare-reorder:active {
+    transform: translateY(0) rotate(180deg);
+}
+
+.compare-clear {
+    padding: 0 1.1rem;
+    border-radius: 999px;
+    letter-spacing: 0.03em;
+}
+
+.compare-clear:hover {
+    border-color: #e63946;
+    color: #ffffff;
+    background: #e63946;
+    transform: translateY(-2px);
+}
+
+.compare-bar-btn {
+    min-height: 42px;
+    padding-block: 0;
+}
+
+body.light-theme .compare-bar-hint {
+    color: #7c7467;
+}
+
+body.light-theme .compare-reorder,
+body.light-theme .compare-clear {
+    background: #ffffff;
+    border-color: #dcceb6;
+    color: #292a28;
+}
+
+body.light-theme .compare-reorder:hover {
+    border-color: #b88a3b;
+    color: #8f682d;
+    background: rgba(184, 138, 59, 0.12);
+}
+
+body.light-theme .compare-clear:hover {
+    border-color: #b88a3b;
+    background: #b88a3b;
+    color: #171817;
+}
+
+@media (max-width: 600px) {
+    .compare-bar-tools {
+        width: 100%;
+        justify-content: space-between;
+        margin-left: 0;
+    }
+}
+
+/* ================================================================
+   ADDED: Footer wishlist - total line + "Clear all" button
+   ================================================================ */
+.footer-wishlist-total {
+    margin-top: 0.4rem;
+    padding-top: 0.7rem;
+    border-top: 1px dashed #333333;
+    color: #d4af37;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.wishlist-clear {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 1rem;
+    border: 1px solid rgba(230, 57, 70, 0.55);
+    border-radius: 999px;
+    background: transparent;
+    color: #e63946;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.wishlist-clear::before {
+    content: "\00d7";
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.wishlist-clear:hover {
+    background: #e63946;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(230, 57, 70, 0.28);
+}
+
+body.light-theme .footer-wishlist-total {
+    border-top-color: #dcceb6;
+    color: #8f682d;
+}
+
+body.light-theme .wishlist-clear {
+    border-color: rgba(184, 138, 59, 0.6);
+    color: #8f682d;
+}
+
+body.light-theme .wishlist-clear:hover {
+    background: #b88a3b;
+    color: #171817;
+    box-shadow: 0 8px 20px rgba(184, 138, 59, 0.28);
+}
+
+/* ================================================================
+   ADDED: "Choose file" buttons (signup + contact pages)
+   ================================================================ */
+.signup-photo,
+.trade-in-photos {
+    display: grid;
+    gap: 0.6rem;
+    padding: 1rem;
+    border: 1px dashed #3a3a3a;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.signup-photo label,
+.trade-in-photos label {
+    color: #d6d6d6;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.signup-photo small,
+.trade-in-photos small {
+    color: #8a8a8a;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+/* these selectors beat ".auth-form input" and ".contact-form input" */
+.auth-form .signup-photo input[type="file"],
+.contact-form .trade-in-photos input[type="file"],
+input[type="file"].file-input {
+    width: 100%;
+    min-height: 0;
+    padding: 0.5rem;
+    border: 1px solid #333333;
+    border-radius: 10px;
+    background: #121212;
+    color: #a6a6a6;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.auth-form .signup-photo input[type="file"]::file-selector-button,
+.contact-form .trade-in-photos input[type="file"]::file-selector-button,
+input[type="file"].file-input::file-selector-button {
+    margin-right: 0.9rem;
+    padding: 0.65rem 1.25rem;
+    border: 0;
+    border-radius: 6px;
+    background: #e63946;
+    color: #ffffff;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.auth-form .signup-photo input[type="file"]::file-selector-button:hover,
+.contact-form .trade-in-photos input[type="file"]::file-selector-button:hover,
+input[type="file"].file-input::file-selector-button:hover {
+    background: #c9303c;
+    box-shadow: 0 8px 20px rgba(230, 57, 70, 0.25);
+}
+
+#signupPhotoPreview {
+    margin: 0.25rem auto;
+    border: 3px solid rgba(230, 57, 70, 0.4);
+    box-shadow: 0 0 0 5px rgba(230, 57, 70, 0.08);
+}
+
+body.light-theme .signup-photo,
+body.light-theme .trade-in-photos {
+    border-color: #dcceb6;
+    background: rgba(184, 138, 59, 0.05);
+}
+
+body.light-theme .signup-photo label,
+body.light-theme .trade-in-photos label {
+    color: #171817;
+}
+
+body.light-theme .signup-photo small,
+body.light-theme .trade-in-photos small {
+    color: #68655f;
+}
+
+body.light-theme .auth-form .signup-photo input[type="file"],
+body.light-theme .contact-form .trade-in-photos input[type="file"] {
+    background: #ffffff;
+    border-color: #dcceb6;
+    color: #68655f;
+}
+
+body.light-theme .auth-form .signup-photo input[type="file"]::file-selector-button,
+body.light-theme .contact-form .trade-in-photos input[type="file"]::file-selector-button {
+    background: #b88a3b;
+    color: #171817;
+}
+
+body.light-theme .auth-form .signup-photo input[type="file"]::file-selector-button:hover,
+body.light-theme .contact-form .trade-in-photos input[type="file"]::file-selector-button:hover {
+    background: #8f682d;
+    color: #fbf8f1;
+}
+
+/* ================================================================
+   ADDED: Login page - Caps Lock note
+   ================================================================ */
+.caps-note {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.4rem;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid rgba(244, 165, 35, 0.5);
+    border-radius: 8px;
+    background: rgba(244, 165, 35, 0.12);
+    color: #f4a523;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.caps-note::before {
+    content: "\21EA";
+    font-size: 1rem;
+    line-height: 1;
+}
+
+body.light-theme .caps-note {
+    color: #8f682d;
+    border-color: rgba(184, 138, 59, 0.5);
+    background: rgba(184, 138, 59, 0.12);
 }
