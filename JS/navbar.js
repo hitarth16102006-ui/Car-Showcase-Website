@@ -96,7 +96,12 @@ function collectAccountData() {
                 const welcome = document.createElement('a');
                 welcome.href = 'garage.html';
                 welcome.className = 'nav-welcome';
-                welcome.innerHTML = `Welcome, <strong>${user.name}</strong>`;
+
+                /* the name was typed by the visitor, so it goes in as text,
+                   never as HTML */
+                const nameEl = document.createElement('strong');
+                nameEl.textContent = user.name;
+                welcome.append('Welcome, ', nameEl);
                 navButtons.insertBefore(welcome, navButtons.firstChild);
             }
 
@@ -176,8 +181,8 @@ function collectAccountData() {
 
     /* ---------- Footer "Explore" brand list (every page) ---------- */
     /* navbar.js loads on every page, unlike main.js, so the footer's
-       full brand list - including new brands like Tesla, Rolls-Royce
-       and Range Rover - now shows up everywhere, not just the home page. */
+       full brand list (built from CARS) shows up everywhere, not just
+       the home page. */
     if (typeof CARS !== 'undefined' && typeof getAllBrands === 'function') {
         const footerExploreList = document.getElementById('footerExploreList');
 
@@ -395,6 +400,46 @@ function collectAccountData() {
         });
     }());
 
+    /* ---------- Collection stats ([data-stat] elements) ---------- */
+    /* The numbers on the home and about pages are counted from CARS, so
+       they can never drift out of date when a car is added or removed. */
+    if (typeof CARS !== 'undefined') {
+        const fuelTypes = [];
+        let variantCount = 0;
+
+        CARS.forEach(car => {
+            variantCount += car.variants.length;
+
+            car.variants.forEach(variant => {
+                if (!fuelTypes.includes(variant.fuelType)) {
+                    fuelTypes.push(variant.fuelType);
+                }
+            });
+        });
+
+        const statValues = {
+            cars: CARS.length,
+            brands: getAllBrands().length,
+            variants: variantCount,
+            fuelTypes: fuelTypes.length
+        };
+
+        document.querySelectorAll('[data-stat]').forEach(el => {
+            const value = statValues[el.getAttribute('data-stat')];
+
+            if (value === undefined) {
+                return;
+            }
+
+            /* animated counters read data-count; plain ones show the number */
+            if (el.hasAttribute('data-count')) {
+                el.setAttribute('data-count', value);
+            } else {
+                el.textContent = value;
+            }
+        });
+    }
+
     /* ---------- Animated stat counters (any [data-count] element) ---------- */
     (function () {
         const counters = document.querySelectorAll('[data-count]');
@@ -414,7 +459,8 @@ function collectAccountData() {
                 }
 
                 const progress = Math.min((timestamp - startTime) / duration, 1);
-                el.textContent = Math.floor(progress * target) + (progress >= 1 ? '+' : '');
+                /* exact counts, so no "+" on the end */
+                el.textContent = Math.floor(progress * target);
 
                 if (progress < 1) {
                     requestAnimationFrame(step);

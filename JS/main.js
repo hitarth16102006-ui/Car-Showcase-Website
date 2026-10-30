@@ -100,7 +100,8 @@ if (typeof CARS !== 'undefined') {
    rendered from CARS like cars.js/details.js do. We still want a
    heart on every card, so we read the car id straight out of the
    card's own "View Details" link (?id=...) and inject the same
-   heart button wishlist.js uses everywhere else. */
+   heart button wishlist.js uses everywhere else. The price is also
+   refreshed from CARS. */
 (function () {
     if (typeof wishlistHeartHTML !== 'function') {
         return;
@@ -122,6 +123,14 @@ if (typeof CARS !== 'undefined') {
 
         imgWrap.insertAdjacentHTML('afterbegin', wishlistHeartHTML(match[1]));
 
+        /* the price comes from CARS, so it always matches the other pages */
+        const car = typeof getCarById === 'function' ? getCarById(match[1]) : null;
+        const priceEl = card.querySelector('.car-price');
+
+        if (car && priceEl) {
+            priceEl.textContent = `Price: ${formatCrorePrice(car.variants[0].priceCr)}`;
+        }
+
         if (typeof compareButtonHTML === 'function') {
             const actionsWrap = document.createElement('div');
             actionsWrap.className = 'car-card-actions';
@@ -132,11 +141,11 @@ if (typeof CARS !== 'undefined') {
     });
 }());
 
-/* ============ TESTIMONIALS CAROUSEL ============ */
-/* 15 reviews, shown 3 at a time, with < > arrows and dot indicators.
-   It starts on a random page, turns pages by itself every 8 seconds,
-   pauses while the mouse is over it, and answers the left / right
-   arrow keys. */
+/* ============ COLLECTION CAROUSEL ============ */
+/* Short profiles of the cars in CARS, shown 3 at a time, with < > arrows
+   and dot indicators. It starts on a random page, turns pages by itself
+   every 8 seconds, pauses while the mouse is over it, and answers the
+   left / right arrow keys. (It reuses the old testimonial-card styling.) */
 
 (function () {
     const grid = document.getElementById('testimonialsGrid');
@@ -144,44 +153,39 @@ if (typeof CARS !== 'undefined') {
     const prevBtn = document.getElementById('testimonialPrev');
     const nextBtn = document.getElementById('testimonialNext');
 
-    if (!grid) {
+    if (!grid || typeof CARS === 'undefined') {
         return;
     }
 
-    const reviews = [
-        { initials: 'RS', name: 'Rahul Sharma', text: 'Bought my BMW M4 through Autoverse and the whole process was smooth and quick. The team was very professional.' },
-        { initials: 'PP', name: 'Priya Patel', text: 'I was a little nervous about buying online but Autoverse made it easy. Got my Audi R8 at a great price.' },
-        { initials: 'AM', name: 'Arjun Mehta', text: 'Verified dealers and honest prices. I saved a lot of money on my Porsche 911. Highly recommended to everyone.' },
-        { initials: 'SK', name: 'Sanya Kapoor', text: 'The car details page made it so easy to compare petrol and hybrid variants side by side before I decided.' },
-        { initials: 'VR', name: 'Vikram Rao', text: 'Picked up a Range Rover through Autoverse. The specification breakdown was more thorough than any dealership site.' },
-        { initials: 'NJ', name: 'Neha Joshi', text: 'Loved browsing the Lamborghini and Ferrari listings. Felt like a proper showroom experience from my laptop.' },
-        { initials: 'KG', name: 'Karan Gill', text: 'Customer support answered every question about my Tesla Model S Plaid within minutes. Excellent service.' },
-        { initials: 'AD', name: 'Ananya Desai', text: 'The search and filter tools made finding the right Mercedes trim effortless. Would recommend to any first-time buyer.' },
-        { initials: 'RM', name: 'Rohan Malhotra', text: 'Test drove the Aston Martin DB11 after finding it here. The listing details matched the real car exactly.' },
-        { initials: 'ID', name: 'Ishaan Dutta', text: 'Great platform for comparing performance numbers across brands before making a big decision.' },
-        { initials: 'MS', name: 'Meera Singh', text: 'The whole booking and enquiry process for my Jaguar F-Type was quick, transparent and stress-free.' },
-        { initials: 'AT', name: 'Aditya Thakur', text: 'Appreciated how clearly diesel, petrol and hybrid options were laid out for the Range Rover I was eyeing.' },
-        { initials: 'PB', name: 'Pooja Bhatia', text: 'Autoverse helped me shortlist between three SUVs in a single afternoon. Genuinely useful comparisons.' },
-        { initials: 'HK', name: 'Harsh Kohli', text: 'Bought my Nissan GT-R here and the after-sales support team followed up multiple times to make sure I was happy.' },
-        { initials: 'SC', name: 'Simran Chawla', text: 'Clean design, honest pricing and a huge range of brands. My go-to site whenever I am car shopping now.' }
-    ];
+    /* "Aston Martin" -> "AM", "Rolls-Royce" -> "RR", "Ford" -> "F" */
+    function brandInitials(brand) {
+        return brand.split(/[\s-]+/).map(word => word.charAt(0)).join('').toUpperCase();
+    }
 
-    const reviewsPerPage = 3;
-    const totalPages = Math.ceil(reviews.length / reviewsPerPage);
+    const profiles = CARS.map(car => ({
+        id: car.id,
+        initials: brandInitials(car.brand),
+        name: car.name,
+        price: `${getPriceCategory(car.variants[0].priceCr)} · from ${formatCrorePrice(car.variants[0].priceCr)}`,
+        text: car.description
+    }));
+
+    const cardsPerPage = 3;
+    const totalPages = Math.ceil(profiles.length / cardsPerPage);
     const autoPlayDelay = 8000;
     let currentPage = Math.floor(Math.random() * totalPages);
     let autoTimer = null;
 
     function renderPage() {
-        const start = currentPage * reviewsPerPage;
-        const pageReviews = reviews.slice(start, start + reviewsPerPage);
+        const start = currentPage * cardsPerPage;
+        const pageCards = profiles.slice(start, start + cardsPerPage);
 
-        grid.innerHTML = pageReviews.map(review => (
+        grid.innerHTML = pageCards.map(profile => (
             '<article class="testimonial-card">' +
-                `<div class="testimonial-img">${review.initials}</div>` +
-                `<h3>${review.name}</h3>` +
-                '<p class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>' +
-                `<p class="testimonial-text">${review.text}</p>` +
+                `<div class="testimonial-img">${profile.initials}</div>` +
+                `<h3><a href="car-details.html?id=${profile.id}">${profile.name}</a></h3>` +
+                `<p class="stars">${profile.price}</p>` +
+                `<p class="testimonial-text">${profile.text}</p>` +
             '</article>'
         )).join('');
 
@@ -192,7 +196,7 @@ if (typeof CARS !== 'undefined') {
                 const dot = document.createElement('button');
                 dot.type = 'button';
                 dot.className = 'testimonial-dot' + (i === currentPage ? ' active' : '');
-                dot.setAttribute('aria-label', `Show reviews page ${i + 1}`);
+                dot.setAttribute('aria-label', `Show cars page ${i + 1}`);
 
                 dot.addEventListener('click', () => {
                     currentPage = i;
@@ -275,7 +279,7 @@ if (typeof CARS !== 'undefined') {
     heroSmall.insertAdjacentElement('afterend', dateLine);
 }());
 
-/* ============ PROMO STRIP: marquee, countdown and clock ============ */
+/* ============ PROMO STRIP: marquee and clock ============ */
 /* Built here so index.html does not need to change. Sits above the
    Featured Cars section. */
 
@@ -308,9 +312,6 @@ if (typeof CARS !== 'undefined') {
     tools.className = 'promo-tools';
     tools.style.cssText = 'display:flex;align-items:center;gap:14px;';
 
-    const countdown = document.createElement('span');
-    countdown.id = 'offerCountdown';
-
     const clock = document.createElement('span');
     clock.id = 'liveClock';
 
@@ -319,38 +320,11 @@ if (typeof CARS !== 'undefined') {
     clockToggle.className = 'btn clock-toggle';
     clockToggle.textContent = 'Stop clock';
 
-    tools.appendChild(countdown);
     tools.appendChild(clock);
     tools.appendChild(clockToggle);
     strip.appendChild(marquee);
     strip.appendChild(tools);
     featured.parentNode.insertBefore(strip, featured);
-
-    /* ---- Countdown: time left until midnight, updated every second ---- */
-    const pad = number => String(number).padStart(2, '0');
-    let countdownTimer = null;
-
-    function updateCountdown() {
-        const end = new Date();
-        end.setHours(23, 59, 59, 999);
-
-        const secondsLeft = Math.floor((end - new Date()) / 1000);
-
-        if (secondsLeft <= 0) {
-            countdown.innerText = 'Today’s offers have ended';
-            clearInterval(countdownTimer);
-            return;
-        }
-
-        const hours = Math.floor(secondsLeft / 3600);
-        const minutes = Math.floor((secondsLeft % 3600) / 60);
-        const seconds = secondsLeft % 60;
-
-        countdown.innerText = `Offers end in ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-    }
-
-    updateCountdown();
-    countdownTimer = setInterval(updateCountdown, 1000);
 
     /* ---- Digital clock with a start / stop toggle button ---- */
     let clockTimer = null;
@@ -442,7 +416,8 @@ if (newsletterForm && newsletterEmail) {
             return;
         }
 
-        alert(`Thank you for subscribing, ${email}!`);
+        /* There is no mailing list behind this form, so say so honestly */
+        alert(`Thanks! ${email} is valid, but AUTOVERSE does not send newsletters yet, so nothing has been signed up.`);
         newsletterEmail.value = '';
     });
 }

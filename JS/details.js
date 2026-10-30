@@ -5,9 +5,8 @@
    (see cars-data.js): a front/side/interior/back
    photo carousel, specs, performance, a working
    colour picker, a working variant / fuel-type
-   picker, features, similar cars - plus a rating
-   summary, variant table, finance tool and a
-   printable spec sheet.
+   picker, features, similar cars - plus a variant
+   comparison table and a printable spec sheet.
    ================================================ */
 
 (function () {
@@ -23,11 +22,21 @@
         car = CARS[0];
     }
 
-    /* remember the last car viewed (implicit global lives in trackVisit) */
-    trackVisit(car.id);
-
     let selectedVariant = car.variants[0];
+    /* Start on the first colour that has a photo of its own, so the
+       first picture matches the colour name shown under it. */
     let selectedColor = car.colors[0];
+
+    if (car.colorImages) {
+        const firstWithPhoto = car.colors.find(color => {
+            const set = car.colorImages[color.name];
+            return set && (set.front || set.side || set.back);
+        });
+
+        if (firstWithPhoto) {
+            selectedColor = firstWithPhoto;
+        }
+    }
     let slideIndex = 0;
 
     function currentImageSet() {
@@ -55,11 +64,16 @@
     function getSlides() {
         const set = currentImageSet();
 
+        /* true when the photo really is in the selected colour, false when
+           it is borrowed from the car's shared photos */
+        const colorSet = car.colorImages ? (car.colorImages[selectedColor.name] || {}) : null;
+        const inColor = angle => colorSet === null || Boolean(colorSet[angle]);
+
         const slides = [
-            { src: set.front || null, label: 'Front View' },
-            { src: set.side || null, label: 'Side View' },
-            { src: set.interior || null, label: 'Interior' },
-            { src: set.back || null, label: 'Rear View' }
+            { src: set.front || null, label: 'Front View', inColor: inColor('front') },
+            { src: set.side || null, label: 'Side View', inColor: inColor('side') },
+            { src: set.interior || null, label: 'Interior', inColor: true },
+            { src: set.back || null, label: 'Rear View', inColor: inColor('back') }
         ];
 
         return slideOrder.map(index => slides[index]);
@@ -180,11 +194,16 @@
         let heartMarkup = typeof wishlistHeartHTML === 'function' ? wishlistHeartHTML(car.id) : '';
 
         if (slide.src) {
+            /* only name the paint colour when the photo is actually in it */
+            let caption = slide.inColor
+                ? selectedColor.name + ' \u2013 ' + slide.label
+                : slide.label + ' (other colour)';
+
             galleryFrame.innerHTML =
                 '<span class="brand-tag">' + car.brand + '</span>' +
                 heartMarkup +
-                '<img src="' + slide.src + '" alt="' + car.name + ' - ' + selectedColor.name + ' - ' + slide.label + '">' +
-                '<span class="gallery-caption">' + selectedColor.name + ' \u2013 ' + slide.label + '</span>';
+                '<img src="' + slide.src + '" alt="' + car.name + ' - ' + caption + '">' +
+                '<span class="gallery-caption">' + caption + '</span>';
         } else {
             galleryFrame.innerHTML =
                 '<span class="brand-tag">' + car.brand + '</span>' +
@@ -314,7 +333,7 @@
 
         let specs = [
             { label: 'Engine', value: car.specs.engine },
-            { label: 'Power', value: selectedVariant.power + ' bhp' },
+            { label: 'Power', value: selectedVariant.power + ' hp' },
             { label: 'Torque', value: selectedVariant.torque + ' Nm' },
             { label: 'Transmission', value: car.specs.transmission },
             { label: '0-100 km/h', value: selectedVariant.accel },
@@ -372,10 +391,10 @@
         }
 
         if (titleEl) {
-            titleEl.textContent = car.brand + ' Philosophy';
+            titleEl.textContent = 'About the ' + car.name;
         }
 
-        textEl.textContent = car.description + ' Every ' + car.brand + ' that carries this badge is built around one idea: performance and craftsmanship should never have to compete with each other.';
+        textEl.textContent = car.description;
     }
 
     /* -------- Powertrain / Design / Interior / Technology (generic, built from specs + features) -------- */
@@ -408,7 +427,7 @@
         let powertrainItems = [
             'Engine: ' + car.specs.engine,
             'Transmission: ' + car.specs.transmission,
-            'Power: ' + selectedVariant.power + ' bhp / Torque: ' + selectedVariant.torque + ' Nm'
+            'Power: ' + selectedVariant.power + ' hp / Torque: ' + selectedVariant.torque + ' Nm'
         ];
 
         if (car.specs.fuelType === 'Electric' || car.specs.fuelType === 'Hybrid') {
@@ -450,7 +469,7 @@
             { icon: 'S', name: 'Sport', text: 'Sharper steering, faster shifts and a more aggressive exhaust note on demand.' },
             isElectrified
                 ? { icon: 'E', name: 'Electric', text: 'Silent, zero-emission driving with instant torque for city commutes.' }
-                : { icon: 'T', name: 'Track', text: 'Maximum power delivery and stability control tuned for closed-circuit driving.' }
+                : { icon: 'I', name: 'Individual', text: 'Steering, suspension and throttle response set separately to suit the driver.' }
         ];
 
         grid.innerHTML = modes.map(function (mode) {
@@ -476,11 +495,12 @@
         let allFeatures = car.features.concat(selectedVariant.extraFeatures || []);
         let safetyFromFeatures = pick(allFeatures, ['brake', 'camera', 'cruise', 'assist', 'sensor', 'stability'], 0);
 
+        /* only items every modern car on the site has; anything more
+           specific must come from the car's own feature list */
         let safetyItems = [
-            'Multi-Airbag Safety Cell',
-            'Advanced Traction & Stability Control',
-            'High-Performance Braking System',
-            '360-Degree Parking Sensors & Camera'
+            'Driver and passenger airbags',
+            'ABS with electronic brake-force distribution',
+            'Electronic stability and traction control'
         ].concat(safetyFromFeatures);
 
         list.innerHTML = safetyItems.slice(0, 6).map(function (item) {
@@ -497,43 +517,16 @@
             return;
         }
 
+        /* AUTOVERSE is a showcase, not a dealer, so these cards point the
+           visitor to the right people instead of promising services */
         let cards = [
-            { title: 'Warranty', text: 'Comprehensive manufacturer warranty coverage arranged through AUTOVERSE\'s partner network.' },
-            { title: 'Service Plans', text: 'Scheduled maintenance packages designed to keep your ' + car.name + ' performing like new.' },
-            { title: 'Concierge Support', text: 'A dedicated AUTOVERSE specialist stays with you from enquiry through to delivery day.' }
+            { title: 'Warranty', text: 'Warranty terms for the ' + car.name + ' are set by ' + car.brand + ' and vary by market. Confirm them with an authorised dealer.' },
+            { title: 'Servicing', text: 'Service intervals and maintenance packages are offered by ' + car.brand + ' dealers, not by AUTOVERSE.' },
+            { title: 'Your Enquiries', text: 'Enquiries and test-drive requests you make here are saved in My Garage on this browser.' }
         ];
 
         grid.innerHTML = cards.map(function (card) {
             return '<div class="ownership-card"><h3>' + card.title + '</h3><p>' + card.text + '</p></div>';
-        }).join('');
-    }
-
-    /* -------- Reviews -------- */
-
-    function renderReviews() {
-        let grid = document.getElementById('reviewsGrid');
-
-        if (!grid || typeof getCarReviews !== 'function') {
-            return;
-        }
-
-        let reviews = getCarReviews(car);
-
-        grid.innerHTML = reviews.map(function (review) {
-            let stars = '\u2605'.repeat(review.rating) + '\u2606'.repeat(5 - review.rating);
-
-            return (
-                '<article class="review-card">' +
-                    '<div class="review-head">' +
-                        '<div class="review-avatar">' + review.initials + '</div>' +
-                        '<div>' +
-                            '<p class="review-name">' + review.name + '</p>' +
-                            '<p class="review-stars">' + stars + '</p>' +
-                        '</div>' +
-                    '</div>' +
-                    '<p class="review-text">' + review.text + '</p>' +
-                '</article>'
-            );
         }).join('');
     }
 
@@ -778,7 +771,7 @@
         const table = document.createElement('table');
         table.style.cssText = 'width:100%;border-collapse:collapse;';
 
-        const columns = ['Variant', 'Fuel', 'Power (bhp)', 'Torque (Nm)', 'Top speed (km/h)', 'Price'];
+        const columns = ['Variant', 'Fuel', 'Power (hp)', 'Torque (Nm)', 'Top speed (km/h)', 'Price'];
         const headRow = table.insertRow();
 
         for (let c = 0; c < columns.length; c++) {
@@ -803,131 +796,6 @@
         block.appendChild(table);
     }
 
-    /* ---- Rating summary with a star pattern (nested loops) ---- */
-    function buildRatingSummary(host) {
-        if (typeof getCarReviews !== 'function') {
-            return;
-        }
-
-        const reviews = getCarReviews(car);
-
-        if (!Array.isArray(reviews) || reviews.length === 0) {
-            return;
-        }
-
-        const counts = new Array(6).fill(0);
-
-        reviews.forEach(review => {
-            counts[review.rating]++;
-        });
-
-        const average = reviews.reduce((total, review) => total + review.rating, 0) / reviews.length;
-        const block = makeBlock(host, 'ratingSummary', 'Rating Summary');
-        const intro = document.createElement('p');
-
-        intro.innerText = `Average ${average.toFixed(1)} / 5 from ${reviews.length} reviews`;
-        block.appendChild(intro);
-
-        const pre = document.createElement('pre');
-        let pattern = '';
-
-        for (let stars = 5; stars >= 1; stars--) {
-            let line = `${stars} star `;
-
-            for (let s = 0; s < stars; s++) {
-                line += '★';
-            }
-
-            for (let n = 0; n < counts[stars]; n++) {
-                line += ' ■';
-            }
-
-            pattern += `${line}\n`;
-        }
-
-        pre.textContent = pattern;
-        block.appendChild(pre);
-    }
-
-    /* ---- Finance tool: calculator, expression box, ownership table ---- */
-    function buildFinanceTool(host) {
-        const block = makeBlock(host, 'financeTool', 'Finance & Ownership Tool');
-        const basePrice = () => selectedVariant.priceCr;
-
-        /* 1. simple calculator (uses switch inside calculate()) */
-        const calcRow = document.createElement('div');
-        calcRow.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px;';
-        calcRow.innerHTML =
-            '<input type="number" id="calcA" placeholder="First number" value="10">' +
-            '<select id="calcOp"><option>+</option><option>-</option><option>*</option><option>/</option></select>' +
-            '<input type="number" id="calcB" placeholder="Second number" value="2">' +
-            '<button type="button" class="btn" id="calcGo">Calculate</button>' +
-            '<strong id="calcOut"></strong>';
-        block.appendChild(calcRow);
-
-        document.getElementById('calcGo').addEventListener('click', () => {
-            const a = parseFloat(document.getElementById('calcA').value);
-            const b = parseFloat(document.getElementById('calcB').value);
-            const op = document.getElementById('calcOp').value;
-
-            document.getElementById('calcOut').innerText = (isNaN(a) || isNaN(b))
-                ? 'Enter two numbers'
-                : `${a} ${op} ${b} = ${calculate(a, op, b)}`;
-        });
-
-        /* 2. expression box using eval(), guarded by a whitelist.
-           eval() runs text as code, so only digits, + - * / ( ) . and
-           spaces are allowed through. Never eval raw user input. */
-        const exprRow = document.createElement('div');
-        exprRow.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px;';
-        exprRow.innerHTML =
-            '<input type="text" id="exprBox" placeholder="e.g. 2.5 * 4 + 1" value="2.5 * 4 + 1">' +
-            '<button type="button" class="btn" id="exprGo">Evaluate</button>' +
-            '<strong id="exprOut"></strong>';
-        block.appendChild(exprRow);
-
-        document.getElementById('exprGo').addEventListener('click', () => {
-            const text = document.getElementById('exprBox').value;
-            const out = document.getElementById('exprOut');
-
-            if (!/^[0-9+\-*/().\s]+$/.test(text)) {
-                out.innerText = 'Only numbers and + - * / ( ) are allowed';
-                return;
-            }
-
-            try {
-                out.innerText = `= ${eval(text)}`;
-            } catch (error) {
-                out.innerText = 'Invalid expression';
-            }
-        });
-
-        /* 3. ownership cost table: a multiplication table in a div */
-        const tableDiv = document.createElement('div');
-        tableDiv.id = 'ownershipTable';
-        block.appendChild(tableDiv);
-
-        function renderOwnershipTable() {
-            const annual = basePrice() * 0.03;
-            const costs = [];
-            let html = `<p>Estimated running cost: 3% of ${formatCrorePrice(basePrice())} per year = ${annual.toFixed(3)} Cr</p>`;
-
-            for (let year = 1; year <= 5; year++) {
-                const cost = annual * year;
-                costs.push(cost);
-                html += `<div>${year} x ${annual.toFixed(3)} = ${cost.toFixed(3)} Cr</div>`;
-            }
-
-            html += `<strong>5-year total: ${sumOf.apply(null, costs).toFixed(3)} Cr</strong>`;
-            tableDiv.innerHTML = html;
-        }
-
-        renderOwnershipTable();
-        refreshFinance = renderOwnershipTable;
-    }
-
-    let refreshFinance = function () {};
-
     /* ---- Printable spec sheet (document.write into a new window) ---- */
     function buildPrintButton() {
         const actions = document.querySelector('.details-buttons');
@@ -950,24 +818,21 @@
                 return;
             }
 
+            const labels = { engine: 'Engine', transmission: 'Transmission', seating: 'Seating', fuelType: 'Fuel type' };
             let rows = '';
 
+            /* for...in walks over every key of the specs object */
             for (const key in car.specs) {
-                rows += `<tr><td><b>${key}</b></td><td>${car.specs[key]}</td></tr>`;
+                rows += `<tr><td><b>${labels[key] || key}</b></td><td>${car.specs[key]}</td></tr>`;
             }
 
             win.document.write(
                 `<html><head><title>${car.name} spec sheet</title></head><body>` +
-                `<h1>${car.name}</h1><p>${car.brand} - ${formatCrorePrice(selectedVariant.priceCr)}</p>` +
+                `<h1>${car.name}</h1><p>${selectedVariant.label} - ${formatCrorePrice(selectedVariant.priceCr)}</p>` +
                 `<table border="1" cellpadding="6">${rows}</table></body></html>`
             );
             win.document.close();
         });
-    }
-
-    /* variant changes also refresh the finance table */
-    if (variantButtons) {
-        variantButtons.addEventListener('click', () => refreshFinance());
     }
 
     if (colorSwatches) {
@@ -987,7 +852,6 @@
     renderDriveModes();
     renderSafety();
     renderOwnership();
-    renderReviews();
     renderFinalCta();
     renderSimilarCars();
 
@@ -997,6 +861,4 @@
 
     const extraHost = getExtraHost();
     buildVariantTable(extraHost);
-    buildRatingSummary(extraHost);
-    buildFinanceTool(extraHost);
 }());

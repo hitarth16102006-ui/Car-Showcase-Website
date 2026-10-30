@@ -201,7 +201,7 @@ function renderCompareBar() {
     const hint = bar.querySelector('.compare-bar-hint');
 
     if (best && hint) {
-        hint.innerText = `Most powerful: ${best.car.name} (${best.power} bhp)`;
+        hint.innerText = `Most powerful: ${best.car.name} (${best.power} hp)`;
     }
 
     if (!existing) {

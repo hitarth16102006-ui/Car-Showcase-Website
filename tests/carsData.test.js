@@ -3,9 +3,9 @@ const {
   formatCrorePrice,
   getCarById,
   getAllBrands,
-  generateGenericReviews,
-  getCarReviews,
   getDefaultThumbnail,
+  getPriceCategory,
+  isInRange,
   placeholderFrameHTML
 } = require('../JS/cars-data.js');
 
@@ -90,48 +90,36 @@ describe('getAllBrands', () => {
   });
 });
 
-describe('getCarReviews / generateGenericReviews', () => {
-  test('returns the hand-written reviews array when a car already has one', () => {
-    const carWithReviews = CARS.find((car) => Array.isArray(car.reviews) && car.reviews.length > 0);
-    expect(carWithReviews).toBeDefined();
-
-    const reviews = getCarReviews(carWithReviews);
-    expect(reviews).toBe(carWithReviews.reviews);
-  });
-
-  test('falls back to generated reviews for a car with no hand-written ones', () => {
-    const carWithoutReviews = CARS.find((car) => !car.reviews);
-
-    if (!carWithoutReviews) {
-      return; // every car currently has reviews - nothing to assert
-    }
-
-    const reviews = getCarReviews(carWithoutReviews);
-    expect(Array.isArray(reviews)).toBe(true);
-    expect(reviews.length).toBe(5);
-  });
-
-  test('generateGenericReviews always produces exactly 5 reviews with valid ratings', () => {
-    const car = CARS[0];
-    const reviews = generateGenericReviews(car);
-
-    expect(reviews).toHaveLength(5);
-
-    reviews.forEach((review) => {
-      expect(typeof review.name).toBe('string');
-      expect(typeof review.text).toBe('string');
-      expect(review.rating).toBeGreaterThanOrEqual(1);
-      expect(review.rating).toBeLessThanOrEqual(5);
+describe('CARS content', () => {
+  test('no car carries made-up customer reviews', () => {
+    CARS.forEach((car) => {
+      expect(car.reviews).toBeUndefined();
     });
   });
 
-  test('generateGenericReviews mentions the car\'s own model name in at least one review', () => {
-    const car = CARS[0];
-    const shortName = car.name.replace(car.brand, '').trim();
-    const reviews = generateGenericReviews(car);
-    const mentionsCar = reviews.some((review) => review.text.includes(shortName));
+  test('the first variant is the starting (cheapest) price, as the site assumes', () => {
+    CARS.forEach((car) => {
+      car.variants.forEach((variant) => {
+        expect(variant.priceCr).toBeGreaterThanOrEqual(car.variants[0].priceCr);
+      });
+    });
+  });
+});
 
-    expect(mentionsCar).toBe(true);
+describe('getPriceCategory', () => {
+  test('puts each price in the right band', () => {
+    expect(getPriceCategory(0.8)).toBe('Entry Luxury');
+    expect(getPriceCategory(1.2)).toBe('Premium');
+    expect(getPriceCategory(4.5)).toBe('Supercar');
+    expect(getPriceCategory(22)).toBe('Hypercar');
+  });
+});
+
+describe('isInRange', () => {
+  test('includes both ends of the range', () => {
+    expect(isInRange(1, 1, 3)).toBe(true);
+    expect(isInRange(3, 1, 3)).toBe(true);
+    expect(isInRange(3.01, 1, 3)).toBe(false);
   });
 });
 

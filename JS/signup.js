@@ -1,7 +1,8 @@
 /* ================================================
    signup.js
-   Handles the signup form: validates the passwords
-   match, stores the account, logs the user in, and
+   Handles the signup form: validates the fields,
+   stores the account in localStorage (the password
+   only as a SHA-256 hash), logs the user in, and
    sends them home where they'll see a welcome
    message with their name.
 
@@ -70,9 +71,7 @@
 
     /* ---------- Profile photo preview (file input + FileReader) ---------- */
     /* The preview appears the moment a file is chosen - no extra button.
-       Note: input.value shows "C:\fakepath\photo.jpg". Browsers hide the real
-       folder on purpose so a website cannot learn your user name or folders;
-       JavaScript only gets the file name and the file itself (input.files). */
+       The photo is only previewed; it is not uploaded or saved anywhere. */
     const submitButton = form.querySelector('[type="submit"]');
     const photoWrap = document.createElement('div');
     photoWrap.className = 'signup-photo';
@@ -115,7 +114,7 @@
         };
 
         reader.readAsDataURL(file);
-        photoName.textContent = `${file.name} (browser path: ${photoInput.value})`;
+        photoName.textContent = file.name;
     });
 
     form.addEventListener('submit', event => {
@@ -129,12 +128,23 @@
         const agreeTerms = document.getElementById('agreeTerms');
 
         if (!name || !email || !password) {
-            alert('Please fill in all fields.');
+            alert('Please fill in your name, email address and password.');
             return;
         }
 
         if (!isValidEmail(email)) {
             alert('Please enter a valid email address.');
+            return;
+        }
+
+        /* optional field: only check it when something was typed */
+        if (phone && !/^[6-9]\d{9}$/.test(phone.replace(/[\s-]/g, '').replace(/^(\+91|0)/, ''))) {
+            alert('Please enter a valid 10-digit mobile number, or leave the field empty.');
+            return;
+        }
+
+        if (password.length < 8) {
+            alert('Your password must be at least 8 characters long.');
             return;
         }
 
@@ -148,16 +158,27 @@
             return;
         }
 
-        upsertUser({ name: name, email: email, phone: phone });
-        setCurrentUser({ name: name, email: email });
-        authLog('signup', email, name);
-
-        try {
-            sessionStorage.setItem('skipHomeLoader', 'true');
-        } catch (error) {
-            /* sessionStorage unavailable - the home loader will just play once more */
+        if (findUserByEmail(email)) {
+            alert('An account with this email already exists on this browser. Please log in instead.');
+            return;
         }
 
-        window.location.href = 'index.html';
+        hashPassword(password)
+            .then(passwordHash => {
+                upsertUser({ name: name, email: email, phone: phone, passwordHash: passwordHash });
+                setCurrentUser({ name: name, email: email });
+                authLog('signup', email, name);
+
+                try {
+                    sessionStorage.setItem('skipHomeLoader', 'true');
+                } catch (error) {
+                    /* sessionStorage unavailable - the home loader will just play once more */
+                }
+
+                window.location.href = 'index.html';
+            })
+            .catch(() => {
+                alert('Signing up needs the site to be opened over https:// or from localhost.');
+            });
     });
 }());

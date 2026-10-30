@@ -9,8 +9,9 @@
      based on the selected enquiry type
    - Test-drive date helpers (minimum date, "Use today")
    - Optional trade-in photo upload with previews
-   - Handles form submit with a friendly confirmation
-     and a booking reference number
+   - Handles form submit: validates the fields, saves
+     the enquiry in this browser (it appears in My
+     Garage) and shows its reference number
    ================================================ */
 
 (function () {
@@ -169,11 +170,12 @@
 
             preview.style.visibility = photoCount > 0 ? 'visible' : 'hidden';
 
-            /* input.value reads "C:\fakepath\name.jpg": the browser hides the
-               real folder so a web page can never learn your folder names. */
-            note.innerText = photoCount > 0
-                ? `${photoCount} photo(s) selected. The browser reports the path as ${input.value}`
-                : 'No image selected';
+            /* ternary: a different message for 1 photo and several */
+            if (photoCount === 0) {
+                note.innerText = 'No image selected';
+            } else {
+                note.innerText = photoCount === 1 ? '1 photo selected' : `${photoCount} photos selected`;
+            }
         });
     }
 
@@ -186,8 +188,23 @@
 
             const name = (form.elements.contactName ? form.elements.contactName.value : '').trim();
 
+            const phone = form.elements.phone ? form.elements.phone.value.replace(/[\s-]/g, '') : '';
+            const pin = form.elements.pin ? form.elements.pin.value.trim() : '';
+
             if (!name) {
                 alert('Please enter your full name.');
+                return;
+            }
+
+            /* Indian mobile number: 10 digits starting 6-9, optional +91 or 0 */
+            if (!/^(\+91|0)?[6-9]\d{9}$/.test(phone)) {
+                alert('Please enter a valid 10-digit mobile number.');
+                return;
+            }
+
+            /* PIN code is optional, but if given it must be 6 digits */
+            if (pin && !/^\d{6}$/.test(pin)) {
+                alert('Please enter a 6-digit PIN code, or leave the field empty.');
                 return;
             }
 
@@ -231,7 +248,10 @@
                 });
             }
 
-            alert(`Thank you, ${name}! Your ${enquiryLabel.replace('&amp;', '&')} has been sent (reference ${reference}). An AUTOVERSE specialist will reach out to you shortly.`);
+            /* Nothing is sent to a server: the enquiry is stored in localStorage
+               and listed in My Garage. The message says exactly that. */
+            alert(`Thank you, ${name}. Your enquiry (${enquiryLabel}) has been saved with reference ${reference}. ` +
+                'You can find it in My Garage on this browser.');
             form.reset();
             updateTestDriveVisibility();
 

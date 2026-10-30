@@ -203,19 +203,19 @@
 
     applyFilters();
 
-    console.log(`cars.js: ${CARS.length} cars rendered, longest name has ${maxOf(...CARS.map(c => c.name).lengths())} characters`);
+    console.log(`cars.js: ${CARS.length} cars rendered`);
     logBrandSummary();
 
     if (searchInput) {
+        /* 'input' fires on every change: typing, pasting, deleting */
         searchInput.addEventListener('input', applyFilters);
 
-        /* Keyboard: Escape clears the box, any key release re-filters */
+        /* Keyboard: Escape clears the box */
         searchInput.addEventListener('keyup', event => {
             if (event.key === 'Escape') {
                 searchInput.value = '';
+                applyFilters();
             }
-
-            applyFilters();
         });
 
         searchInput.addEventListener('focus', () => searchInput.classList.add('focused'));

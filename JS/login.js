@@ -3,9 +3,9 @@
    Handles the login form. This site has no real
    backend, so we check the email against:
      1. the demo accounts in users.json (a JSON file), and
-     2. accounts created via Signup on this browser.
-   If neither knows the email we still let the person
-   in and use a friendly name derived from their email.
+     2. accounts created via Signup on this browser
+        (their password is compared as a SHA-256 hash).
+   An email that neither list knows is refused.
    ================================================ */
 
 (function () {
@@ -61,6 +61,30 @@
         }
 
         window.location.href = 'index.html';
+    }
+
+    /* An account created with the signup form on this browser.
+       hashPassword() returns a Promise, so the comparison happens in .then(). */
+    function checkLocalAccount(email, password, rememberMeBox) {
+        const user = findUserByEmail(email);
+
+        if (!user || !user.passwordHash) {
+            alert('No account was found for this email on this browser. Please sign up first, or use a demo account.');
+            return;
+        }
+
+        hashPassword(password)
+            .then(hash => {
+                if (hash !== user.passwordHash) {
+                    alert('Incorrect password for this account. Please try again.');
+                    return;
+                }
+
+                finishLogin(user.name, user.email, rememberMeBox);
+            })
+            .catch(() => {
+                alert('Login needs the site to be opened over https:// or from localhost.');
+            });
     }
 
     /* Caps Lock warning: getModifierState('CapsLock') tells us whether it is on.
@@ -123,22 +147,17 @@
 
         loadDemoUsers().then(demoUsers => {
             const outcome = checkCredentials(email, password, demoUsers);
-            let name;
 
             switch (outcome.status) {
                 case 'wrong-password':
                     alert('Incorrect password for this account. Please try again.');
                     return;
                 case 'demo':
-                    name = outcome.name;
-                    break;
-                default: {
-                    const existingUser = findUserByEmail(email);
-                    name = existingUser ? existingUser.name : deriveNameFromEmail(email);
-                }
+                    finishLogin(outcome.name, email, rememberMeBox);
+                    return;
+                default:
+                    checkLocalAccount(email, password, rememberMeBox);
             }
-
-            finishLogin(name, email, rememberMeBox);
         });
     });
 }());

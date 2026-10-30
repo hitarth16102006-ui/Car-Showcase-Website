@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | AUTOVERSE</title>
 
-    <meta name="description" content="Book a test drive, request a price, or get in touch with an AUTOVERSE specialist.">
+    <meta name="description" content="Try the AUTOVERSE enquiry form. Enquiries are saved in your browser and listed in My Garage; they are not sent anywhere.">
     <link rel="icon" type="image/svg+xml" href="../Images/favicon.svg">
     <meta property="og:title" content="Contact | AUTOVERSE">
-    <meta property="og:description" content="Book a test drive, request a price, or get in touch with an AUTOVERSE specialist.">
+    <meta property="og:description" content="Try the AUTOVERSE enquiry form. Enquiries are saved in your browser and listed in My Garage; they are not sent anywhere.">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="AUTOVERSE">
     <meta name="twitter:card" content="summary">
@@ -47,8 +47,8 @@
     </div>
 
     <div class="nav-buttons">
-        <a href="login.html" class="login-btn">Login</a>
-        <a href="signup.html" class="signup-btn">Signup</a>
+        <a href="login.html" class="login-btn">Sign In</a>
+        <a href="signup.html" class="signup-btn">Sign Up</a>
         <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme" title="Toggle theme">&#9790;</button>
     </div>
 
@@ -65,10 +65,10 @@
 <!-- ========== PREMIUM HERO ========== -->
 <section class="contact-hero">
     <p class="contact-hero-eyebrow">CONTACT</p>
-    <h1>Let's Start<br>Your Journey.</h1>
+    <h1>Questions About<br>a Car?</h1>
     <p class="contact-hero-text">
-        Whether you're looking to explore a model, book a private viewing, or simply have a
-        question, our automotive specialists are here to assist.
+        Use the form below to try an enquiry or test-drive request. AUTOVERSE is a student project
+        with no backend: your enquiry is saved in this browser and shown in My Garage, and nobody is notified.
     </p>
     <a href="#enquiryForm" class="btn">Enquire Now <span class="arrow">&darr;</span></a>
 </section>
@@ -142,9 +142,9 @@
                 </div>
 
                 <div class="form-field">
-                    <label for="testDriveLocation">Preferred Showroom</label>
+                    <label for="testDriveLocation">Preferred City</label>
                     <select id="testDriveLocation" name="testDriveLocation">
-                        <option value="">Select showroom</option>
+                        <option value="">Select city</option>
                         <option>Delhi</option>
                         <option>Chandigarh</option>
                         <option>Mumbai</option>
@@ -172,18 +172,18 @@
                 <div class="form-grid-2">
                     <div class="form-field">
                         <label for="contactName">Full Name *</label>
-                        <input id="contactName" name="name" type="text" placeholder="Enter your full name" autocomplete="name" required>
+                        <input id="contactName" name="name" type="text" placeholder="Full name" autocomplete="name" required>
                     </div>
                     <div class="form-field">
-                        <label for="contactEmail">Your Email *</label>
-                        <input id="contactEmail" name="email" type="email" placeholder="Enter your email" autocomplete="email" required>
+                        <label for="contactEmail">Email Address *</label>
+                        <input id="contactEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
                     </div>
                 </div>
 
                 <div class="form-grid-2">
                     <div class="form-field">
                         <label for="contactPhone">Phone Number *</label>
-                        <input id="contactPhone" name="phone" type="tel" placeholder="Enter your phone number" autocomplete="tel" required>
+                        <input id="contactPhone" name="phone" type="tel" placeholder="10-digit mobile number" autocomplete="tel" required>
                     </div>
                     <div class="form-field">
                         <label for="contactPin">PIN Code</label>
@@ -232,7 +232,7 @@
             </div>
 
             <div class="form-block">
-                <p class="form-block-title">How Should We Contact You?</p>
+                <p class="form-block-title">Preferred Contact Method</p>
                 <div class="pill-radio-row">
                     <label class="pill-radio"><input type="radio" name="contactMethod" value="Email" checked><span>Email</span></label>
                     <label class="pill-radio"><input type="radio" name="contactMethod" value="Phone"><span>Phone</span></label>
@@ -240,7 +240,7 @@
                 </div>
 
                 <div class="form-field" style="margin-top:1rem;">
-                    <label for="bestTime">Best Time to Contact You</label>
+                    <label for="bestTime">Best Time to Contact</label>
                     <select id="bestTime" name="bestTime">
                         <option>Morning &mdash; 9 AM to 12 PM</option>
                         <option>Afternoon &mdash; 12 PM to 4 PM</option>
@@ -251,8 +251,8 @@
             </div>
 
             <div class="form-field">
-                <label for="contactMessage">Your Message</label>
-                <textarea id="contactMessage" name="message" rows="5" placeholder="Tell us which vehicle you're interested in, what information you need, or how we can assist you." required></textarea>
+                <label for="contactMessage">Your Message *</label>
+                <textarea id="contactMessage" name="message" rows="5" placeholder="Which car are you interested in, and what would you like to know?" required></textarea>
             </div>
 
             <div class="consent-block">
@@ -262,28 +262,20 @@
                 </label>
                 <label class="consent-item">
                     <input type="checkbox" name="agreeMarketing">
-                    <span>I would like to receive AUTOVERSE news and updates.</span>
+                    <span>I would like to receive AUTOVERSE news and updates (demo only: no emails are sent).</span>
                 </label>
             </div>
 
-            <button type="submit" class="btn btn-red">Send Enquiry <span class="arrow">&rarr;</span></button>
+            <button type="submit" class="btn btn-red">Submit Enquiry <span class="arrow">&rarr;</span></button>
 
         </form>
 
         <div class="contact-info">
 
-            <h2>Connect With AUTOVERSE</h2>
+            <h2>Contact the Team</h2>
 
-            <p class="contact-hover-item"><span class="contact-icon">&#9743;</span><strong>Call Us:</strong>&nbsp;+91 XXX XXX XXXX</p>
-            <p class="contact-hover-item"><span class="contact-icon">&#9993;</span><strong>Email:</strong>&nbsp;hello@autoverse.com</p>
-            <p class="contact-hover-item"><span class="contact-icon">&#128205;</span><strong>Showroom:</strong>&nbsp;New Delhi, India</p>
-            <p class="contact-hover-item"><span class="contact-icon">&#9201;</span><strong>Hours:</strong>&nbsp;Mon&ndash;Sat, 9:00 AM&ndash;7:00 PM</p>
-
-            <div class="whatsapp-card">
-                <p class="whatsapp-title">WhatsApp Concierge</p>
-                <p class="whatsapp-text">Speak directly with an AUTOVERSE specialist.</p>
-                <a href="https://wa.me/91XXXXXXXXXX" class="btn whatsapp-btn" target="_blank" rel="noopener">Chat With Us <span class="arrow">&rarr;</span></a>
-            </div>
+            <p class="contact-hover-item"><span class="contact-icon">&#9993;</span><strong>Email:</strong>&nbsp;<a href="mailto:hitarth@gmail.com">hitarth@gmail.com</a></p>
+            <p class="contact-hover-item"><span class="contact-icon">&#128279;</span><strong>Source code:</strong>&nbsp;<a href="https://github.com/hitarth16102006-ui/Car-Showcase-Website" target="_blank" rel="noopener">GitHub</a></p>
 
         </div>
 
@@ -294,44 +286,26 @@
 <!-- ========== CONCIERGE ========== -->
 <section class="concierge-section">
     <div class="section-heading">
-        <p class="manifesto-eyebrow">AUTOVERSE CONCIERGE</p>
-        <h2 class="section-title">More Than Assistance.<br>A Personalized Experience.</h2>
-        <p class="section-subtitle">From selecting the right model to arranging a private viewing, our specialists make every step effortless.</p>
+        <p class="manifesto-eyebrow">HOW ENQUIRIES WORK</p>
+        <h2 class="section-title">Simple, Local<br>and Private.</h2>
+        <p class="section-subtitle">The enquiry form is part of a frontend demo. Here is what happens when you submit it.</p>
     </div>
 
     <div class="concierge-grid">
         <div class="concierge-card">
             <div class="concierge-icon">01</div>
-            <h3>Private Viewing</h3>
-            <p>Experience your chosen vehicle in an exclusive setting, on your schedule.</p>
+            <h3>Choose a Car</h3>
+            <p>Pick an enquiry type and the car you're interested in, then fill in your details.</p>
         </div>
         <div class="concierge-card">
             <div class="concierge-icon">02</div>
-            <h3>Personalized Assistance</h3>
-            <p>Get guidance based on your requirements, budget and driving preferences.</p>
+            <h3>Saved in Your Browser</h3>
+            <p>Your enquiry gets a reference number and is stored in this browser's localStorage. Nothing is sent to a server.</p>
         </div>
         <div class="concierge-card">
             <div class="concierge-icon">03</div>
-            <h3>Test Drive</h3>
-            <p>Experience the performance in person before making your decision.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ========== VISIT US / SHOWROOM ========== -->
-<section class="showroom-section">
-    <div class="section-heading">
-        <h2 class="section-title">Visit AUTOVERSE</h2>
-        <p class="section-subtitle">Experience the cars in person</p>
-    </div>
-
-    <div class="showroom-card">
-        <div class="showroom-image" aria-hidden="true"></div>
-        <div class="showroom-details">
-            <h3>New Delhi</h3>
-            <p class="showroom-sub">AUTOVERSE Experience Centre</p>
-            <p class="showroom-hours">Mon &ndash; Sat &nbsp;|&nbsp; 09:00 &ndash; 19:00</p>
-            <a href="https://maps.google.com" class="btn back-btn" target="_blank" rel="noopener">Get Directions <span class="arrow">&rarr;</span></a>
+            <h3>Track It in My Garage</h3>
+            <p>Sign in to see your enquiries and test-drive requests in My Garage.</p>
         </div>
     </div>
 </section>
@@ -344,84 +318,36 @@
 
     <div class="faq-list" id="faqList">
         <details class="faq-item" open>
-            <summary>Can I book a test drive online?</summary>
-            <p>Yes. Select "Book a Test Drive" above, choose your preferred model, date and location through our enquiry form, and our team will confirm your slot.</p>
+            <summary>Is AUTOVERSE a real car dealership?</summary>
+            <p>No. AUTOVERSE is a student project that showcases cars. It does not sell cars, arrange test drives or give quotations.</p>
         </details>
         <details class="faq-item">
-            <summary>Can I request a quotation?</summary>
-            <p>Yes. Select "Request a Price" as your enquiry type and our team will get back to you with a detailed quote for your chosen model and variant.</p>
+            <summary>What happens when I submit an enquiry?</summary>
+            <p>It is saved in this browser's localStorage with a reference number and appears in My Garage when you are signed in. Nothing is emailed or sent to a server, and nobody is notified.</p>
         </details>
         <details class="faq-item">
-            <summary>Can I customize my vehicle?</summary>
-            <p>Customization availability depends on the model and configuration. Select "Vehicle Enquiry" and our specialists will walk you through the options.</p>
+            <summary>Can I book a test drive?</summary>
+            <p>You can choose "Book a Test Drive" to try the form, and the request will appear in My Garage. No real test drive is arranged.</p>
         </details>
         <details class="faq-item">
-            <summary>How soon will I receive a response?</summary>
-            <p>Our team will contact you using your preferred communication method, usually within 24 hours during business days.</p>
+            <summary>Will anyone reply to my enquiry?</summary>
+            <p>No. The site has no backend, so enquiries are not received by anyone. To contact the project team, email <a href="mailto:hitarth@gmail.com">hitarth@gmail.com</a>.</p>
         </details>
         <details class="faq-item faq-hidden">
-            <summary>Do you accept trade-ins or part-exchange?</summary>
-            <p>Yes. Select "Purchase Assistance" and mention your current vehicle - our team will arrange a valuation as part of your enquiry.</p>
+            <summary>Are the prices real?</summary>
+            <p>Prices are indicative figures in Indian rupees, shown for browsing and comparison only. Check with an authorised dealer for current prices.</p>
         </details>
         <details class="faq-item faq-hidden">
-            <summary>Is financing available?</summary>
-            <p>We work with a network of financing partners for eligible models. Let us know your preferred budget in your message and we'll share the options that fit.</p>
+            <summary>Do I need an account?</summary>
+            <p>No. You can browse, compare and save cars without one. My Garage needs a sign-in, but accounts are a frontend demo stored only in this browser.</p>
         </details>
         <details class="faq-item faq-hidden">
-            <summary>What warranty comes with the vehicle?</summary>
-            <p>Warranty coverage varies by brand and model. Full details are shared during your enquiry, along with any extended warranty options available.</p>
+            <summary>Where is my information stored?</summary>
+            <p>Only in your browser's localStorage on this device. See the <a href="privacy.html">Privacy Policy</a> for details.</p>
         </details>
         <details class="faq-item faq-hidden">
-            <summary>How long does delivery take after booking?</summary>
-            <p>Delivery timelines depend on the model, variant and stock availability, typically ranging from a few days to several weeks for made-to-order configurations.</p>
-        </details>
-        <details class="faq-item faq-hidden">
-            <summary>Do you ship vehicles internationally?</summary>
-            <p>Select "Partnership / Business Enquiry" for international or bulk requests and our team will guide you through logistics and documentation.</p>
-        </details>
-        <details class="faq-item faq-hidden">
-            <summary>Can I charge an electric vehicle at your showroom?</summary>
-            <p>Yes, our Experience Centres offer charging support for EV test drives and viewings - just mention this when booking.</p>
-        </details>
-        <details class="faq-item faq-hidden">
-            <summary>Can I just walk in without booking an appointment?</summary>
-            <p>Walk-ins are welcome, but booking ahead through this form guarantees a specialist and your preferred vehicle are ready when you arrive.</p>
-        </details>
-        <details class="faq-item faq-hidden">
-            <summary>Can I cancel or reschedule a test drive?</summary>
-            <p>Absolutely. Reach out through WhatsApp Concierge or email with your original booking details and we'll help you find a new slot.</p>
-        </details>
-        <details class="faq-item faq-hidden">
-            <summary>Is there room to negotiate on price?</summary>
-            <p>Select "Request a Price" and our specialists will discuss configuration, offers and any applicable pricing flexibility with you directly.</p>
-        </details>
-        <details class="faq-item faq-hidden">
-            <summary>Can I view multiple cars in a single visit?</summary>
-            <p>Yes. Mention every model you'd like to see in your message and we'll prepare all of them for your showroom visit.</p>
-        </details>
-        <details class="faq-item faq-hidden">
-            <summary>Do you offer virtual consultations?</summary>
-            <p>Yes, select "General Enquiry" and mention you'd prefer a video call - a specialist will arrange a virtual walkthrough of the vehicle.</p>
-        </details>
-        <details class="faq-item faq-hidden">
-            <summary>Can I extend my warranty after purchase?</summary>
-            <p>Extended warranty plans are available on most models. Ask your specialist about options during the ownership conversation.</p>
-        </details>
-        <details class="faq-item faq-hidden">
-            <summary>Do you help arrange insurance?</summary>
-            <p>Yes, our concierge team can connect you with trusted insurance partners as part of the "Purchase Assistance" enquiry type.</p>
-        </details>
-        <details class="faq-item faq-hidden">
-            <summary>Is there a loyalty or referral program?</summary>
-            <p>AUTOVERSE occasionally runs referral perks for returning customers - ask your specialist what's currently available.</p>
-        </details>
-        <details class="faq-item faq-hidden">
-            <summary>Can businesses purchase vehicles in bulk?</summary>
-            <p>Yes. Select "Partnership / Business Enquiry" for corporate or fleet purchases and a dedicated account specialist will reach out.</p>
-        </details>
-        <details class="faq-item faq-hidden">
-            <summary>How is my personal information used?</summary>
-            <p>Your details are only used to respond to your enquiry and, if opted in, to share AUTOVERSE news - see our Privacy Policy for full details.</p>
+            <summary>How do I delete my enquiries and saved data?</summary>
+            <p>Clear this site's data (cookies and site data) in your browser settings. This removes your demo account, wishlist, compare list, enquiries and test-drive requests.</p>
         </details>
     </div>
 
@@ -432,9 +358,9 @@
 
 <!-- ========== FINAL CTA ========== -->
 <section class="contact-final-cta">
-    <h2>Your Journey<br>Starts Here.</h2>
-    <p>The road is waiting.</p>
-    <a href="#enquiryForm" class="btn">Book a Test Drive <span class="arrow">&rarr;</span></a>
+    <h2>Have a Question<br>About a Car?</h2>
+    <p>Try the enquiry form above.</p>
+    <a href="#enquiryForm" class="btn">Make an Enquiry <span class="arrow">&rarr;</span></a>
 </section>
 
 </main>
@@ -446,7 +372,7 @@
                 <span class="logo-auto">AUTO</span>
                 <span class="logo-verse">VERSE</span>
             </div>
-            <p class="footer-text">Your trusted destination for premium sports and luxury cars, crafted for drivers who value performance and design.</p>
+            <p class="footer-text">A student project for exploring, comparing and saving luxury and performance cars, built with HTML, CSS and JavaScript.</p>
         </div>
 
         <div class="footer-links">
@@ -467,27 +393,18 @@
 
         <div class="footer-contact">
             <h3>Contact</h3>
-            <p>Email: hitarth@gmail.com</p>
+            <p>Email: <a href="mailto:hitarth@gmail.com">hitarth@gmail.com</a></p>
             <p>Phone: 6239180869</p>
             <div class="footer-social">
-                <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="AUTOVERSE on Facebook" class="social-icon">
-                    <svg viewBox="0 0 24 24" width="18" height="18"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg>
-                </a>
-                <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="AUTOVERSE on Instagram" class="social-icon">
-                    <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.89 1.11 1.15 1.77.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77A4.9 4.9 0 0 1 5.45.53c.64-.25 1.37-.42 2.43-.47C8.94.01 9.28 0 12 0m0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10m0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4M17.5 4.6a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4"/></svg>
-                </a>
-                <a href="https://www.snapchat.com/" target="_blank" rel="noopener" aria-label="AUTOVERSE on Snapchat" class="social-icon">
-                    <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2c3.5 0 5.6 2.6 5.7 5.9.03.9 0 1.7-.05 2.3.4.2.9.3 1.35.55.35.2.5.6.4 1-.15.55-.85.9-1.5 1.1-.1.65.35 1.55 1.15 2.1.3.2.25.65-.1.8-.5.2-1 .3-1.4.45-.1.25-.15.55-.3.85-.15.3-.5.35-.85.3-.5-.05-1-.2-1.5-.15-.55.05-1 .4-1.55.75-.65.4-1.35.75-2.35.75s-1.7-.35-2.35-.75c-.55-.35-1-.7-1.55-.75-.5-.05-1 .1-1.5.15-.35.05-.7 0-.85-.3-.15-.3-.2-.6-.3-.85-.4-.15-.9-.25-1.4-.45-.35-.15-.4-.6-.1-.8.8-.55 1.25-1.45 1.15-2.1-.65-.2-1.35-.55-1.5-1.1-.1-.4.05-.8.4-1 .45-.25.95-.35 1.35-.55-.05-.6-.08-1.4-.05-2.3C6.4 4.6 8.5 2 12 2"/></svg>
-                </a>
-                <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener" aria-label="AUTOVERSE on WhatsApp" class="social-icon">
-                    <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.35A10 10 0 1 0 12 2m0 18.2a8.16 8.16 0 0 1-4.16-1.14l-.3-.18-3.1.85.85-3-.2-.32A8.2 8.2 0 1 1 12 20.2m4.5-6.15c-.25-.12-1.45-.72-1.67-.8-.22-.08-.39-.12-.55.13-.16.24-.63.8-.78.96-.14.16-.28.18-.53.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.22-1.46-1.37-1.7-.14-.25-.02-.38.11-.5.11-.11.25-.28.37-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.42-.55-.42h-.47c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.13 3.64.58.25 1.03.4 1.38.5.58.19 1.11.16 1.53.1.47-.07 1.45-.6 1.65-1.17.2-.58.2-1.08.14-1.18-.06-.1-.22-.16-.47-.28"/></svg>
+                <a href="https://github.com/hitarth16102006-ui/Car-Showcase-Website" target="_blank" rel="noopener" aria-label="AUTOVERSE source code on GitHub" class="social-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 .5C5.73.5.5 5.73.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5"/></svg>
                 </a>
             </div>
         </div>
     </div>
 
     <div class="footer-bottom">
-        <p>&copy; 2026 AUTOVERSE. All rights reserved. &middot; <a href="terms.html">Terms</a> &middot; <a href="privacy.html">Privacy</a></p>
+        <p>&copy; 2026 AUTOVERSE &middot; A student project &middot; <a href="terms.html">Terms</a> &middot; <a href="privacy.html">Privacy</a></p>
     </div>
 </footer>
 

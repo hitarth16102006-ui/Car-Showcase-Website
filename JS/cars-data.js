@@ -9,6 +9,9 @@
    angles: front, side, interior, back. Any angle
    set to null renders as a labelled placeholder
    frame in the gallery carousel instead of a photo.
+   variants[0] is always the cheapest variant: the
+   whole site uses it as the starting price.
+   Power is in hp, torque in Nm, top speed in km/h.
 
    Shared globals are declared with `var` on purpose:
    every page loads several classic <script> files that
@@ -47,8 +50,8 @@ var INTERIOR_ICON_SVG =
         '<line x1="79" y1="66" x2="65" y2="57" />' +
     '</svg>';
 
-/* Builds a labelled placeholder frame for a car photo angle that
-   hasn't been supplied yet. */
+/* Builds a labelled placeholder frame for a car photo angle we don't
+   have a correct photo of. */
 function placeholderFrameHTML(car, label, tintHex) {
     const icon = label === 'Interior' ? INTERIOR_ICON_SVG : CAR_SILHOUETTE_SVG;
     const shortName = car.name.replace(car.brand, '').trim().toUpperCase();
@@ -57,7 +60,7 @@ function placeholderFrameHTML(car, label, tintHex) {
         `<div class="placeholder-car" style="border-color:${tintHex}66; color:${tintHex};">` +
             `<div class="placeholder-icon">${icon}</div>` +
             `${car.brand.toUpperCase()}<br><strong>${shortName}</strong>` +
-            `<em>${label} photo coming soon</em>` +
+            `<em>${label} photo not available</em>` +
         '</div>'
     );
 }
@@ -67,9 +70,9 @@ var CARS = [
         id: "bmw-m4",
         brand: "BMW",
         name: "BMW M4",
-        images: { front: "../Images/bmw-m4.png", side: null, interior: "../Images/buick-interior.png", back: "../Images/dodge-back.jpg" },
+        images: { front: "../Images/bmw-m4.png", side: null, interior: null, back: null },
         colorImages: {
-            "Racing Red": { front: null, side: "../Images/bmw-m4-red-side.png", interior: null, back: null },
+            "Racing Red": { front: null, side: null, interior: null, back: null },
             "Jet Black": { front: "../Images/bmw-m4-black-front.png", side: null, interior: null, back: null },
             "Alpine White": { front: "../Images/bmw-m4-white-front.png", side: null, interior: null, back: null },
             "Sun Yellow": { front: "../Images/bmw-m4-yellow-front.png", side: null, interior: null, back: null },
@@ -78,9 +81,9 @@ var CARS = [
             "Laguna Seca Blue": { front: "../Images/bmw-m4-blue-front.png", side: "../Images/bmw-m4-blue-side.png", interior: null, back: null },
             "Frozen Blue": { front: "../Images/bmw-m4-frozenblue-front.png", side: null, interior: null, back: null }
         },
-        description: "A razor-sharp coupe that blends everyday usability with true M-division performance.",
-        specs: { engine: "3.0L Twin-Turbo Inline-6", transmission: "8-Speed Auto", seating: "4 Seats", fuelType: "Petrol" },
-        features: ["Adaptive M Suspension", "Carbon Fibre Roof", "M Sport Differential", "Head-Up Display", "Harman Kardon Audio", "Adaptive LED Headlights"],
+        description: "BMW M's two-door coupe with a 3.0-litre twin-turbo inline-six, sold in India as the all-wheel-drive M4 Competition M xDrive.",
+        specs: { engine: "3.0L Twin-Turbo Inline-6", transmission: "8-Speed M Steptronic Auto", seating: "4 Seats", fuelType: "Petrol" },
+        features: ["M xDrive All-Wheel Drive", "Adaptive M Suspension", "Active M Differential", "Carbon Fibre Roof", "Head-Up Display", "Harman Kardon Audio"],
         colors: [
             { name: "Racing Red", hex: "#c81e2c" },
             { name: "Jet Black", hex: "#0a0a0a" },
@@ -92,38 +95,24 @@ var CARS = [
             { name: "Frozen Blue", hex: "#3a4f7a" }
         ],
         variants: [
-            { id: "competition", label: "M4 Competition", fuelType: "Petrol", power: 510, torque: 650, topSpeed: 290, accel: "3.9s", priceCr: 1.20, extraFeatures: [] },
-            { id: "cs", label: "M4 CS", fuelType: "Petrol", power: 550, torque: 650, topSpeed: 302, accel: "3.4s", priceCr: 1.45, extraFeatures: ["Carbon Bucket Seats", "Track-Tuned Chassis"] }
-        ],
-        reviews: [
-            { name: "Rahul Sharma", initials: "RS", rating: 5, text: "Bought my M4 Competition through Autoverse and the whole process was smooth and quick. The team was very professional throughout." },
-            { name: "Sanya Kapoor", initials: "SK", rating: 5, text: "The Laguna Seca Blue is even better in person. M Sport Differential makes corner exits addictive." },
-            { name: "Arnav Puri", initials: "AP", rating: 4, text: "Firm ride on Indian roads but that's expected from a proper M car. Adaptive suspension helps a lot in Comfort mode." },
-            { name: "Neha Joshi", initials: "NJ", rating: 5, text: "Test drove the CS variant after browsing here and immediately upgraded my booking. Worth every rupee of the difference." },
-            { name: "Karan Gill", initials: "KG", rating: 5, text: "Harman Kardon audio and the carbon roof were the deciding factors for me. Delivery was right on schedule too." }
+            { id: "competition", label: "M4 Competition M xDrive", fuelType: "Petrol", power: 523, torque: 650, topSpeed: 250, accel: "3.5s", priceCr: 1.53, extraFeatures: [] },
+            { id: "cs", label: "M4 CS", fuelType: "Petrol", power: 543, torque: 650, topSpeed: 302, accel: "3.4s", priceCr: 1.89, extraFeatures: ["M Carbon Bucket Seats", "Carbon Fibre Bonnet"] }
         ]
     },
     {
         id: "audi-r8",
         brand: "Audi",
         name: "Audi R8",
-        images: { front: "../Images/audi-r8.png", side: null, interior: "../Images/tata-interior.png", back: "../Images/mclaren-720s-back.jpg" },
+        images: { front: "../Images/audi-r8.png", side: null, interior: null, back: null },
         colorImages: {
             "Ibis White": { front: "../Images/audi-r8-white-front.png", side: null, interior: null, back: "../Images/audi-r8-white-back.png" },
             "Florett Silver": { front: "../Images/audi-r8-silver-front.png", side: null, interior: null, back: null },
-            "Tango Red": { front: "../Images/audi-r8-red-front.png", side: "../Images/audi-r8-red-side.png", interior: null, back: "../Images/audi-r8-red-back.png" },
-            "Daytona Grey": { front: "../Images/audi-r8-grey-front.png", side: "../Images/audi-r8-grey-side.png", interior: null, back: null }
+            "Tango Red": { front: "../Images/audi-r8-red-front.png", side: null, interior: null, back: "../Images/audi-r8-red-back.png" },
+            "Daytona Grey": { front: "../Images/audi-r8-grey-front.png", side: null, interior: null, back: null }
         },
-        reviews: [
-            { name: "Kabir Malhotra", initials: "KM", rating: 5, text: "The naturally aspirated V10 is a dying breed and Audi nailed it. Bought the Daytona Grey and it looks even better in person." },
-            { name: "Simone D'Souza", initials: "SD", rating: 5, text: "Daily drove my R8 for a year now. Quattro grip makes it usable even in the monsoon, which surprised everyone at the dealership." },
-            { name: "Yash Oberoi", initials: "YO", rating: 4, text: "Test drove the Performance variant after enquiring on Autoverse. Brutally fast, though rear visibility takes some getting used to." },
-            { name: "Ananya Bhalla", initials: "AB", rating: 5, text: "Virtual Cockpit and B&O sound system make this feel like a spaceship. The Tango Red paint is stunning under sunlight." },
-            { name: "Rajveer Chadha", initials: "RC", rating: 5, text: "Best decision booking a private viewing here. Sales team knew every spec by heart and the car matched the listing exactly." }
-        ],
-        description: "Audi's mid-engine flagship, pairing a screaming naturally aspirated V10 with everyday quattro grip.",
-        specs: { engine: "5.2L V10", transmission: "7-Speed S-Tronic", seating: "2 Seats", fuelType: "Petrol" },
-        features: ["Quattro All-Wheel Drive", "Virtual Cockpit", "Magnetic Ride", "Carbon Sigma Package", "Bang & Olufsen Audio", "Laser Headlights"],
+        description: "Audi's mid-engine two-seater with a naturally aspirated 5.2-litre V10 and quattro all-wheel drive; production ended in 2024.",
+        specs: { engine: "5.2L V10", transmission: "7-Speed S tronic DCT", seating: "2 Seats", fuelType: "Petrol" },
+        features: ["Quattro All-Wheel Drive", "Audi Virtual Cockpit", "Magnetic Ride Dampers", "Aluminium & Carbon Audi Space Frame", "Bang & Olufsen Audio", "Laser Light Headlights (optional)"],
         colors: [
             { name: "Ibis White", hex: "#f5f5f5" },
             { name: "Florett Silver", hex: "#c8c8c8" },
@@ -131,366 +120,322 @@ var CARS = [
             { name: "Daytona Grey", hex: "#4a4a4a" }
         ],
         variants: [
-            { id: "v10", label: "R8 V10", fuelType: "Petrol", power: 570, torque: 550, topSpeed: 324, accel: "3.4s", priceCr: 2.50, extraFeatures: [] },
-            { id: "v10-performance", label: "R8 V10 Performance", fuelType: "Petrol", power: 620, torque: 580, topSpeed: 331, accel: "3.1s", priceCr: 2.85, extraFeatures: ["Carbon Ceramic Brakes", "Performance Exhaust"] }
+            { id: "v10", label: "R8 V10", fuelType: "Petrol", power: 562, torque: 550, topSpeed: 324, accel: "3.4s", priceCr: 2.30, extraFeatures: [] },
+            { id: "v10-performance", label: "R8 V10 Performance", fuelType: "Petrol", power: 611, torque: 580, topSpeed: 331, accel: "3.1s", priceCr: 2.72, extraFeatures: ["Carbon Ceramic Brakes", "Carbon Fibre Exterior Trim"] }
         ]
     },
     {
         id: "mercedes-amg-gt",
         brand: "Mercedes",
         name: "Mercedes AMG GT",
-        images: { front: "../Images/mercedes-amg-gt.png", side: null, interior: "../Images/mercedes-interior.png", back: "../Images/lamborghini-aventador-svj-back.png" },
-        description: "A front mid-engine grand tourer built by AMG's One Man, One Engine philosophy.",
-        specs: { engine: "4.0L Twin-Turbo V8", transmission: "9-Speed AMG Speedshift", seating: "2 Seats", fuelType: "Petrol" },
-        features: ["AMG Ride Control", "Race Start Launch Control", "Burmester Audio", "Adjustable Rear Wing", "AMG Track Pace", "Nappa Leather Interior"],
+        images: { front: "../Images/mercedes-amg-gt.png", side: null, interior: null, back: null },
+        description: "A front-mid-engine two-seat coupe whose 4.0-litre twin-turbo V8 is hand-built under AMG's 'one man, one engine' process.",
+        specs: { engine: "4.0L Twin-Turbo V8", transmission: "7-Speed AMG Speedshift DCT", seating: "2 Seats", fuelType: "Petrol" },
+        features: ["AMG Ride Control", "AMG Dynamic Select", "Race Start Launch Control", "Rear-Mounted Transaxle Gearbox", "Burmester Surround Sound", "Nappa Leather Upholstery"],
         colors: CAR_COLORS,
         variants: [
-            { id: "gt", label: "AMG GT", fuelType: "Petrol", power: 476, torque: 600, topSpeed: 285, accel: "3.9s", priceCr: 2.20, extraFeatures: [] },
-            { id: "gt-r", label: "AMG GT R", fuelType: "Petrol", power: 577, torque: 700, topSpeed: 318, accel: "3.5s", priceCr: 2.65, extraFeatures: ["Active Rear-Wheel Steering", "Widebody Kit"] }
-        ],
-        reviews: [
-            { name: "Ananya Desai", initials: "AD", rating: 5, text: "One Man, One Engine philosophy really shows in how this car pulls. Burmester audio is the icing on top." },
-            { name: "Rohan Malhotra", initials: "RM", rating: 5, text: "Booked the AMG GT R after a private viewing arranged through Autoverse. Widebody kit looks incredible in person." },
-            { name: "Pooja Bhatia", initials: "PB", rating: 4, text: "Long bonnet takes getting used to in tight parking but the driving position and sound more than make up for it." },
-            { name: "Ishaan Dutta", initials: "ID", rating: 5, text: "Track Pace telemetry is a fun touch for weekend circuit days. Adjustable rear wing is functional, not just for show." },
-            { name: "Simran Chawla", initials: "SC", rating: 5, text: "Nappa leather interior feels genuinely premium. Sales team here answered every spec question before I even visited." }
+            { id: "gt", label: "AMG GT S", fuelType: "Petrol", power: 515, torque: 670, topSpeed: 310, accel: "3.8s", priceCr: 2.09, extraFeatures: [] },
+            { id: "gt-r", label: "AMG GT R", fuelType: "Petrol", power: 577, torque: 700, topSpeed: 318, accel: "3.6s", priceCr: 2.23, extraFeatures: ["Active Rear-Wheel Steering", "AMG Track Pace", "Manually Adjustable Rear Wing"] }
         ]
     },
     {
         id: "ferrari-sf90",
         brand: "Ferrari",
         name: "Ferrari SF90",
-        images: { front: "../Images/ferrari-sf90.png", side: null, interior: "../Images/ferrari-interior.png", back: "../Images/ferrari-sf90-back.jpg" },
-        description: "Ferrari's first series-production plug-in hybrid, combining a twin-turbo V8 with three electric motors.",
+        images: { front: "../Images/ferrari-sf90.png", side: null, interior: null, back: null },
+        description: "Ferrari's first series-production plug-in hybrid, pairing a 4.0-litre twin-turbo V8 with three electric motors for 1,000 CV combined.",
         specs: { engine: "4.0L Twin-Turbo V8 + 3 Electric Motors", transmission: "8-Speed DCT", seating: "2 Seats", fuelType: "Hybrid" },
-        features: ["eAWD Electric All-Wheel Drive", "25km Full-Electric Range", "Carbon Fibre Monocoque", "Side Slip Control 8.0", "Active Aero", "Racing-Derived Brake-by-Wire"],
+        features: ["Electric Front-Axle All-Wheel Drive", "Up to 25 km Electric-Only Range", "eManettino Drive Modes", "Active Shut-Off Gurney Aero", "Brake-by-Wire System", "Aluminium & Carbon Fibre Chassis"],
         colors: CAR_COLORS,
         variants: [
-            { id: "stradale", label: "SF90 Stradale", fuelType: "Hybrid", power: 986, torque: 800, topSpeed: 340, accel: "2.5s", priceCr: 4.50, extraFeatures: [] },
-            { id: "xx-stradale", label: "SF90 XX Stradale", fuelType: "Hybrid", power: 1030, torque: 820, topSpeed: 350, accel: "2.3s", priceCr: 5.20, extraFeatures: ["Track-Focused Aero Kit", "Lightweight Forged Wheels"] }
-        ],
-        reviews: [
-            { name: "Aditya Thakur", initials: "AT", rating: 5, text: "986 horsepower with a 25km electric-only range is a genuinely absurd combination. Daily usable, weekend savage." },
-            { name: "Meera Singh", initials: "MS", rating: 5, text: "eAWD makes the SF90 shockingly easy to drive fast. The whole booking process through Autoverse felt white-glove." },
-            { name: "Harsh Kohli", initials: "HK", rating: 4, text: "Cabin tech takes a session to fully learn but once you do, it's the most immersive supercar interior I've sat in." },
-            { name: "Vikram Rao", initials: "VR", rating: 5, text: "Side Slip Control 8.0 genuinely changes how confident you feel pushing it near the limit. Ferrari engineering at its peak." },
-            { name: "Aarushi Malhan", initials: "AM", rating: 5, text: "Active aero and the carbon monocoque justify every rupee of the premium over lesser supercars in this bracket." }
+            { id: "stradale", label: "SF90 Stradale", fuelType: "Hybrid", power: 986, torque: 800, topSpeed: 340, accel: "2.5s", priceCr: 7.50, extraFeatures: [] },
+            { id: "spider", label: "SF90 Spider", fuelType: "Hybrid", power: 986, torque: 800, topSpeed: 340, accel: "2.5s", priceCr: 8.55, extraFeatures: ["Retractable Hard Top"] }
         ]
     },
     {
         id: "lamborghini-huracan",
         brand: "Lamborghini",
         name: "Lamborghini Huracan",
-        images: { front: "../Images/lamborghini-huracan.png", side: null, interior: "../Images/lamborghini-interior.png", back: "../Images/ferrari-sf90-back.jpg" },
-        description: "A naturally aspirated V10 supercar that delivers pure, uncompromising Lamborghini theatre.",
+        images: { front: "../Images/lamborghini-huracan.png", side: null, interior: "../Images/lamborghini-interior.png", back: null },
+        description: "Lamborghini's naturally aspirated V10 supercar, sold in India as the all-wheel-drive EVO and the rear-drive, track-focused STO; production ended in 2024.",
         specs: { engine: "5.2L V10", transmission: "7-Speed DCT", seating: "2 Seats", fuelType: "Petrol" },
-        features: ["Lamborghini Dinamica Veicolo Integrata", "All-Wheel Steering", "Carbon Ceramic Brakes", "Forged Composite Body Panels", "Track Telemetry", "Alcantara Interior"],
+        features: ["LDVI Integrated Vehicle Dynamics", "Rear-Wheel Steering", "Carbon Ceramic Brakes", "Magnetorheological Dampers", "8.4-inch Touchscreen", "Alcantara Interior"],
         colors: CAR_COLORS,
         variants: [
-            { id: "evo", label: "Huracan EVO", fuelType: "Petrol", power: 630, torque: 600, topSpeed: 325, accel: "2.9s", priceCr: 3.50, extraFeatures: [] },
-            { id: "sto", label: "Huracan STO", fuelType: "Petrol", power: 640, torque: 565, topSpeed: 310, accel: "3.0s", priceCr: 3.95, extraFeatures: ["Motorsport-Derived Aero", "Titanium Exhaust"] }
-        ],
-        reviews: [
-            { name: "Arjun Mehta", initials: "AM", rating: 5, text: "Verified dealers and honest prices. I saved a lot compared to what other platforms quoted for the same Huracan EVO." },
-            { name: "Tanvi Rathore", initials: "TR", rating: 5, text: "That naturally aspirated V10 scream at 8000 rpm is why I chose the STO over turbocharged rivals. Zero regrets." },
-              { name: "Dhruv Kapadia", initials: "DK", rating: 4, text: "STO is track-focused, so ride quality on broken city roads is a compromise you need to accept going in." },
-            { name: "Riya Sabharwal", initials: "RS", rating: 5, text: "Alcantara interior and the forged composite panels feel special every time I open the door. True Lamborghini theatre." },
-            { name: "Nakul Bedi", initials: "NB", rating: 5, text: "All-wheel steering makes it feel smaller than it is through tight corners. Booked mine after a track demo day." }
+            { id: "evo", label: "Huracan EVO", fuelType: "Petrol", power: 631, torque: 600, topSpeed: 325, accel: "2.9s", priceCr: 3.73, extraFeatures: ["All-Wheel Drive"] },
+            { id: "sto", label: "Huracan STO", fuelType: "Petrol", power: 631, torque: 565, topSpeed: 310, accel: "3.0s", priceCr: 4.99, extraFeatures: ["Rear-Wheel Drive", "Carbon Fibre Body Panels", "Lamborghini Telemetry"] }
         ]
     },
     {
         id: "porsche-911-turbo-s",
         brand: "Porsche",
         name: "Porsche 911 Turbo S",
-        images: { front: "../Images/porsche-911.png", side: null, interior: "../Images/porsche-interior.png", back: "../Images/dodge-back.jpg" },
-        description: "A high-performance sports car that combines everyday comfort with Porsche engineering and incredible speed.",
+        images: { front: "../Images/porsche-911.png", side: null, interior: "../Images/porsche-interior.png", back: null },
+        description: "The 992-generation 911 Turbo S, a 2+2 with a rear-mounted 3.7-litre twin-turbo flat-six and all-wheel drive.",
         specs: { engine: "3.7L Twin-Turbo Flat-6", transmission: "8-Speed PDK", seating: "4 Seats", fuelType: "Petrol" },
-        features: ["Adaptive Cruise Control", "Premium Sound System", "LED Headlights", "Parking Sensors", "Performance Brakes", "Premium Interior"],
+        features: ["PASM Adaptive Suspension", "Porsche Ceramic Composite Brakes", "Rear-Axle Steering", "Porsche Active Aerodynamics", "Sport Chrono Package", "Bose Surround Sound"],
         colors: CAR_COLORS,
         variants: [
-            { id: "coupe", label: "Turbo S Coupe", fuelType: "Petrol", power: 572, torque: 750, topSpeed: 330, accel: "2.7s", priceCr: 1.80, extraFeatures: [] },
-            { id: "cabriolet", label: "Turbo S Cabriolet", fuelType: "Petrol", power: 572, torque: 750, topSpeed: 320, accel: "2.8s", priceCr: 1.95, extraFeatures: ["Power Soft Top", "Wind Deflector"] }
-        ],
-        reviews: [
-            { name: "Priya Patel", initials: "PP", rating: 5, text: "I was a little nervous about buying a car online but Autoverse made it easy. Got my 911 Turbo S at a great price." },
-            { name: "Siddharth Anand", initials: "SA", rating: 5, text: "Everyday usability with genuine supercar pace is the whole point of a 911, and this one nails it perfectly." },
-            { name: "Fatima Sheikh", initials: "FS", rating: 4, text: "Rear seats are more symbolic than usable for adults, but that's a 911 thing, not an Autoverse thing." },
-            { name: "Kunal Sarin", initials: "KS", rating: 5, text: "PDK gearbox shifts are instant. Booked a test drive here and drove home the same week." },
-            { name: "Bhavya Nanda", initials: "BN", rating: 5, text: "The Cabriolet with the power soft top is the perfect weekend car. Premium sound system is a genuine highlight too." }
+            { id: "coupe", label: "Turbo S Coupe", fuelType: "Petrol", power: 641, torque: 800, topSpeed: 330, accel: "2.7s", priceCr: 3.08, extraFeatures: [] },
+            { id: "cabriolet", label: "Turbo S Cabriolet", fuelType: "Petrol", power: 641, torque: 800, topSpeed: 330, accel: "2.8s", priceCr: 3.37, extraFeatures: ["Power Soft Top", "Electric Wind Deflector"] }
         ]
     },
     {
         id: "lamborghini-aventador-svj",
         brand: "Lamborghini",
         name: "Lamborghini Aventador SVJ",
-        images: { front: "../Images/lamborghini-aventador-svj-front.png", side: null, interior: "../Images/mahindra-interior.png", back: "../Images/lamborghini-aventador-svj-back.png" },
-        description: "The most track-focused Aventador ever built, with active aerodynamics and a screaming V12.",
+        images: { front: "../Images/lamborghini-aventador-svj-front.png", side: null, interior: null, back: "../Images/lamborghini-aventador-svj-back.png" },
+        description: "The limited-production Aventador SVJ, with a 6.5-litre naturally aspirated V12 and ALA active aerodynamics.",
         specs: { engine: "6.5L V12", transmission: "7-Speed ISR", seating: "2 Seats", fuelType: "Petrol" },
-        features: ["ALA Active Aerodynamics", "Rear-Wheel Steering", "Carbon Fibre Monocoque", "Magnetorheological Suspension", "Track Data Logger", "Nurburgring-Tuned Chassis"],
+        features: ["ALA Active Aerodynamics", "Rear-Wheel Steering", "Carbon Fibre Monocoque", "Pushrod Magnetorheological Suspension", "Carbon Ceramic Brakes", "All-Wheel Drive"],
         colors: CAR_COLORS,
         variants: [
-            { id: "coupe", label: "SVJ Coupe", fuelType: "Petrol", power: 770, torque: 720, topSpeed: 350, accel: "2.8s", priceCr: 5.70, extraFeatures: [] },
-            { id: "roadster", label: "SVJ Roadster", fuelType: "Petrol", power: 770, torque: 720, topSpeed: 349, accel: "2.9s", priceCr: 6.10, extraFeatures: ["Removable Carbon Roof Panels"] }
+            { id: "coupe", label: "SVJ Coupe", fuelType: "Petrol", power: 759, torque: 720, topSpeed: 350, accel: "2.8s", priceCr: 6.00, extraFeatures: [] },
+            { id: "roadster", label: "SVJ Roadster", fuelType: "Petrol", power: 759, torque: 720, topSpeed: 350, accel: "2.9s", priceCr: 6.10, extraFeatures: ["Removable Carbon Roof Panels"] }
         ]
     },
     {
         id: "ferrari-roma",
         brand: "Ferrari",
         name: "Ferrari Roma",
-        images: { front: "../Images/ferrari-roma-front.png", side: null, interior: "../Images/generic-cream-interior.png", back: "../Images/mclaren-720s-back.jpg" },
-        description: "A sleek 2+ grand tourer inspired by 1950s and '60s dolce vita Rome, blending elegance with a twin-turbo V8.",
+        images: { front: "../Images/ferrari-roma-front.png", side: null, interior: null, back: null },
+        description: "A front-engine 2+2 grand tourer styled after 1950s and '60s Italian GTs, with a 3.9-litre twin-turbo V8.",
         specs: { engine: "3.9L Twin-Turbo V8", transmission: "8-Speed DCT", seating: "4 Seats", fuelType: "Petrol" },
-        features: ["Manettino Dial", "Side Slip Control", "Digital Cockpit", "JBL Premium Audio", "Adaptive Suspension", "Wireless CarPlay"],
+        features: ["Manettino Dial", "Side Slip Control", "16-inch Digital Instrument Cluster", "Passenger Touch Display", "Magnetorheological Dampers", "JBL Professional Audio (optional)"],
         colors: CAR_COLORS,
         variants: [
-            { id: "coupe", label: "Roma Coupe", fuelType: "Petrol", power: 620, torque: 760, topSpeed: 320, accel: "3.4s", priceCr: 3.10, extraFeatures: [] },
-            { id: "spider", label: "Roma Spider", fuelType: "Petrol", power: 620, torque: 760, topSpeed: 316, accel: "3.4s", priceCr: 3.45, extraFeatures: ["Retractable Fabric Roof"] }
+            { id: "coupe", label: "Roma Coupe", fuelType: "Petrol", power: 612, torque: 760, topSpeed: 320, accel: "3.4s", priceCr: 3.76, extraFeatures: [] },
+            { id: "spider", label: "Roma Spider", fuelType: "Petrol", power: 612, torque: 760, topSpeed: 320, accel: "3.4s", priceCr: 4.76, extraFeatures: ["Five-Layer Fabric Soft Top"] }
         ]
     },
     {
         id: "porsche-panamera-e-hybrid",
         brand: "Porsche",
         name: "Porsche Panamera Turbo S E-Hybrid",
-        images: { front: "../Images/porsche-panamera-front.png", side: null, interior: "../Images/futuristic-concept-interior.png", back: "../Images/lamborghini-aventador-svj-back.png" },
-        description: "A four-door luxury sports sedan available with a hybrid drivetrain that pairs V8 power with electric torque.",
+        images: { front: "../Images/porsche-panamera-front.png", side: null, interior: null, back: null },
+        description: "The second-generation Panamera four-door in 2021 Turbo S form, offered with a 4.0-litre twin-turbo V8 alone or as a plug-in hybrid.",
         specs: { engine: "4.0L Twin-Turbo V8 + Electric Motor", transmission: "8-Speed PDK", seating: "4 Seats", fuelType: "Hybrid" },
-        features: ["Porsche Active Suspension", "Adaptive Air Suspension", "Rear-Wheel Steering", "Panoramic Roof", "Burmester 3D Audio", "Electric-Only Driving Mode"],
+        features: ["Adaptive Air Suspension", "Porsche Dynamic Chassis Control", "Rear-Axle Steering", "Sport Chrono Package", "Panoramic Roof (optional)", "Burmester 3D Audio (optional)"],
         colors: CAR_COLORS,
         variants: [
-            { id: "e-hybrid", label: "Turbo S E-Hybrid", fuelType: "Hybrid", power: 690, torque: 870, topSpeed: 315, accel: "3.1s", priceCr: 2.35, extraFeatures: ["44km Electric Range"] },
-            { id: "turbo-petrol", label: "Turbo (Petrol)", fuelType: "Petrol", power: 620, torque: 820, topSpeed: 306, accel: "3.3s", priceCr: 1.95, extraFeatures: [] }
+            { id: "turbo-petrol", label: "Turbo S", fuelType: "Petrol", power: 621, torque: 820, topSpeed: 315, accel: "3.1s", priceCr: 2.12, extraFeatures: [] },
+            { id: "e-hybrid", label: "Turbo S E-Hybrid", fuelType: "Hybrid", power: 690, torque: 870, topSpeed: 315, accel: "3.2s", priceCr: 2.43, extraFeatures: ["About 50 km electric range (WLTP)", "E-Power Electric Driving Mode"] }
         ]
     },
     {
         id: "audi-rs7-sportback",
         brand: "Audi",
         name: "Audi RS7 Sportback",
-        images: { front: "../Images/audi-rs7-front.png", side: null, interior: "../Images/bentley-interior3-dup.png", back: "../Images/ferrari-sf90-back.jpg" },
-        description: "A four-door coupe that hides supercar performance beneath a practical, everyday-usable body.",
+        images: { front: null, side: null, interior: null, back: null },
+        description: "Audi Sport's five-door Sportback with a 4.0-litre twin-turbo V8, a 48-volt mild-hybrid system and quattro all-wheel drive.",
         specs: { engine: "4.0L Twin-Turbo V8", transmission: "8-Speed Tiptronic", seating: "5 Seats", fuelType: "Petrol" },
-        features: ["Quattro All-Wheel Drive", "48V Mild-Hybrid System", "Matrix LED Headlights", "Sport Differential", "Bang & Olufsen 3D Audio", "Adaptive Air Suspension"],
+        features: ["Quattro All-Wheel Drive", "48V Mild-Hybrid System", "Matrix LED Headlights", "Quattro Sport Differential", "Adaptive Air Suspension", "Bang & Olufsen 3D Audio"],
         colors: CAR_COLORS,
         variants: [
-            { id: "rs7", label: "RS7 Sportback", fuelType: "Petrol", power: 600, torque: 800, topSpeed: 250, accel: "3.6s", priceCr: 1.94, extraFeatures: [] },
-            { id: "rs7-performance", label: "RS7 Performance", fuelType: "Petrol", power: 630, torque: 850, topSpeed: 305, accel: "3.3s", priceCr: 2.15, extraFeatures: ["Dynamic Package Plus"] }
+            { id: "rs7", label: "RS7 Sportback", fuelType: "Petrol", power: 591, torque: 800, topSpeed: 250, accel: "3.6s", priceCr: 1.94, extraFeatures: [] },
+            { id: "rs7-performance", label: "RS7 Performance", fuelType: "Petrol", power: 621, torque: 850, topSpeed: 280, accel: "3.4s", priceCr: 2.15, extraFeatures: ["Dynamic Package Plus (305 km/h limit)"] }
         ]
     },
     {
         id: "bmw-i8",
         brand: "BMW",
         name: "BMW i8",
-        images: { front: "../Images/bmw-i8-front.png", side: null, interior: "../Images/bmw-interior.png", back: "../Images/bmw-i8-back.png" },
-        description: "A futuristic plug-in hybrid sports car built around a carbon-fibre passenger cell for efficiency and performance.",
+        images: { front: "../Images/bmw-i8-front.png", side: null, interior: null, back: "../Images/bmw-i8-back.png" },
+        description: "BMW's 2014–2020 plug-in hybrid sports car, pairing a 1.5-litre turbo three-cylinder with a front electric motor in a carbon-fibre passenger cell.",
         specs: { engine: "1.5L Turbo 3-Cyl + Electric Motor", transmission: "6-Speed Auto + 2-Speed Electric", seating: "4 Seats", fuelType: "Hybrid" },
-        features: ["Carbon Fibre Life Module", "eDrive Electric-Only Mode", "Butterfly Doors", "Laser Headlights", "BMW Head-Up Display", "Regenerative Braking"],
+        features: ["Carbon Fibre Life Module", "eDrive Electric-Only Mode", "Butterfly Doors", "Head-Up Display", "Regenerative Braking", "BMW Laserlight (optional)"],
         colors: CAR_COLORS,
-        reviews: [
-            { name: "Nikhil Bajwa", initials: "NB", rating: 5, text: "The butterfly doors get a crowd every single time I park it downtown. Still turns heads years after launch." },
-            { name: "Trisha Nair", initials: "TN", rating: 4, text: "Great for city commutes on electric-only mode, and the hybrid kick-in feels seamless. Just wish the boot was bigger." },
-            { name: "Aryan Vohra", initials: "AV", rating: 5, text: "Enquired here about the Roadster variant and had it booked within a week. Feels like driving a spaceship every day." },
-            { name: "Ridhima Sood", initials: "RS", rating: 5, text: "Fuel savings from the hybrid setup are real, and it still has proper sports car presence. Zero regrets." },
-            { name: "Omkar Deshmukh", initials: "OD", rating: 4, text: "Cabin is snug for taller drivers but the driving dynamics and futuristic design more than make up for it." }
-        ],
         variants: [
-            { id: "coupe", label: "i8 Coupe", fuelType: "Hybrid", power: 369, torque: 570, topSpeed: 250, accel: "4.4s", priceCr: 1.65, extraFeatures: ["53km Electric Range"] },
-            { id: "roadster", label: "i8 Roadster", fuelType: "Hybrid", power: 369, torque: 570, topSpeed: 250, accel: "4.6s", priceCr: 1.85, extraFeatures: ["Power Soft Top"] }
+            { id: "coupe", label: "i8 Coupe", fuelType: "Hybrid", power: 369, torque: 570, topSpeed: 250, accel: "4.4s", priceCr: 2.62, extraFeatures: ["Up to 55 km electric range (NEDC)"] },
+            { id: "roadster", label: "i8 Roadster", fuelType: "Hybrid", power: 369, torque: 570, topSpeed: 250, accel: "4.6s", priceCr: 2.90, extraFeatures: ["Electric Soft Top", "Up to 53 km electric range (NEDC)"] }
         ]
     },
     {
         id: "range-rover-autobiography",
-        brand: "Range Rover",
+        brand: "Land Rover",
         name: "Range Rover Autobiography",
         images: { front: "../Images/range-rover-front.png", side: null, interior: "../Images/range-rover-interior.png", back: "../Images/range-rover-back.png" },
         colorImages: {
             "Champagne Gold": { front: "../Images/rangerover-gold-front.png", side: null, interior: null, back: null },
-            "Garnet Red": { front: "../Images/rangerover-red-front.png", side: null, interior: null, back: null },
+            "Garnet Red": { front: null, side: null, interior: null, back: null },
             "Santorini Black": { front: "../Images/range-rover-front.png", side: null, interior: null, back: null }
         },
-        description: "The definitive full-size luxury SUV, offered with either an efficient diesel or a powerful petrol engine.",
-        specs: { engine: "3.0L I6 (Diesel/Petrol options)", transmission: "8-Speed Auto", seating: "5 Seats", fuelType: "Diesel" },
-        features: ["Terrain Response 2", "Air Suspension", "Executive Class Rear Seats", "Meridian Signature Sound", "Adaptive Cruise Control", "Night Vision Camera"],
+        description: "The fifth-generation (L460) full-size Range Rover in Autobiography trim, sold in India with a 3.0-litre mild-hybrid petrol inline-six.",
+        specs: { engine: "3.0L Twin-Turbo Inline-6 Mild-Hybrid", transmission: "8-Speed Auto", seating: "5 Seats", fuelType: "Petrol" },
+        features: ["Terrain Response 2", "Electronic Air Suspension", "All-Wheel Steering", "Meridian Signature Sound System", "Pivi Pro 13.1-inch Touchscreen", "Adaptive Cruise Control"],
         colors: [
             { name: "Champagne Gold", hex: "#b89a6e" },
             { name: "Garnet Red", hex: "#7a2e2b" },
             { name: "Santorini Black", hex: "#2b2b2b" }
         ],
         variants: [
-            { id: "diesel", label: "3.0L Diesel", fuelType: "Diesel", power: 350, torque: 700, topSpeed: 234, accel: "6.3s", priceCr: 2.10, extraFeatures: ["Best-in-class Fuel Economy"] },
-            { id: "petrol", label: "4.4L Petrol V8", fuelType: "Petrol", power: 530, torque: 750, topSpeed: 250, accel: "4.6s", priceCr: 2.45, extraFeatures: ["Sport Exhaust"] }
+            { id: "petrol", label: "Autobiography P400 Petrol", fuelType: "Petrol", power: 394, torque: 550, topSpeed: 242, accel: "5.8s", priceCr: 2.57, extraFeatures: [] }
         ]
     },
     {
         id: "bentley-continental-gt",
         brand: "Bentley",
         name: "Bentley Continental GT",
-        images: { front: "../Images/bentley-continental-gt-front.png", side: null, interior: "../Images/bentley-continental-gt-interior.png", back: "../Images/mclaren-720s-back.jpg" },
-        description: "A hand-crafted British grand tourer that blends effortless V8 or W12 power with true luxury.",
-        specs: { engine: "4.0L V8 / 6.0L W12", transmission: "8-Speed DCT", seating: "4 Seats", fuelType: "Petrol" },
-        features: ["Rotating Dashboard Display", "Naim for Bentley Audio", "All-Wheel Drive", "Adaptive Air Suspension", "Diamond-Quilted Leather", "Massage Seats"],
+        images: { front: "../Images/bentley-continental-gt-front.png", side: null, interior: null, back: null },
+        description: "The third-generation (2018–2024) Continental GT, a 2+2 grand tourer offered with a 4.0-litre twin-turbo V8 or a 6.0-litre twin-turbo W12.",
+        specs: { engine: "4.0L Twin-Turbo V8 / 6.0L Twin-Turbo W12", transmission: "8-Speed DCT", seating: "4 Seats", fuelType: "Petrol" },
+        features: ["Bentley Rotating Display (optional)", "Naim for Bentley Audio (optional)", "All-Wheel Drive", "Three-Chamber Air Suspension", "Diamond-Quilted Leather", "Massage Front Seats"],
         colors: CAR_COLORS,
         variants: [
-            { id: "v8", label: "Continental GT V8", fuelType: "Petrol", power: 550, torque: 770, topSpeed: 318, accel: "4.0s", priceCr: 3.85, extraFeatures: [] },
-            { id: "w12-speed", label: "Continental GT Speed W12", fuelType: "Petrol", power: 659, torque: 900, topSpeed: 335, accel: "3.5s", priceCr: 4.60, extraFeatures: ["Electronic Active Differential"] }
+            { id: "v8", label: "Continental GT V8", fuelType: "Petrol", power: 542, torque: 770, topSpeed: 318, accel: "4.0s", priceCr: 3.85, extraFeatures: [] },
+            { id: "w12-speed", label: "Continental GT Speed W12", fuelType: "Petrol", power: 650, torque: 900, topSpeed: 335, accel: "3.6s", priceCr: 6.46, extraFeatures: ["Electronic Limited-Slip Differential", "All-Wheel Steering"] }
         ]
     },
     {
         id: "rolls-royce-ghost",
         brand: "Rolls-Royce",
         name: "Rolls-Royce Ghost",
-        images: { front: "../Images/rolls-royce-ghost-front.png", side: null, interior: "../Images/rollsroyce-interior.png", back: "../Images/lamborghini-aventador-svj-back.png" },
-        description: "The most technologically advanced Rolls-Royce ever built, prioritising silence and effortless power.",
+        images: { front: "../Images/rolls-royce-ghost-front.png", side: null, interior: "../Images/rollsroyce-interior.png", back: null },
+        description: "Rolls-Royce's second-generation Ghost saloon (Series II from 2024), with a 6.75-litre twin-turbo V12, all-wheel drive and all-wheel steering.",
         specs: { engine: "6.75L Twin-Turbo V12", transmission: "8-Speed Auto", seating: "5 Seats", fuelType: "Petrol" },
-        features: ["Planar Suspension System", "Starlight Headliner", "Whisper-Quiet Cabin", "Bespoke Audio System", "Satellite-Aided Transmission", "Illuminated Fascia"],
+        features: ["Planar Suspension System", "Satellite-Aided Transmission", "All-Wheel Drive and Steering", "Starlight Headliner", "Illuminated Fascia", "Bespoke Audio System"],
         colors: CAR_COLORS,
         variants: [
-            { id: "standard", label: "Ghost", fuelType: "Petrol", power: 563, torque: 850, topSpeed: 250, accel: "4.8s", priceCr: 7.95, extraFeatures: [] },
-            { id: "extended", label: "Ghost Extended", fuelType: "Petrol", power: 563, torque: 850, topSpeed: 250, accel: "5.0s", priceCr: 8.90, extraFeatures: ["Extended Rear Legroom", "Rear Theatre Configuration"] }
+            { id: "standard", label: "Ghost", fuelType: "Petrol", power: 563, torque: 850, topSpeed: 250, accel: "4.8s", priceCr: 8.95, extraFeatures: [] },
+            { id: "extended", label: "Ghost Extended", fuelType: "Petrol", power: 563, torque: 850, topSpeed: 250, accel: "5.0s", priceCr: 10.19, extraFeatures: ["170 mm Longer Wheelbase", "Extra Rear Legroom"] }
         ]
     },
     {
         id: "aston-martin-db11",
         brand: "Aston Martin",
         name: "Aston Martin DB11",
-        images: { front: "../Images/aston-martin-db11-front.png", side: null, interior: "../Images/bentley-interior2.png", back: "../Images/ferrari-sf90-back.jpg" },
-        reviews: [
-            { name: "Rohit Ahuja", initials: "RA", rating: 5, text: "Picked up my DB11 in British Racing Green and it still stops traffic every single time. The V12 soundtrack alone is worth the price." },
-            { name: "Meher Kapoor", initials: "MK", rating: 5, text: "Booked a test drive through Autoverse and the showroom experience was flawless. Genuinely felt like buying a piece of art, not just a car." },
-            { name: "Devansh Rana", initials: "DR", rating: 4, text: "Interior craftsmanship is unmatched at this price point. Only wish the infotainment felt a bit more modern, but I forgive it for how it drives." },
-            { name: "Ira Sethi", initials: "IS", rating: 5, text: "The convertible top operation and cabin refinement make this the perfect daily-usable grand tourer. Highly recommend the AMR trim." },
-            { name: "Farhan Qureshi", initials: "FQ", rating: 5, text: "Autoverse's enquiry team arranged a private viewing within two days. The DB11 delivers effortless power with old-school elegance." }
-        ],
-        description: "A handsome British grand tourer offered with a twin-turbo V8 or a thunderous V12.",
+        images: { front: "../Images/aston-martin-db11-front.png", side: null, interior: null, back: null },
+        description: "Aston Martin's 2016–2023 grand tourer, offered with a Mercedes-AMG-sourced 4.0-litre twin-turbo V8 or Aston's own 5.2-litre twin-turbo V12.",
         specs: { engine: "4.0L Twin-Turbo V8 / 5.2L Twin-Turbo V12", transmission: "8-Speed Auto", seating: "4 Seats", fuelType: "Petrol" },
-        features: ["Aeroblade Active Aerodynamics", "Adaptive Damping", "Bang & Olufsen BeoSound", "Carbon Fibre Body Panels", "Sports Exhaust", "Bespoke Leather Interior"],
+        features: ["Aeroblade Rear Aerodynamics", "Adaptive Damping", "Bonded Aluminium Structure", "Sports Exhaust", "Bang & Olufsen BeoSound (optional)", "Bridge of Weir Leather Interior"],
         colors: CAR_COLORS,
         variants: [
-            { id: "v8", label: "DB11 V8", fuelType: "Petrol", power: 503, torque: 675, topSpeed: 300, accel: "4.0s", priceCr: 3.30, extraFeatures: [] },
-            { id: "amr-v12", label: "DB11 AMR V12", fuelType: "Petrol", power: 630, torque: 700, topSpeed: 335, accel: "3.7s", priceCr: 3.90, extraFeatures: ["AMR Aero Kit", "Sports Plus Suspension"] }
+            { id: "v8", label: "DB11 V8", fuelType: "Petrol", power: 496, torque: 675, topSpeed: 301, accel: "4.0s", priceCr: 3.80, extraFeatures: [] },
+            { id: "amr-v12", label: "DB11 AMR V12", fuelType: "Petrol", power: 621, torque: 700, topSpeed: 334, accel: "3.7s", priceCr: 4.20, extraFeatures: ["AMR Sport-Tuned Suspension", "AMR Exterior Detailing"] }
         ]
     },
     {
         id: "tesla-model-s-plaid",
         brand: "Tesla",
         name: "Tesla Model S Plaid",
-        images: { front: "../Images/tesla-model-s-plaid-front.png", side: null, interior: "../Images/dark-minimalist-interior.png", back: "../Images/dodge-back.jpg" },
-        description: "A tri-motor all-electric sedan that out-accelerates most hypercars while seating five in comfort.",
+        images: { front: "../Images/tesla-model-s-plaid-front.png", side: null, interior: null, back: null },
+        description: "The tri-motor version of Tesla's five-seat electric sedan, rated by Tesla at 1,020 hp and 0-100 km/h in 2.1 seconds.",
         specs: { engine: "Tri-Motor Electric Powertrain", transmission: "Single-Speed Direct Drive", seating: "5 Seats", fuelType: "Electric" },
-        features: ["Full Self-Driving Capability", "17-inch Cinematic Display", "Yoke Steering Wheel", "Over-the-Air Updates", "Bioweapon Defense Mode Filter", "Track Mode"],
+        features: ["Autopilot Driver Assistance", "17-inch Touchscreen", "Yoke Steering (optional)", "Over-the-Air Updates", "HEPA Filter with Bioweapon Defense Mode", "Track Mode"],
         colors: CAR_COLORS,
         variants: [
-            { id: "plaid", label: "Plaid", fuelType: "Electric", power: 1020, torque: 1420, topSpeed: 322, accel: "1.99s", priceCr: 1.55, extraFeatures: ["396mi Range"] },
-            { id: "plaid-plus", label: "Plaid+ Long Range", fuelType: "Electric", power: 1020, torque: 1420, topSpeed: 322, accel: "2.1s", priceCr: 1.75, extraFeatures: ["446mi Range", "Extended Battery Pack"] }
+            { id: "plaid", label: "Plaid", fuelType: "Electric", power: 1020, torque: 1420, topSpeed: 322, accel: "2.1s", priceCr: 1.55, extraFeatures: ["Up to 592 km range (EPA est.)"] }
         ]
     },
     {
         id: "jaguar-f-type-r",
         brand: "Jaguar",
         name: "Jaguar F-Type R",
-        images: { front: "../Images/jaguar-f-type-front.png", side: null, interior: "../Images/jaguar-f-type-interior.jpg", back: "../Images/mclaren-720s-back.jpg" },
-        description: "A supercharged British sports car with a growling V8 soundtrack and sharp, balanced handling.",
+        images: { front: "../Images/jaguar-f-type-front.png", side: null, interior: null, back: null },
+        description: "The top F-Type, a two-seat sports car with a 5.0-litre supercharged V8 and all-wheel drive; F-Type production ended in 2024.",
         specs: { engine: "5.0L Supercharged V8", transmission: "8-Speed Auto", seating: "2 Seats", fuelType: "Petrol" },
-        features: ["Torque Vectoring by Braking", "Adaptive Dynamics", "Configurable Sport Exhaust", "Meridian Sound System", "All-Wheel Drive", "Launch Control"],
+        features: ["All-Wheel Drive", "Torque Vectoring by Braking", "Adaptive Dynamics", "Switchable Active Exhaust", "Meridian Sound System", "Launch Control"],
         colors: CAR_COLORS,
         variants: [
-            { id: "coupe", label: "F-Type R Coupe", fuelType: "Petrol", power: 575, torque: 700, topSpeed: 300, accel: "3.5s", priceCr: 1.75, extraFeatures: [] },
-            { id: "convertible", label: "F-Type R Convertible", fuelType: "Petrol", power: 575, torque: 700, topSpeed: 300, accel: "3.7s", priceCr: 1.95, extraFeatures: ["Power-Fold Soft Top"] }
+            { id: "coupe", label: "F-Type R Coupe", fuelType: "Petrol", power: 567, torque: 700, topSpeed: 300, accel: "3.7s", priceCr: 1.75, extraFeatures: [] },
+            { id: "convertible", label: "F-Type R Convertible", fuelType: "Petrol", power: 567, torque: 700, topSpeed: 300, accel: "3.7s", priceCr: 2.42, extraFeatures: ["Power-Folding Soft Top"] }
         ]
     },
     {
         id: "mclaren-720s",
         brand: "McLaren",
         name: "McLaren 720S",
-        images: { front: "../Images/mclaren-720s-front.png", side: null, interior: "../Images/buick-interior.png", back: "../Images/mclaren-720s-back.jpg" },
-        description: "A featherweight carbon-tub supercar with dihedral doors and blistering twin-turbo V8 performance.",
+        images: { front: "../Images/mclaren-720s-front.png", side: null, interior: null, back: null },
+        description: "McLaren's 2017–2023 mid-engine supercar, built around a carbon-fibre Monocage II tub with dihedral doors and a 4.0-litre twin-turbo V8.",
         specs: { engine: "4.0L Twin-Turbo V8", transmission: "7-Speed DCT", seating: "2 Seats", fuelType: "Petrol" },
-        features: ["Dihedral Doors", "Proactive Chassis Control II", "Variable Drift Control", "Carbon Fibre Monocage", "Folding Driver Display", "Track Telemetry"],
+        features: ["Dihedral Doors", "Proactive Chassis Control II", "Variable Drift Control", "Carbon Fibre Monocage II", "Folding Driver Display", "McLaren Track Telemetry (optional)"],
         colors: CAR_COLORS,
         variants: [
-            { id: "coupe", label: "720S Coupe", fuelType: "Petrol", power: 710, torque: 770, topSpeed: 341, accel: "2.9s", priceCr: 4.20, extraFeatures: [] },
-            { id: "spider", label: "720S Spider", fuelType: "Petrol", power: 710, torque: 770, topSpeed: 336, accel: "2.9s", priceCr: 4.60, extraFeatures: ["Retractable Hardtop"] }
+            { id: "coupe", label: "720S Coupe", fuelType: "Petrol", power: 710, torque: 770, topSpeed: 341, accel: "2.9s", priceCr: 4.65, extraFeatures: [] },
+            { id: "spider", label: "720S Spider", fuelType: "Petrol", power: 710, torque: 770, topSpeed: 341, accel: "2.9s", priceCr: 5.04, extraFeatures: ["Retractable Hard Top"] }
         ]
     },
     {
         id: "maserati-mc20",
         brand: "Maserati",
         name: "Maserati MC20",
-        images: { front: "../Images/maserati-mc20-front.png", side: null, interior: "../Images/tata-interior.png", back: "../Images/lamborghini-aventador-svj-back.png" },
-        description: "Maserati's return to true supercar form, built around a bespoke twin-turbo V6 and butterfly doors.",
+        images: { front: "../Images/maserati-mc20-front.png", side: null, interior: null, back: null },
+        description: "Maserati's mid-engine two-seater with butterfly doors and the in-house 3.0-litre 'Nettuno' twin-turbo V6.",
         specs: { engine: "3.0L Twin-Turbo V6", transmission: "8-Speed DCT", seating: "2 Seats", fuelType: "Petrol" },
-        features: ["Butterfly Doors", "Carbon Fibre Monocoque", "Launch Control", "Adaptive Suspension", "Sonus Faber Audio", "Racing-Derived Aero"],
+        features: ["Butterfly Doors", "Carbon Fibre Monocoque", "Pre-Chamber Combustion Engine", "Launch Control", "Double-Wishbone Suspension", "Sonus Faber Audio (optional)"],
         colors: CAR_COLORS,
         variants: [
-            { id: "coupe", label: "MC20 Coupe", fuelType: "Petrol", power: 630, torque: 730, topSpeed: 325, accel: "2.9s", priceCr: 3.35, extraFeatures: [] },
-            { id: "cielo", label: "MC20 Cielo", fuelType: "Petrol", power: 630, torque: 730, topSpeed: 320, accel: "3.0s", priceCr: 3.75, extraFeatures: ["Electrochromic Glass Roof"] }
+            { id: "coupe", label: "MC20 Coupe", fuelType: "Petrol", power: 621, torque: 730, topSpeed: 325, accel: "2.9s", priceCr: 3.69, extraFeatures: [] },
+            { id: "cielo", label: "MC20 Cielo", fuelType: "Petrol", power: 621, torque: 730, topSpeed: 320, accel: "3.0s", priceCr: 5.02, extraFeatures: ["Retractable Electrochromic Glass Roof"] }
         ]
     },
     {
         id: "koenigsegg-jesko",
         brand: "Koenigsegg",
         name: "Koenigsegg Jesko",
-        images: { front: null, side: "../Images/koenigsegg-jesko-side.png", interior: "../Images/mahindra-interior.png", back: "../Images/ferrari-sf90-back.jpg" },
-        description: "A Swedish hypercar engineered around a 9-speed multi-clutch gearbox and record-chasing aerodynamics.",
+        images: { front: "../Images/koenigsegg-jesko-side.png", side: null, interior: null, back: null },
+        description: "A Swedish hypercar whose 5.0-litre twin-turbo V8 makes 1,280 hp on regular petrol (1,600 hp on E85), driving through a 9-speed multi-clutch gearbox.",
         specs: { engine: "5.0L Twin-Turbo V8", transmission: "9-Speed Light Speed Transmission", seating: "2 Seats", fuelType: "Petrol" },
-        features: ["Light Speed Transmission", "Active Rear Wing", "Autoskin Doors", "Carbon Fibre Body", "Triplex Suspension", "Track-Focused Aero Package"],
+        features: ["Light Speed Transmission", "Autoskin Powered Doors", "Triplex Suspension", "Active Rear-Wheel Steering", "Carbon Fibre Chassis", "Removable Roof Panel"],
         colors: CAR_COLORS,
         variants: [
-            { id: "standard", label: "Jesko", fuelType: "Petrol", power: 1280, torque: 1500, topSpeed: 480, accel: "2.5s", priceCr: 22.00, extraFeatures: [] },
-            { id: "absolut", label: "Jesko Absolut", fuelType: "Petrol", power: 1280, torque: 1500, topSpeed: 531, accel: "2.5s", priceCr: 24.50, extraFeatures: ["Top-Speed Focused Bodywork"] }
+            { id: "standard", label: "Jesko Attack", fuelType: "Petrol", power: 1280, torque: 1500, topSpeed: 480, accel: "2.5s", priceCr: 22.00, extraFeatures: ["High-Downforce Rear Wing"] },
+            { id: "absolut", label: "Jesko Absolut", fuelType: "Petrol", power: 1280, torque: 1500, topSpeed: 531, accel: "2.5s", priceCr: 24.50, extraFeatures: ["Low-Drag Bodywork without Rear Wing"] }
         ]
     },
     {
         id: "bugatti-chiron",
         brand: "Bugatti",
         name: "Bugatti Chiron",
-        images: { front: "../Images/bugatti-chiron-front.png", side: null, interior: "../Images/generic-cream-interior.png", back: "../Images/dodge-back.jpg" },
-        description: "An engineering marvel powered by a quad-turbo W16, built for effortless triple-digit cruising.",
+        images: { front: "../Images/bugatti-chiron-front.png", side: null, interior: null, back: null },
+        description: "Bugatti's 2016–2024 hypercar, powered by an 8.0-litre quad-turbo W16 and limited to 500 cars across all versions.",
         specs: { engine: "8.0L Quad-Turbo W16", transmission: "7-Speed DCT", seating: "2 Seats", fuelType: "Petrol" },
-        features: ["Quad-Turbo W16 Engine", "Active Aerodynamics", "Carbon Ceramic Brakes", "Bespoke Leather Cabin", "Adaptive Chassis", "Top Speed Key Mode"],
+        features: ["Carbon Fibre Monocoque", "Active Aerodynamics", "Carbon Ceramic Brakes", "Adaptive Chassis", "Top Speed Key", "Bespoke Leather Cabin"],
         colors: CAR_COLORS,
         variants: [
-            { id: "standard", label: "Chiron", fuelType: "Petrol", power: 1500, torque: 1600, topSpeed: 420, accel: "2.4s", priceCr: 26.50, extraFeatures: [] },
-            { id: "super-sport", label: "Chiron Super Sport", fuelType: "Petrol", power: 1600, torque: 1600, topSpeed: 440, accel: "2.4s", priceCr: 32.00, extraFeatures: ["Elongated Tail for Stability"] }
+            { id: "standard", label: "Chiron", fuelType: "Petrol", power: 1479, torque: 1600, topSpeed: 420, accel: "2.4s", priceCr: 26.50, extraFeatures: [] },
+            { id: "super-sport", label: "Chiron Super Sport", fuelType: "Petrol", power: 1578, torque: 1600, topSpeed: 440, accel: "2.4s", priceCr: 32.00, extraFeatures: ["Long-Tail Bodywork"] }
         ]
     },
     {
         id: "pagani-huayra",
         brand: "Pagani",
         name: "Pagani Huayra",
-        images: { front: "../Images/pagani-huayra-front.png", side: null, interior: "../Images/futuristic-concept-interior.png", back: "../Images/mclaren-720s-back.jpg" },
-        description: "A hand-built Italian hypercar where art and engineering meet, with active aero flaps at every corner.",
+        images: { front: "../Images/pagani-huayra-front.png", side: null, interior: null, back: null },
+        description: "Pagani's hand-built hypercar with a Mercedes-AMG 6.0-litre twin-turbo V12 and four independently controlled active aero flaps.",
         specs: { engine: "6.0L Twin-Turbo V12", transmission: "7-Speed AMT", seating: "2 Seats", fuelType: "Petrol" },
-        features: ["Active Aero Flaps", "Carbon-Titanium Monocoque", "Gearbox by Xtrac", "Exposed Titanium Exhaust", "Bespoke Instrumentation", "Hand-Stitched Leather Cabin"],
+        features: ["Active Aero Flaps", "Carbo-Titanium Monocoque", "Xtrac Single-Clutch Gearbox", "Titanium Exhaust", "Bespoke Instrumentation", "Hand-Stitched Leather Cabin"],
         colors: CAR_COLORS,
         variants: [
-            { id: "coupe", label: "Huayra Coupe", fuelType: "Petrol", power: 730, torque: 1000, topSpeed: 383, accel: "3.2s", priceCr: 19.50, extraFeatures: [] },
-            { id: "roadster", label: "Huayra Roadster", fuelType: "Petrol", power: 764, torque: 1000, topSpeed: 383, accel: "3.2s", priceCr: 22.00, extraFeatures: ["Removable Carbon Roof Panels"] }
+            { id: "coupe", label: "Huayra Coupe", fuelType: "Petrol", power: 720, torque: 1000, topSpeed: 383, accel: "3.2s", priceCr: 19.50, extraFeatures: [] },
+            { id: "roadster", label: "Huayra Roadster", fuelType: "Petrol", power: 754, torque: 1000, topSpeed: 383, accel: "3.2s", priceCr: 22.00, extraFeatures: ["Removable Roof Panels"] }
         ]
     },
     {
         id: "nissan-gt-r",
         brand: "Nissan",
         name: "Nissan GT-R",
-        images: { front: "../Images/nissan-gt-r-front.png", side: null, interior: "../Images/bentley-interior3-dup.png", back: "../Images/lamborghini-aventador-svj-back.png" },
-        description: "Nicknamed Godzilla, a twin-turbo all-wheel-drive icon that punches far above its price bracket.",
+        images: { front: "../Images/nissan-gt-r-front.png", side: null, interior: null, back: null },
+        description: "Nissan's R35 GT-R, a 2+2 coupe with a hand-assembled 3.8-litre twin-turbo V6 and ATTESA E-TS all-wheel drive; production ended in 2025.",
         specs: { engine: "3.8L Twin-Turbo V6", transmission: "6-Speed DCT", seating: "4 Seats", fuelType: "Petrol" },
-        features: ["ATTESA E-TS All-Wheel Drive", "Launch Control", "Bilstein DampTronic Suspension", "Titanium Exhaust", "Driver-Focused Cockpit", "Track Data Logger"],
+        features: ["ATTESA E-TS All-Wheel Drive", "Rear-Mounted Transaxle", "Bilstein DampTronic Suspension", "Launch Control", "Titanium Exhaust", "Multi-Function Performance Display"],
         colors: CAR_COLORS,
         variants: [
-            { id: "premium", label: "GT-R Premium", fuelType: "Petrol", power: 565, torque: 633, topSpeed: 315, accel: "2.9s", priceCr: 1.90, extraFeatures: [] },
-            { id: "nismo", label: "GT-R NISMO", fuelType: "Petrol", power: 600, torque: 652, topSpeed: 320, accel: "2.7s", priceCr: 2.60, extraFeatures: ["Motorsport Aero Kit", "Carbon Fibre Bonnet"] }
+            { id: "premium", label: "GT-R", fuelType: "Petrol", power: 562, torque: 637, topSpeed: 315, accel: "2.9s", priceCr: 2.12, extraFeatures: [] },
+            { id: "nismo", label: "GT-R NISMO", fuelType: "Petrol", power: 592, torque: 652, topSpeed: 320, accel: "2.7s", priceCr: 2.60, extraFeatures: ["Carbon Fibre Bonnet and Wings", "Carbon Ceramic Brakes"] }
         ]
     },
     {
         id: "chevrolet-corvette-z06",
         brand: "Chevrolet",
         name: "Chevrolet Corvette Z06",
-        images: { front: "../Images/chevrolet-corvette-z06-front.png", side: null, interior: "../Images/bentley-interior2.png", back: "../Images/ferrari-sf90-back.jpg" },
-        description: "A mid-engine American supercar with a screaming naturally aspirated flat-plane-crank V8.",
+        images: { front: "../Images/chevrolet-corvette-z06-front.png", side: null, interior: null, back: null },
+        description: "The C8 Corvette Z06, a mid-engine two-seater with a 5.5-litre naturally aspirated flat-plane-crank V8 that revs to 8,600 rpm.",
         specs: { engine: "5.5L Naturally Aspirated V8", transmission: "8-Speed DCT", seating: "2 Seats", fuelType: "Petrol" },
-        features: ["Flat-Plane-Crank V8", "Magnetic Ride Control 4.0", "Launch Control", "Carbon Fibre Aero Package", "Performance Data Recorder", "Z-Mode Drive Selector"],
+        features: ["Flat-Plane-Crank V8", "Magnetic Ride Control 4.0", "Launch Control", "Performance Data Recorder", "Z-Mode Drive Selector", "Z07 Carbon Aero Package (optional)"],
         colors: CAR_COLORS,
         variants: [
-            { id: "coupe", label: "Z06 Coupe", fuelType: "Petrol", power: 670, torque: 623, topSpeed: 306, accel: "2.6s", priceCr: 1.15, extraFeatures: [] },
+            { id: "coupe", label: "Z06 Coupe", fuelType: "Petrol", power: 670, torque: 623, topSpeed: 306, accel: "2.6s", priceCr: 1.15, extraFeatures: ["Removable Roof Panel"] },
             { id: "convertible", label: "Z06 Convertible", fuelType: "Petrol", power: 670, torque: 623, topSpeed: 306, accel: "2.7s", priceCr: 1.30, extraFeatures: ["Power Retractable Hardtop"] }
         ]
     },
@@ -498,17 +443,17 @@ var CARS = [
         id: "ford-mustang-shelby-gt500",
         brand: "Ford",
         name: "Ford Mustang Shelby GT500",
-        images: { front: "../Images/ford-mustang-shelby-front.png", side: null, interior: "../Images/buick-interior.png", back: "../Images/ford-mustang-shelby-back.png" },
+        images: { front: "../Images/ford-mustang-shelby-front.png", side: null, interior: null, back: "../Images/ford-mustang-shelby-back.png" },
         colorImages: {
             "Iconic Silver": { front: "../Images/ford-mustang-shelby-front.png", side: null, interior: null, back: null },
             "Grabber Orange": { front: "../Images/ford-mustang-shelby-orange-front.png", side: null, interior: null, back: null },
             "Race Red": { front: null, side: null, interior: null, back: "../Images/ford-mustang-shelby-back.png" },
-            "Velocity Blue": { front: null, side: "../Images/ford-mustang-shelby-blue-top.png", interior: null, back: null },
-            "Grabber Lime": { front: null, side: "../Images/ford-mustang-shelby-green-side.png", interior: null, back: null }
+            "Velocity Blue": { front: "../Images/ford-mustang-shelby-blue-top.png", side: null, interior: null, back: null },
+            "Grabber Lime": { front: "../Images/ford-mustang-shelby-green-side.png", side: null, interior: null, back: null }
         },
-        description: "The most powerful street-legal Ford ever built, with a supercharged V8 and a wide, track-ready stance.",
+        description: "The 2020–2022 Shelby GT500, a Mustang with a 760 hp supercharged 5.2-litre V8 and a 7-speed dual-clutch gearbox.",
         specs: { engine: "5.2L Supercharged V8", transmission: "7-Speed DCT", seating: "4 Seats", fuelType: "Petrol" },
-        features: ["Electronic Line-Lock", "MagneRide Damping", "Launch Control", "Active Valve Exhaust", "Recaro Racing Seats", "Track Apps Data Display"],
+        features: ["Electronic Line-Lock", "MagneRide Damping", "Launch Control", "Active Valve Exhaust", "Track Apps Data Display", "Brembo Brakes"],
         colors: [
             { name: "Iconic Silver", hex: "#c6c8ca" },
             { name: "Grabber Orange", hex: "#e8631a" },
@@ -516,44 +461,37 @@ var CARS = [
             { name: "Velocity Blue", hex: "#1c5fa8" },
             { name: "Grabber Lime", hex: "#c3d92b" }
         ],
-        reviews: [
-            { name: "Vikramjeet Ahluwalia", initials: "VA", rating: 5, text: "760 horsepower from a factory Mustang still feels unreal on launch control. Track Apps display is a great touch for track days." },
-            { name: "Radhika Menon", initials: "RM", rating: 5, text: "Bought it in Grabber Orange and it's the loudest thing in every parking lot, in the best possible way." },
-            { name: "Cyrus Batliwala", initials: "CB", rating: 4, text: "Recaro seats hold you in place through every corner. Ride is stiff for daily driving but that's the point of this car." },
-            { name: "Ishika Bhargava", initials: "IB", rating: 5, text: "The active valve exhaust note alone made me sign the paperwork. Autoverse's spec sheet matched the dealership car exactly." },
-            { name: "Gaurav Thakkar", initials: "GT", rating: 5, text: "MagneRide suspension makes it surprisingly composed on rough roads. Best value supercharged V8 you can buy right now." }
-        ],
         variants: [
             { id: "standard", label: "Shelby GT500", fuelType: "Petrol", power: 760, torque: 847, topSpeed: 290, accel: "3.3s", priceCr: 1.05, extraFeatures: [] },
-            { id: "carbon-track", label: "Shelby GT500 Carbon Track Pack", fuelType: "Petrol", power: 760, torque: 847, topSpeed: 290, accel: "3.2s", priceCr: 1.25, extraFeatures: ["Carbon Fibre Wheels", "Track Aero Kit"] }
+            { id: "carbon-track", label: "Shelby GT500 Carbon Fiber Track Package", fuelType: "Petrol", power: 760, torque: 847, topSpeed: 290, accel: "3.2s", priceCr: 1.25, extraFeatures: ["Carbon Fibre Wheels", "Adjustable Carbon Rear Wing", "Recaro Seats"] }
         ]
     },
     {
         id: "toyota-gr-supra",
         brand: "Toyota",
         name: "Toyota GR Supra",
-        images: { front: "../Images/toyota-gr-supra-front.png", side: null, interior: "../Images/toyota-camry-interior.png", back: "../Images/mclaren-720s-back.jpg" },
-        description: "A modern reboot of a legendary nameplate, tuned for balanced, driver-focused rear-wheel-drive fun.",
+        images: { front: null, side: null, interior: null, back: null },
+        description: "The fifth-generation (A90) GR Supra, a two-seat coupe co-developed with BMW and powered by a 3.0-litre turbo inline-six.",
         specs: { engine: "3.0L Turbo Inline-6", transmission: "8-Speed Auto", seating: "2 Seats", fuelType: "Petrol" },
-        features: ["Adaptive Variable Suspension", "Active Differential", "Launch Control", "JBL Premium Audio", "Sport Exhaust", "Driving Mode Select"],
+        features: ["Adaptive Variable Suspension", "Active Rear Differential", "Launch Control", "Brembo Front Brakes", "8.8-inch Touchscreen", "Sport Drive Mode"],
         colors: CAR_COLORS,
         variants: [
-            { id: "3.0", label: "GR Supra 3.0", fuelType: "Petrol", power: 382, torque: 500, topSpeed: 250, accel: "4.1s", priceCr: 0.68, extraFeatures: [] },
-            { id: "3.0-premium", label: "GR Supra 3.0 Premium", fuelType: "Petrol", power: 382, torque: 500, topSpeed: 250, accel: "4.1s", priceCr: 0.78, extraFeatures: ["Adaptive Headlights", "Wireless Charging"] }
+            { id: "3.0", label: "GR Supra 3.0", fuelType: "Petrol", power: 382, torque: 500, topSpeed: 250, accel: "3.9s", priceCr: 0.68, extraFeatures: [] },
+            { id: "3.0-premium", label: "GR Supra 3.0 Premium", fuelType: "Petrol", power: 382, torque: 500, topSpeed: 250, accel: "3.9s", priceCr: 0.78, extraFeatures: ["JBL Premium Audio", "Head-Up Display", "Wireless Charging"] }
         ]
     },
     {
         id: "mazda-mx5-miata",
         brand: "Mazda",
         name: "Mazda MX-5 Miata",
-        images: { front: "../Images/mazda-mx5-front.jpg", side: null, interior: "../Images/tata-interior.png", back: "../Images/lamborghini-aventador-svj-back.png" },
-        description: "A lightweight, front-engine, rear-wheel-drive roadster built purely around driving joy.",
+        images: { front: null, side: null, interior: null, back: null },
+        description: "The fourth-generation (ND) MX-5, a lightweight front-engine, rear-drive two-seater offered as a soft-top or RF retractable fastback.",
         specs: { engine: "2.0L Naturally Aspirated Inline-4", transmission: "6-Speed Manual", seating: "2 Seats", fuelType: "Petrol" },
-        features: ["Kinematic Posture Control", "Limited-Slip Differential", "Manual Soft Top", "Bose Sound System", "Lightweight Chassis", "Sport Suspension"],
+        features: ["Kinematic Posture Control", "Rear-Wheel Drive", "Limited-Slip Differential (manual models)", "Bose Sound System", "Bilstein Dampers (selected trims)", "Apple CarPlay & Android Auto"],
         colors: CAR_COLORS,
         variants: [
-            { id: "soft-top", label: "MX-5 Soft Top", fuelType: "Petrol", power: 181, torque: 205, topSpeed: 210, accel: "6.5s", priceCr: 0.32, extraFeatures: [] },
-            { id: "rf", label: "MX-5 RF (Retractable Hardtop)", fuelType: "Petrol", power: 181, torque: 205, topSpeed: 209, accel: "6.5s", priceCr: 0.38, extraFeatures: ["Power Retractable Fastback Roof"] }
+            { id: "soft-top", label: "MX-5 Soft Top", fuelType: "Petrol", power: 181, torque: 205, topSpeed: 210, accel: "6.5s", priceCr: 0.32, extraFeatures: ["Manual Fabric Soft Top"] },
+            { id: "rf", label: "MX-5 RF (Retractable Fastback)", fuelType: "Petrol", power: 181, torque: 205, topSpeed: 209, accel: "6.5s", priceCr: 0.38, extraFeatures: ["Power Retractable Fastback Roof"] }
         ]
     },
     {
@@ -566,24 +504,24 @@ var CARS = [
             "Pangea Green": { front: "../Images/defender-green-front.png", side: null, interior: null, back: null },
             "Santorini Black": { front: "../Images/defender-black-front.png", side: null, interior: null, back: null }
         },
-        description: "A rugged, go-anywhere SUV built on a stiff monocoque with genuine off-road capability.",
-        specs: { engine: "3.0L Diesel I6 / 5.0L Petrol V8", transmission: "8-Speed Auto", seating: "5 Seats", fuelType: "Diesel" },
-        features: ["Terrain Response 2", "Configurable Terrain Modes", "Wade Sensing", "ClearSight Ground View", "Air Suspension", "Electronic Air Suspension"],
+        description: "The current-generation Defender, built on an aluminium monocoque with permanent four-wheel drive and a two-speed transfer box.",
+        specs: { engine: "3.0L Diesel I6 / 5.0L Supercharged Petrol V8", transmission: "8-Speed Auto", seating: "5 Seats", fuelType: "Diesel" },
+        features: ["Terrain Response 2", "Electronic Air Suspension", "Wade Sensing", "ClearSight Ground View", "3D Surround Camera", "Pivi Pro Infotainment"],
         colors: [
             { name: "Coastal Blue", hex: "#4a6a78" },
             { name: "Pangea Green", hex: "#8a9873" },
             { name: "Santorini Black", hex: "#2b2b2b" }
         ],
         variants: [
-            { id: "d300-diesel", label: "D300 Diesel", fuelType: "Diesel", power: 300, torque: 650, topSpeed: 191, accel: "6.5s", priceCr: 1.30, extraFeatures: [] },
-            { id: "v8-petrol", label: "V8 Petrol", fuelType: "Petrol", power: 525, torque: 625, topSpeed: 240, accel: "5.2s", priceCr: 1.85, extraFeatures: ["Sport Exhaust", "Adaptive Dynamics"] }
+            { id: "d300-diesel", label: "110 D300 Diesel", fuelType: "Diesel", power: 296, torque: 650, topSpeed: 191, accel: "6.7s", priceCr: 1.32, extraFeatures: [] },
+            { id: "v8-petrol", label: "110 P525 V8 Petrol", fuelType: "Petrol", power: 518, torque: 625, topSpeed: 240, accel: "5.4s", priceCr: 1.85, extraFeatures: ["Quad Exhaust Outlets", "Adaptive Dynamics"] }
         ]
     },
     {
         id: "mercedes-g-wagon",
         brand: "Mercedes",
         name: "Mercedes-Benz G-Class",
-        images: { front: "../Images/mercedes-g-wagon-front.jpg", side: null, interior: "../Images/mahindra-interior.png", back: "../Images/mercedes-g-wagon-back.png" },
+        images: { front: "../Images/mercedes-g-wagon-front.jpg", side: null, interior: null, back: "../Images/mercedes-g-wagon-back.png" },
         colorImages: {
             "Denim Blue": { front: "../Images/gwagon-blue-front.png", side: null, interior: null, back: "../Images/gwagon-blue-back.png" },
             "Alpine White": { front: "../Images/gwagon-white-front.png", side: null, interior: null, back: null },
@@ -592,9 +530,9 @@ var CARS = [
             "Sunset Orange": { front: "../Images/gwagon-orange-front.png", side: null, interior: null, back: "../Images/gwagon-orange-back.png" },
             "Maroon": { front: "../Images/gwagon-maroon-front.png", side: null, interior: null, back: null }
         },
-        description: "The unmistakable boxy off-roader turned status symbol, blending body-on-frame toughness with genuine luxury.",
+        description: "Mercedes-Benz's boxy body-on-frame off-roader, with three locking differentials and a low-range transfer case under a luxury cabin.",
         specs: { engine: "4.0L Biturbo V8", transmission: "9-Speed Auto", seating: "5 Seats", fuelType: "Petrol" },
-        features: ["Three Locking Differentials", "Low-Range Transfer Case", "AMG Ride Control Suspension", "Burmester Surround Sound", "MBUX Dual-Screen Cockpit", "Off-Road Engineering Package"],
+        features: ["Three Locking Differentials", "Low-Range Transfer Case", "Independent Front Suspension", "Burmester Surround Sound", "MBUX Dual-Screen Cockpit", "Off-Road Cockpit Display"],
         colors: [
             { name: "Denim Blue", hex: "#3a5f7d" },
             { name: "Alpine White", hex: "#f2f2f2" },
@@ -605,71 +543,62 @@ var CARS = [
         ],
         variants: [
             { id: "g550", label: "G550", fuelType: "Petrol", power: 416, torque: 610, topSpeed: 210, accel: "5.9s", priceCr: 1.95, extraFeatures: [] },
-            { id: "g63-amg", label: "AMG G63", fuelType: "Petrol", power: 585, torque: 850, topSpeed: 220, accel: "4.5s", priceCr: 2.85, extraFeatures: ["AMG Performance Exhaust", "AMG Widebody Styling"] }
+            { id: "g63-amg", label: "AMG G63", fuelType: "Petrol", power: 577, torque: 850, topSpeed: 240, accel: "4.3s", priceCr: 3.60, extraFeatures: ["48V Mild-Hybrid System", "AMG Ride Control Suspension", "AMG Performance Exhaust"] }
         ]
     },
     {
         id: "hyundai-ioniq-5",
         brand: "Hyundai",
         name: "Hyundai Ioniq 5",
-        images: { front: null, side: "../Images/hyundai-ioniq5-side.jpg", interior: "../Images/ioniq-style-interior.png", back: "../Images/ferrari-sf90-back.jpg" },
-        description: "A retro-futuristic electric crossover with an ultra-fast 800V charging platform.",
-        specs: { engine: "Dual-Motor Electric Powertrain", transmission: "Single-Speed Direct Drive", seating: "5 Seats", fuelType: "Electric" },
-        features: ["800V Ultra-Fast Charging", "Vehicle-to-Load Power Outlet", "Flat Floor Cabin", "Highway Driving Assist 2", "Sliding Centre Console", "Solar Roof Option"],
+        images: { front: null, side: "../Images/hyundai-ioniq5-side.jpg", interior: null, back: null },
+        description: "Hyundai's E-GMP-based electric crossover with 800-volt fast charging, sold in India as a single 72.6 kWh rear-drive variant.",
+        specs: { engine: "Electric Motor (RWD) / Dual-Motor (AWD)", transmission: "Single-Speed Direct Drive", seating: "5 Seats", fuelType: "Electric" },
+        features: ["800V Ultra-Fast Charging", "Vehicle-to-Load Power Outlet", "Flat-Floor Cabin", "Sliding 'Universal Island' Centre Console", "Relaxation Front Seats", "Level 2 ADAS"],
         colors: CAR_COLORS,
         variants: [
-            { id: "rwd", label: "Ioniq 5 RWD", fuelType: "Electric", power: 225, torque: 350, topSpeed: 185, accel: "7.4s", priceCr: 0.45, extraFeatures: ["354km Range"] },
-            { id: "awd", label: "Ioniq 5 AWD", fuelType: "Electric", power: 320, torque: 605, topSpeed: 185, accel: "5.1s", priceCr: 0.55, extraFeatures: ["414km Range", "Dual Motor Traction"] }
+            { id: "rwd", label: "Ioniq 5 RWD (72.6 kWh)", fuelType: "Electric", power: 214, torque: 350, topSpeed: 185, accel: "7.6s", priceCr: 0.46, extraFeatures: ["Up to 631 km range (ARAI)"] },
+            { id: "awd", label: "Ioniq 5 AWD", fuelType: "Electric", power: 320, torque: 605, topSpeed: 185, accel: "5.1s", priceCr: 0.55, extraFeatures: ["Dual-Motor All-Wheel Drive"] }
         ]
     },
     {
         id: "kia-ev6-gt",
         brand: "Kia",
         name: "Kia EV6 GT",
-        images: { front: "../Images/kia-ev6-front.jpg", side: null, interior: "../Images/generic-cream-interior.png", back: "../Images/dodge-back.jpg" },
-        description: "Kia's performance-flagship electric crossover, sharing its 800V platform with the Ioniq 5 but tuned for speed.",
+        images: { front: "../Images/kia-ev6-front.jpg", side: null, interior: null, back: null },
+        description: "Kia's E-GMP electric crossover, sold in India as the GT-Line AWD; the 585 PS EV6 GT is the performance version sold in other markets.",
         specs: { engine: "Dual-Motor Electric Powertrain", transmission: "Single-Speed Direct Drive", seating: "5 Seats", fuelType: "Electric" },
-        features: ["800V Ultra-Fast Charging", "Launch Control", "Drift Mode", "GT Sport Seats", "Electronic Limited-Slip Differential", "Meridian Premium Audio"],
+        features: ["800V Ultra-Fast Charging", "Dual-Motor All-Wheel Drive", "Vehicle-to-Load Power Outlet", "Augmented-Reality Head-Up Display", "Meridian Premium Audio", "Level 2 ADAS"],
         colors: CAR_COLORS,
         variants: [
-            { id: "gt", label: "EV6 GT", fuelType: "Electric", power: 585, torque: 740, topSpeed: 260, accel: "3.5s", priceCr: 0.72, extraFeatures: ["424km Range"] },
-            { id: "gt-line", label: "EV6 GT-Line AWD", fuelType: "Electric", power: 320, torque: 605, topSpeed: 185, accel: "5.2s", priceCr: 0.62, extraFeatures: ["441km Range"] }
+            { id: "gt-line", label: "EV6 GT-Line AWD", fuelType: "Electric", power: 321, torque: 605, topSpeed: 185, accel: "5.2s", priceCr: 0.66, extraFeatures: ["Up to 663 km range (ARAI)"] },
+            { id: "gt", label: "EV6 GT", fuelType: "Electric", power: 577, torque: 740, topSpeed: 260, accel: "3.5s", priceCr: 0.72, extraFeatures: ["Launch Control", "Drift Mode", "Electronic Limited-Slip Differential", "Up to 424 km range (WLTP)"] }
         ]
     },
     {
         id: "lucid-air",
         brand: "Lucid",
         name: "Lucid Air",
-        images: { front: "../Images/lucid-air-front.png", side: "../Images/lucid-air-side.png", interior: null, back: "../Images/lucid-air-back.png" },
+        images: { front: "../Images/lucid-air-front.png", side: "../Images/lucid-air-side.png", interior: "../Images/lucid-air-interior.png", back: "../Images/lucid-air-back.png" },
         colorImages: {
-            "Eureka Gold": { front: "../Images/lucid-air-front.png", side: null, interior: null, back: null },
-            "Storm Grey": { front: "../Images/lucid-air-front-grey.png", side: null, interior: null, back: null },
+            "Eureka Gold": { front: null, side: null, interior: null, back: null },
+            "Quantum Grey": { front: "../Images/lucid-air-front-grey.png", side: null, interior: null, back: null },
             "Sable Copper": { front: "../Images/lucid-air-copper-front.png", side: null, interior: null, back: null },
-            "Garnet Red": { front: null, side: "../Images/lucid-air-side.png", interior: null, back: "../Images/lucid-air-back.png" },
-            "Coastal Teal": { front: "../Images/lucid-air-teal-front.png", side: null, interior: null, back: null },
-            "Zenith Red": { front: "../Images/lucid-air-green-collage.png", side: null, interior: null, back: null }
+            "Zenith Red": { front: null, side: "../Images/lucid-air-side.png", interior: null, back: "../Images/lucid-air-back.png" },
+            "Coastal Teal": { front: "../Images/lucid-air-teal-front.png", side: null, interior: null, back: null }
         },
-        description: "A hyper-efficient electric luxury sedan with segment-leading range and a minimalist, tech-forward cabin.",
-        specs: { engine: "Dual-Motor Electric Powertrain", transmission: "Single-Speed Direct Drive", seating: "5 Seats", fuelType: "Electric" },
-        features: ["DreamDrive Pro Assist", "Glass Canopy Roof", "19-Speaker Surreal Sound", "Wireless Device Charging", "Over-the-Air Updates", "Executive Rear Seating Package"],
+        description: "Lucid's long-range electric luxury sedan, offered as the dual-motor Touring and the tri-motor Sapphire.",
+        specs: { engine: "Dual-Motor (Touring) / Tri-Motor (Sapphire) Electric", transmission: "Single-Speed Direct Drive", seating: "5 Seats", fuelType: "Electric" },
+        features: ["DreamDrive Driver Assistance", "Glass Canopy Roof", "34-inch Curved Glass Cockpit Display", "Surreal Sound Audio", "Wireless Device Charging", "Over-the-Air Updates"],
         colors: [
             { name: "Eureka Gold", hex: "#8a7250" },
-            { name: "Storm Grey", hex: "#6d7278" },
+            { name: "Quantum Grey", hex: "#6d7278" },
             { name: "Sable Copper", hex: "#7a5a4c" },
-            { name: "Garnet Red", hex: "#5e1f2b" },
-            { name: "Coastal Teal", hex: "#2f8f9c" },
-            { name: "Zenith Red", hex: "#7c9473" }
-        ],
-        reviews: [
-            { name: "Advait Kulkarni", initials: "AK", rating: 5, text: "684km real-world range on the Touring trim blew my expectations out of the water. Glass canopy roof makes the cabin feel massive." },
-            { name: "Pallavi Iyer", initials: "PI", rating: 5, text: "Booked a test drive after browsing Autoverse for a week. The Sapphire variant's acceleration genuinely scared me a little." },
-            { name: "Zubin Wadia", initials: "ZW", rating: 4, text: "Minimalist interior is gorgeous but takes some relearning if you're coming from a traditional dashboard layout." },
-            { name: "Naina Chopra", initials: "NC", rating: 5, text: "Quietest cabin I've ever sat in. Over-the-air updates keep adding new features months after delivery." },
-            { name: "Kunal Firodia", initials: "KF", rating: 5, text: "Went in for the Coastal Teal colour and ended up loving the whole ownership experience Autoverse arranged end to end." }
+            { name: "Zenith Red", hex: "#5e1f2b" },
+            { name: "Coastal Teal", hex: "#2f8f9c" }
         ],
         variants: [
-            { id: "touring", label: "Air Touring", fuelType: "Electric", power: 620, torque: 830, topSpeed: 210, accel: "3.4s", priceCr: 1.15, extraFeatures: ["684km Range"] },
-            { id: "sapphire", label: "Air Sapphire", fuelType: "Electric", power: 1234, torque: 1430, topSpeed: 270, accel: "1.89s", priceCr: 2.10, extraFeatures: ["Tri-Motor All-Wheel Drive", "Track Mode"] }
+            { id: "touring", label: "Air Touring", fuelType: "Electric", power: 620, torque: 830, topSpeed: 225, accel: "3.4s", priceCr: 1.15, extraFeatures: ["Up to 653 km range (EPA est., 19-inch wheels)"] },
+            { id: "sapphire", label: "Air Sapphire", fuelType: "Electric", power: 1234, torque: 1430, topSpeed: 330, accel: "1.9s", priceCr: 2.10, extraFeatures: ["Tri-Motor All-Wheel Drive", "Carbon Ceramic Brakes", "Up to 687 km range (EPA est.)"] }
         ]
     },
     {
@@ -683,25 +612,18 @@ var CARS = [
             "Summit White": { front: "../Images/cadillac-escalade-white-front.png", side: null, interior: null, back: null },
             "Skyline Blue": { front: null, side: "../Images/cadillac-escalade-side.png", interior: null, back: "../Images/cadillac-escalade-back.png" }
         },
-        description: "A supercharged, full-size luxury SUV that pairs American V8 muscle with three rows of tech-laden comfort.",
+        description: "The V-Series version of Cadillac's three-row full-size SUV, with a 682 hp supercharged 6.2-litre V8.",
         specs: { engine: "6.2L Supercharged V8", transmission: "10-Speed Auto", seating: "7 Seats", fuelType: "Petrol" },
-        features: ["Super Cruise Hands-Free Driving", "AKG Studio Reference Audio", "38-inch Curved OLED Display", "Magnetic Ride Control 4.0", "Adaptive Air Suspension", "Night Vision Camera"],
+        features: ["Super Cruise Hands-Free Driving", "AKG Studio Reference Audio", "Curved OLED Display", "Magnetic Ride Control 4.0", "Adaptive Air Suspension", "Night Vision Camera"],
         colors: [
             { name: "Infrared Red", hex: "#8f1f1f" },
             { name: "Stellar Black", hex: "#0a0a0a" },
             { name: "Summit White", hex: "#f2f2f2" },
             { name: "Skyline Blue", hex: "#2b5f7a" }
         ],
-        reviews: [
-            { name: "Manav Grewal", initials: "MG", rating: 5, text: "Third-row space is genuinely usable for adults, and Super Cruise makes highway drives to the farmhouse effortless." },
-            { name: "Divya Ramesh", initials: "DR", rating: 5, text: "The 38-inch OLED display is ridiculous in the best way. Booked mine in Summit White after a showroom visit arranged via Autoverse." },
-            { name: "Harman Preet Singh", initials: "HS", rating: 4, text: "Supercharged V8 has serious muscle for something this size. Fuel economy is what you'd expect, but I knew that going in." },
-            { name: "Aaliya Fernandes", initials: "AF", rating: 5, text: "AKG audio system alone justifies the V-Series upgrade. Feels like a private jet cabin on wheels." },
-            { name: "Suryansh Bhatia", initials: "SB", rating: 5, text: "Autoverse's enquiry form let me pick the exact trim before visiting, saved so much back and forth with the dealership." }
-        ],
         variants: [
-            { id: "v", label: "Escalade V", fuelType: "Petrol", power: 682, torque: 653, topSpeed: 220, accel: "4.4s", priceCr: 1.75, extraFeatures: [] },
-            { id: "v-black", label: "Escalade V Black Edition", fuelType: "Petrol", power: 682, torque: 653, topSpeed: 220, accel: "4.4s", priceCr: 1.95, extraFeatures: ["Black Accent Package", "22-inch Gloss Black Wheels"] }
+            { id: "v", label: "Escalade-V", fuelType: "Petrol", power: 682, torque: 885, topSpeed: 200, accel: "4.4s", priceCr: 1.75, extraFeatures: [] },
+            { id: "v-esv", label: "Escalade-V ESV (Long Wheelbase)", fuelType: "Petrol", power: 682, torque: 885, topSpeed: 200, accel: "4.4s", priceCr: 1.95, extraFeatures: ["Longer Wheelbase", "Larger Cargo Area"] }
         ]
     }
 ];
@@ -749,67 +671,6 @@ function getAllBrands() {
     return brands.sort();
 }
 
-/* Reviews for a car's details page. Cars with a hand-written
-   `reviews` array (the ones we have real customer-style feedback for)
-   use that directly. Every other car still needs 4-5 reviews on its
-   details page, so we generate believable ones from a shared name
-   pool + car-aware sentence templates instead of leaving the section
-   empty. */
-var AUTOVERSE_REVIEW_NAMES = [
-    { name: "Aman Sethi", initials: "AS" }, { name: "Kritika Bose", initials: "KB" },
-    { name: "Yuvraj Chauhan", initials: "YC" }, { name: "Sneha Pillai", initials: "SP" },
-    { name: "Rajat Kumar", initials: "RK" }, { name: "Anushka Rane", initials: "AR" },
-    { name: "Mihir Shah", initials: "MS" }, { name: "Diya Krishnan", initials: "DK" },
-    { name: "Vivaan Sinha", initials: "VS" }, { name: "Tara Bhatt", initials: "TB" },
-    { name: "Aditi Chandra", initials: "AC" }, { name: "Rishabh Dua", initials: "RD" }
-];
-
-var AUTOVERSE_REVIEW_TEMPLATES = [
-    "The {shortName} exceeded what the listing on Autoverse promised - test drove it and booked the same day.",
-    "Genuinely impressed by the {engine} in the {shortName}. Feels every bit as premium as the price suggests.",
-    "Autoverse's enquiry team made choosing between variants of the {shortName} so much easier than visiting three dealerships.",
-    "Been driving my {shortName} for a few months now and the {feature} has been a standout feature every day.",
-    "Comparing specs on the details page before visiting the showroom saved me hours. The {shortName} matched the listing exactly.",
-    "The {fuelType} setup in the {shortName} is impressively refined. Would recommend to anyone shopping in this segment."
-];
-
-function generateGenericReviews(car) {
-    const shortName = car.name.replace(car.brand, "").trim() || car.name;
-    const feature = (car.features && car.features[0]) || "build quality";
-    const engine = (car.specs && car.specs.engine) || "engine";
-    const fuelType = (car.specs && car.specs.fuelType) || "powertrain";
-    const reviews = [];
-
-    for (let i = 0; i < 5; i++) {
-        const person = AUTOVERSE_REVIEW_NAMES[(i * 3 + car.id.length) % AUTOVERSE_REVIEW_NAMES.length];
-        const template = AUTOVERSE_REVIEW_TEMPLATES[(i + car.id.length) % AUTOVERSE_REVIEW_TEMPLATES.length];
-
-        /* /g = replace every occurrence, not just the first */
-        const text = template
-            .replace(/\{shortName\}/g, shortName)
-            .replace(/\{feature\}/g, feature)
-            .replace(/\{engine\}/g, engine)
-            .replace(/\{fuelType\}/g, fuelType);
-
-        reviews.push({
-            name: person.name,
-            initials: person.initials,
-            rating: i % 5 === 0 ? 4 : 5,
-            text: text
-        });
-    }
-
-    return reviews;
-}
-
-function getCarReviews(car) {
-    if (Array.isArray(car.reviews) && car.reviews.length) {
-        return car.reviews;
-    }
-
-    return generateGenericReviews(car);
-}
-
 /* Best available thumbnail for listing cards / similar cars.
    Cars with per-colour photos (colorImages) use the first colour that
    actually has a photo; everything else falls back to the flat
@@ -838,33 +699,12 @@ function getDefaultThumbnail(car) {
 
 /* ================================================
    Number, decision and loop helpers
-   (all of these are used by cars.js, details.js,
-   contact.js or main.js)
+   (used by cars.js, details.js, contact.js and main.js)
    ================================================ */
 
 /* Even / odd check */
 function isEven(number) {
     return number % 2 === 0;
-}
-
-/* Largest of two numbers (if...else) */
-function largestOfTwo(a, b) {
-    if (a > b) {
-        return a;
-    } else {
-        return b;
-    }
-}
-
-/* Largest of three numbers (nested comparisons) */
-function largestOfThree(a, b, c) {
-    if (a >= b && a >= c) {
-        return a;
-    } else if (b >= a && b >= c) {
-        return b;
-    } else {
-        return c;
-    }
 }
 
 /* Is the number inside min..max (inclusive)? */
@@ -884,95 +724,6 @@ function getPriceCategory(priceCr) {
     } else {
         return 'Hypercar';
     }
-}
-
-/* Simple calculator built on switch...case with break + default */
-function calculate(a, operator, b) {
-    let result;
-
-    switch (operator) {
-        case '+':
-            result = a + b;
-            break;
-        case '-':
-            result = a - b;
-            break;
-        case '*':
-            result = a * b;
-            break;
-        case '/':
-            result = b === 0 ? 'Cannot divide by zero' : a / b;
-            break;
-        default:
-            result = 'Invalid operator';
-    }
-
-    return result;
-}
-
-/* Counts the digits of a number with a while loop */
-function countDigits(number) {
-    let n = Math.abs(Math.floor(number));
-    let count = 0;
-
-    if (n === 0) {
-        return 1;
-    }
-
-    while (n > 0) {
-        n = Math.floor(n / 10);
-        count++;
-    }
-
-    return count;
-}
-
-/* Adds up the digits of a number with a while loop */
-function sumOfDigits(number) {
-    let n = Math.abs(Math.floor(number));
-    let sum = 0;
-
-    while (n > 0) {
-        sum += n % 10;
-        n = Math.floor(n / 10);
-    }
-
-    return sum;
-}
-
-/* Sums any number of arguments using the `arguments` object */
-function sumOf() {
-    let total = 0;
-
-    for (let i = 0; i < arguments.length; i++) {
-        total += arguments[i];
-    }
-
-    return total;
-}
-
-/* Average of any number of arguments (uses arguments.length) */
-function averageOf() {
-    if (arguments.length === 0) {
-        return 0;
-    }
-
-    return sumOf.apply(null, arguments) / arguments.length;
-}
-
-/* Remembers the last car the visitor looked at.
-   NOTE: `lastViewedCarId` is deliberately NOT declared with var / let /
-   const. Assigning to an undeclared name in sloppy mode creates an
-   implicit global variable. (Bad practice in real projects - kept here
-   only to show how implicit globals behave.) */
-function trackVisit(carId) {
-    try {
-        lastViewedCarId = carId;
-    } catch (error) {
-        /* strict mode forbids implicit globals - safe to ignore */
-    }
-
-    return carId;
 }
 
 /* ================================================
@@ -1015,23 +766,6 @@ function capitalizeWords(text) {
     return words.join(' ');
 }
 
-/* "Hello" -> "hELLO" */
-function swapCase(text) {
-    let result = '';
-
-    for (let i = 0; i < text.length; i++) {
-        const letter = text[i];
-        result += letter === letter.toUpperCase() ? letter.toLowerCase() : letter.toUpperCase();
-    }
-
-    return result;
-}
-
-/* "CAR" + "1" -> "C1A1R1" (map over every character) */
-function appendToEachChar(text, suffix) {
-    return text.split('').map(character => character + suffix).join('');
-}
-
 /* Unique booking reference such as AV-421873. do...while keeps
    generating until the number has not been used before. */
 function generateReferenceNumber(seedText, existingRefs) {
@@ -1059,66 +793,9 @@ function formatDateLong(date) {
    Array helpers
    ================================================ */
 
-/* Numbers in ascending order. The compare function is essential:
-   the default sort() compares as strings, so [100, 25] stays wrong. */
-function sortAscending(numbers) {
-    return [...numbers].sort((a, b) => a - b);
-}
-
-function sortDescending(numbers) {
-    return [...numbers].sort((a, b) => b - a);
-}
-
-/* Rest parameter collects the arguments into an array,
-   spread hands them to Math.max / Math.min one by one. */
-function maxOf(...numbers) {
-    return Math.max(...numbers);
-}
-
-function minOf(...numbers) {
-    return Math.min(...numbers);
-}
-
 /* Merge two arrays with spread */
 function mergeLists(first, second) {
     return [...first, ...second];
-}
-
-/* Even numbers only, sorted ascending */
-function evenNumbersSorted(numbers) {
-    return sortAscending(numbers.filter(isEven));
-}
-
-/* Insert an item at the second-last position */
-function insertSecondLast(list, item) {
-    list.splice(list.length - 1, 0, item);
-    return list;
-}
-
-/* Remove EVERY occurrence of a value. Loop backwards so splice()
-   never shifts an item we have yet to check. */
-function removeAll(list, value) {
-    for (let i = list.length - 1; i >= 0; i--) {
-        if (list[i] === value) {
-            list.splice(i, 1);
-        }
-    }
-
-    return list;
-}
-
-/* Custom Array method: lengths of every string in the array.
-   defineProperty keeps it non-enumerable so for...in loops over
-   arrays are not polluted by it. */
-if (!Array.prototype.lengths) {
-    Object.defineProperty(Array.prototype, 'lengths', {
-        value: function () {
-            return this.map(item => String(item).length);
-        },
-        enumerable: false,
-        configurable: true,
-        writable: true
-    });
 }
 
 /* Brand -> number of cars. Uses for...in over a plain object. */
@@ -1167,37 +844,18 @@ if (typeof module !== 'undefined' && module.exports) {
         formatCrorePrice: formatCrorePrice,
         getCarById: getCarById,
         getAllBrands: getAllBrands,
-        generateGenericReviews: generateGenericReviews,
-        getCarReviews: getCarReviews,
         getDefaultThumbnail: getDefaultThumbnail,
         removeDuplicates: removeDuplicates,
         isEven: isEven,
-        largestOfTwo: largestOfTwo,
-        largestOfThree: largestOfThree,
         isInRange: isInRange,
         getPriceCategory: getPriceCategory,
-        calculate: calculate,
-        countDigits: countDigits,
-        sumOfDigits: sumOfDigits,
-        sumOf: sumOf,
-        averageOf: averageOf,
-        trackVisit: trackVisit,
         randomInt: randomInt,
         pickRandom: pickRandom,
         charCodeSum: charCodeSum,
         capitalizeWords: capitalizeWords,
-        swapCase: swapCase,
-        appendToEachChar: appendToEachChar,
         generateReferenceNumber: generateReferenceNumber,
         formatDateLong: formatDateLong,
-        sortAscending: sortAscending,
-        sortDescending: sortDescending,
-        maxOf: maxOf,
-        minOf: minOf,
         mergeLists: mergeLists,
-        evenNumbersSorted: evenNumbersSorted,
-        insertSecondLast: insertSecondLast,
-        removeAll: removeAll,
         getBrandSummary: getBrandSummary
     };
 }
